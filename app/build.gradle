@@ -1,28 +1,59 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-android'
+}
+
+//apply from: 'and_res_guard.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdk rootProject.ext.android.compileSdk
     defaultConfig {
-        applicationId "com.example.myfirstapp"
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0-${System.env.VERSION_SHA}"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId "com.bytedance.tiktok"
+        minSdk rootProject.ext.android.minSdk
+        targetSdk rootProject.ext.android.targetSdk
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            minifyEnabled true
+            shrinkResources true //强力删除无用资源，不打包进apk，需配合minifyEnabled一起使用
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    buildFeatures{
+        dataBinding = true
+    }
+    buildFeatures{
+        viewBinding = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation rootProject.ext.androisxLibs
+    implementation rootProject.ext.immersionbar.immersionbar
+    implementation rootProject.ext.tablayout.tablayout
+    implementation rootProject.ext.rxjava.rxjava
+    implementation rootProject.ext.lottile.lottile
+    implementation rootProject.ext.glide.glide
+    implementation rootProject.ext.exoplayerLibs
+    debugImplementation rootProject.ext.leakcanary.leakcanary
 }
+

@@ -1,0 +1,102 @@
+
+//android sdk 版本 和 库依赖统一配置
+ext {
+    android = [
+            compileSdk : 34,
+            minSdk     : 24,
+            targetSdk  : 29,
+            versionCode: 10,
+            versionName: "3.0"
+    ]
+
+    dependVersion = [
+            lifecycle: '2.4.0',
+            retrofit: '2.9.0',
+            glide: '4.12.0',
+            leakcanary: '2.7',
+            navigation: '2.3.2',
+            lottile: '2.8.0',
+            exoplayer: '2.19.1'
+
+    ]
+
+    androidxDeps = [
+            appcompat       : 'androidx.appcompat:appcompat:1.6.1',
+            material        : 'com.google.android.material:material:1.2.1',
+            constraintlayout: 'androidx.constraintlayout:constraintlayout:2.0.4',
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            corektx         : 'androidx.core:core-ktx:1.3.2',
+            supportv4 : 'androidx.legacy:legacy-support-v4:1.0.0'
+    ]
+
+    lifecycle = [
+            livedata: "androidx.lifecycle:lifecycle-livedata-ktx:${dependVersion.lifecycle}",
+            viewmodel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${dependVersion.lifecycle}"
+    ]
+
+    coroutines = [
+            coroutinescore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
+            coroutinesandroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    ]
+
+    squareup = [
+            moshi: "com.squareup.moshi:moshi-kotlin:${dependVersion.moshi}",
+            retrofit: "com.squareup.retrofit2:retrofit:${dependVersion.retrofit}",
+            convertergson: "com.squareup.retrofit2:converter-gson:${dependVersion.retrofit}"
+    ]
+
+    navigation = [
+            navigationfragment: "androidx.navigation:navigation-fragment-ktx:${dependVersion.navigation}",
+            navigationui: "androidx.navigation:navigation-ui-ktx:${dependVersion.navigation}"
+    ]
+
+    hilt = [
+            hilt: "com.google.dagger:hilt-android:$dagger_hilt_version",
+            compiler: "com.google.dagger:hilt-android-compiler:$dagger_hilt_version"
+    ]
+
+    lottile = [
+            lottile: "com.airbnb.android:lottie:${dependVersion.lottile}"
+    ]
+
+    immersionbar = [
+            immersionbar: "com.gyf.immersionbar:immersionbar:3.0.0-beta05"
+    ]
+
+    tablayout = [
+            tablayout: 'com.androidkun:XTabLayout:1.1.4'
+    ]
+
+    rxjava = [
+            rxjava: 'io.reactivex:rxjava:1.1.0'
+    ]
+
+    viewpager = [
+            viewpager2: "androidx.viewpager2:viewpager2:${dependVersion.viewpager2}"
+    ]
+
+    exoplayer = [
+            exoplayer: "com.google.android.exoplayer:exoplayer:${dependVersion.exoplayer}",
+            core: "com.google.android.exoplayer:exoplayer-core:${dependVersion.exoplayer}",
+            dash: "com.google.android.exoplayer:exoplayer-dash:${dependVersion.exoplayer}",
+            hls: "com.google.android.exoplayer:exoplayer-hls:${dependVersion.exoplayer}", //如果要播放 m3u8 ，添加exoplayer-hls
+            ui: "com.google.android.exoplayer:exoplayer-ui:${dependVersion.exoplayer}",
+            trmp: "com.google.android.exoplayer:extension-rtmp:${dependVersion.exoplayer}"
+    ]
+
+    glide = [
+            glide: 'com.github.bumptech.glide:glide:4.12.0'
+    ]
+
+    leakcanary = [
+            leakcanary: "com.squareup.leakcanary:leakcanary-android:${dependVersion.leakcanary}"
+    ]
+
+    //以集合的方法进行依赖
+    androisxLibs = androidxDeps.values()
+    lifecycleLibs = lifecycle.values()
+    coroutineslibs = coroutines.values()
+    squareuplibs = squareup.values()
+    navigationlibs = navigation.values()
+    exoplayerLibs = exoplayer.values()
+}
