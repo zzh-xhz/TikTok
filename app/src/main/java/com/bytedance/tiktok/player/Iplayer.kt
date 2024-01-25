@@ -1,6 +1,7 @@
 package com.bytedance.tiktok.player
 
-import com.google.android.exoplayer2.ExoPlayer
+import androidx.media3.exoplayer.ExoPlayer
+
 
 interface Iplayer {
 

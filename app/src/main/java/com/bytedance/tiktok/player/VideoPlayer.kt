@@ -1,4 +1,3 @@
-package com.bytedance.tiktok.player
 
 import android.content.Context
 import android.text.TextUtils
@@ -7,22 +6,25 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.database.StandaloneDatabaseProvider
+import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.cache.CacheDataSource
+import androidx.media3.datasource.cache.LeastRecentlyUsedCacheEvictor
+import androidx.media3.datasource.cache.SimpleCache
+import androidx.media3.exoplayer.DefaultLoadControl
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.BaseMediaSource
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
+import androidx.media3.exoplayer.trackselection.TrackSelector
 import com.bytedance.tiktok.activity.MainActivity
 import com.bytedance.tiktok.databinding.ViewPlayviewBinding
 import com.bytedance.tiktok.fragment.MainFragment
-import com.google.android.exoplayer2.DefaultLoadControl
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.database.StandaloneDatabaseProvider
-import com.google.android.exoplayer2.source.BaseMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.trackselection.TrackSelector
-import com.google.android.exoplayer2.upstream.DefaultDataSource
-import com.google.android.exoplayer2.upstream.cache.CacheDataSource
-import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor
-import com.google.android.exoplayer2.upstream.cache.SimpleCache
+import com.bytedance.tiktok.player.Iplayer
+
 
 /**
  * create by libo
@@ -30,11 +32,11 @@ import com.google.android.exoplayer2.upstream.cache.SimpleCache
  * description 播放器VideoPlayer
  */
 class VideoPlayer @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
-    FrameLayout(context, attrs), Iplayer , DefaultLifecycleObserver {
+    FrameLayout(context, attrs), Iplayer, DefaultLifecycleObserver {
 
     private val trackSelector: TrackSelector = DefaultTrackSelector(context)
-    private val mPlayer : SimpleExoPlayer by lazy {
-            SimpleExoPlayer.Builder(context)
+    private val mPlayer : ExoPlayer by lazy {
+        ExoPlayer.Builder(context)
                 .setTrackSelector(trackSelector)
                 .setLoadControl(loadControl) //构建内存缓冲
                 .build()
@@ -127,7 +129,7 @@ class VideoPlayer @JvmOverloads constructor(context: Context, attrs: AttributeSe
         mPlayer.play()
     }
 
-    override fun getplayer(): SimpleExoPlayer {
+    override fun getplayer(): ExoPlayer {
         return mPlayer
     }
 

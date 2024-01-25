@@ -1,5 +1,6 @@
 package com.bytedance.tiktok.fragment
 
+import VideoPlayer
 import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -7,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout.LayoutParams
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlaybackException
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -23,11 +26,8 @@ import com.bytedance.tiktok.utils.OnVideoControllerListener
 import com.bytedance.tiktok.utils.RxBus
 import com.bytedance.tiktok.view.CommentDialog
 import com.bytedance.tiktok.view.ControllerView
-import com.bytedance.tiktok.player.VideoPlayer
 import com.bytedance.tiktok.view.LikeView
 import com.bytedance.tiktok.view.ShareDialog
-import com.google.android.exoplayer2.ExoPlaybackException
-import com.google.android.exoplayer2.Player
 import rx.Subscription
 import rx.functions.Action1
 
@@ -159,7 +159,7 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
      */
     private fun dettachParentView(rootView: ViewGroup) {
         //1.添加videoView到当前需要播放的item中,添加进item之前，保证videoView没有父view
-        videoView?.parent?.let {
+        videoView.parent?.let {
             (it as ViewGroup).removeView(videoView)
         }
 

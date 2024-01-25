@@ -1,6 +1,7 @@
 package com.bytedance.tiktok.bean
 
-import com.google.android.exoplayer2.source.BaseMediaSource
+import androidx.media3.exoplayer.source.BaseMediaSource
+
 
 /**
  * create by libo
