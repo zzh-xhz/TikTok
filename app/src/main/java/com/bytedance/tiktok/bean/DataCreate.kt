@@ -12,6 +12,7 @@ import java.util.*
 class DataCreate {
 
     init {
+
         val videoBeanOne = VideoBean()
         videoBeanOne.content = "#街坊 #颜值打分 给自己颜值打100分的女生集合"
         videoBeanOne.videoRes = "https://wave.video/embed/6581e9eedd95d26a606f6c87/6581e9eedd95d26a606f6c85.mp4"

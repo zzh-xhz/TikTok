@@ -7,6 +7,7 @@ import com.bytedance.tiktok.R
 import com.bytedance.tiktok.base.BaseBindingActivity
 import com.bytedance.tiktok.base.CommPagerAdapter
 import com.bytedance.tiktok.bean.MainPageChangeEvent
+import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.ActivityMainBinding
 import com.bytedance.tiktok.fragment.MainFragment
@@ -36,7 +37,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
         fragments.add(mainFragment)
         fragments.add(personalHomeFragment)
         pagerAdapter = CommPagerAdapter(supportFragmentManager, fragments, arrayOf("", ""))
-        binding.viewPager!!.adapter = pagerAdapter
+        binding.viewPager.adapter = pagerAdapter
 
         //点击头像切换页面
         RxBus.getDefault().toObservable(MainPageChangeEvent::class.java)
@@ -45,6 +46,15 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
                         binding.viewPager!!.currentItem = event.page
                     }
                 } as Action1<MainPageChangeEvent>)
+
+
+        //点击底部切换页面
+        RxBus.getDefault().toObservable(MainTabChangeEvent::class.java)
+            .subscribe(Action1 { event: MainTabChangeEvent ->
+                if (binding.viewPager != null) {
+                    binding.viewPager.setSlide(event.isSlide)
+                }
+            } as Action1<MainTabChangeEvent>)
         binding.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {

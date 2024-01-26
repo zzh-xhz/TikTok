@@ -10,6 +10,8 @@ import com.androidkun.xtablayout.XTabLayout
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.base.BaseBindingFragment
 import com.bytedance.tiktok.base.CommPagerAdapter
+import com.bytedance.tiktok.bean.MainPageChangeEvent
+import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.FragmentMainBinding
 import com.bytedance.tiktok.utils.RxBus
@@ -92,8 +94,8 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
                 val position = tab?.position
                 if (position != null) {
                     selectIndexFragment(position)
-                };
-
+                }
+                RxBus.getDefault().post(MainTabChangeEvent((position == 0 || position==1)))
             }
 
             override fun onTabUnselected(tab: XTabLayout.Tab?) {
