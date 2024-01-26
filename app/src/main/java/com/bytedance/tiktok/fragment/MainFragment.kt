@@ -1,15 +1,20 @@
 package com.bytedance.tiktok.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.androidkun.xtablayout.XTabLayout
+import com.bytedance.tiktok.R
 import com.bytedance.tiktok.base.BaseBindingFragment
 import com.bytedance.tiktok.base.CommPagerAdapter
 import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.FragmentMainBinding
 import com.bytedance.tiktok.utils.RxBus
 import java.util.*
+
 
 /**
  * create by libo
@@ -19,17 +24,32 @@ import java.util.*
 class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBinding.inflate(it)}) {
     private var currentLocationFragment: CurrentLocationFragment? = null
     private var recommendFragment: RecommendFragment? = null
-
     private val fragments = ArrayList<Fragment>()
     private var pagerAdapter: CommPagerAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setFragments()
         setMainMenu()
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+    private fun addChildFragment(childFragment: Fragment, containerId: Int) {
+        // 获取 childFragmentManager
+        val fragmentManager = childFragmentManager
+        // 开启事务
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        // 将子 Fragment 替换到指定容器中
+        fragmentTransaction.replace(containerId, childFragment)
+        // 提交事务
+        fragmentTransaction.commitAllowingStateLoss ()
+    }
     private fun setFragments() {
         currentLocationFragment = CurrentLocationFragment()
         recommendFragment = RecommendFragment()
@@ -61,11 +81,63 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
     private fun setMainMenu() {
         with(binding.tabMainMenu) {
             addTab(newTab().setText("首页"))
-            addTab(newTab().setText("好友"))
+            addTab(newTab().setText("朋友"))
             addTab(newTab().setText(""))
             addTab(newTab().setText("消息"))
             addTab(newTab().setText("我"))
         }
+        binding.tabMainMenu.addOnTabSelectedListener(object : XTabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: XTabLayout.Tab?) {
+                // 处理选中标签的操作
+                val position = tab?.position
+                if (position != null) {
+                    selectIndexFragment(position)
+                };
+
+            }
+
+            override fun onTabUnselected(tab: XTabLayout.Tab?) {
+                // 处理取消选中标签的操作
+            }
+
+            override fun onTabReselected(tab: XTabLayout.Tab?) {
+                // 处理重新选中标签的操作
+            }
+        })
+    }
+
+
+
+
+
+    private fun selectIndexFragment(position :Int ){
+        if (position == 0 ){
+            binding.viewPager.visibility = View.VISIBLE
+            binding.tabTitle.visibility = View.VISIBLE
+            binding.fragmentContainer.visibility = View.GONE
+            return
+        }
+        if (position == 2 ){
+            return
+        }
+        if (position == 1 ||position == 3 || position == 4){
+            binding.viewPager.visibility = View.GONE
+            binding.tabTitle.visibility = View.GONE
+            binding.fragmentContainer.visibility = View.VISIBLE
+        }
+        addChildFragment(getFragment(position), R.id.fragmentContainer)
+    }
+    private fun getFragment(position :Int):Fragment{
+        if (position == 1 ){
+            return FriendFragment()
+        }
+        if (position == 3 ){
+            return MessageFragment()
+        }
+        if (position == 4 ){
+            return MineFragment()
+        }
+        return FriendFragment()
     }
 
     companion object {

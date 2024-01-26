@@ -33,7 +33,6 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
     private val EXIT_TIME = 2000
 
     override fun init() {
-
         fragments.add(mainFragment)
         fragments.add(personalHomeFragment)
         pagerAdapter = CommPagerAdapter(supportFragmentManager, fragments, arrayOf("", ""))
