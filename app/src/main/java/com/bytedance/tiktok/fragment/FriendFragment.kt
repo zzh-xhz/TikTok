@@ -50,7 +50,6 @@ import xyz.doikki.videoplayer.util.L
  * description 朋友播放页
  */
 class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding>({FragmentFriendBinding.inflate(it)}) {
-    private var adapter: VideoAdapter?= null
     private var commentDialog : CommentDialog?= null
     private var shareDialog : ShareDialog?= null
 
@@ -104,10 +103,15 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
         mViewPagerImpl =  binding.viewPager2.getChildAt(0) as RecyclerView
     }
     private fun startPlay(position: Int) {
+        closeDialog()
         val count = mViewPagerImpl?.childCount
         for (i in 0 until count!!) {
             val itemView = mViewPagerImpl?.getChildAt(i)
             val viewHolder = itemView?.tag as Tiktok3Adapter.ViewHolder
+            //评论点赞事件
+            likeShareEvent(viewHolder.controllerView)
+            //切换播放视频的作者主页数据
+            RxBus.getDefault().post(CurUserBean(DataCreate.datas[position]?.userBean!!))
             if (viewHolder.mPosition == position) {
                 mVideoView?.release()
                 Utils.removeViewFormParent(mVideoView)
@@ -120,6 +124,7 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
                 viewHolder.mPlayerContainer.addView(mVideoView, 0)
                 mVideoView!!.start()
                 mCurPos = position
+
                 break
             }
         }
@@ -172,15 +177,15 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
     }
 
     private fun setRefreshEvent() {
-//        binding.refreshLayout.setColorSchemeResources(R.color.color_link)
-//        binding.refreshLayout.setOnRefreshListener {
-//            object : CountDownTimer(1000, 1000) {
-//                override fun onTick(millisUntilFinished: Long) {}
-//                override fun onFinish() {
-//                    binding.refreshLayout!!.isRefreshing = false
-//                }
-//            }.start()
-//        }
+        binding.refreshLayout.setColorSchemeResources(R.color.color_link)
+        binding.refreshLayout.setOnRefreshListener {
+            object : CountDownTimer(1000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {}
+                override fun onFinish() {
+                    binding.refreshLayout!!.isRefreshing = false
+                }
+            }.start()
+        }
     }
 
     /**

@@ -7,7 +7,7 @@
     <dimen name="dkplayer_controller_seekbar_size_n">14dp</dimen>
     <dimen name="dkplayer_controller_seekbar_size_s">14dp</dimen>
     <dimen name="dkplayer_controller_seekbar_max_size">1dp</dimen>
-    <dimen name="dkplayer_play_btn_size">50dp</dimen>
+    <dimen name="dkplayer_play_btn_size">60dp</dimen>
     <dimen name="dkplayer_controller_time_text_size">14sp</dimen>
     <dimen name="controller_height">46dp</dimen>
     <dimen name="controller_icon_padding">12dp</dimen>

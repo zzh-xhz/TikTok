@@ -1,5 +1,4 @@
 package com.bytedance.tiktok.widget.component;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -15,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bytedance.tiktok.R;
+import com.bytedance.tiktok.view.CommentDialog;
+import com.bytedance.tiktok.view.ControllerView;
+import com.bytedance.tiktok.view.ShareDialog;
 
 import xyz.doikki.videoplayer.controller.ControlWrapper;
 import xyz.doikki.videoplayer.controller.IControlComponent;
@@ -22,7 +24,6 @@ import xyz.doikki.videoplayer.player.VideoView;
 import xyz.doikki.videoplayer.util.L;
 
 public class TikTokView extends FrameLayout implements IControlComponent {
-
     private final ImageView thumb;
     private final ImageView mPlayBtn;
 
@@ -46,6 +47,7 @@ public class TikTokView extends FrameLayout implements IControlComponent {
         LayoutInflater.from(getContext()).inflate(R.layout.layout_tiktok_controller, this, true);
         thumb = findViewById(R.id.iv_thumb);
         mPlayBtn = findViewById(R.id.play_btn);
+
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
