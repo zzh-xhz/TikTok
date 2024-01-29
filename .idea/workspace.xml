@@ -9,7 +9,37 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3981b629-6337-45d3-8c7f-ab7eb818634f" name="Changes" comment="" />
+    <list default="true" id="3981b629-6337-45d3-8c7f-ab7eb818634f" name="Changes" comment="项目主页面搭建完成&#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/bytedance/tiktok/ExampleInstrumentedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android-template.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fastlane/Appfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fastlane/Fastfile" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,11 +68,27 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2bQew0ANEjpP9mY4PybpTdpwwqB" />
   <component name="ProjectViewState">
@@ -59,14 +105,59 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "SHOW_ALL_PROCESSES": "false",
     "android-custom-viewD:/Android SDK/sources/android-34/android/view/View.java_SELECTED": "View",
+    "android-custom-viewD:/Android SDK/sources/android-34/android/view/ViewGroup.java_SELECTED": "ViewGroup",
+    "android-custom-viewD:/Android SDK/sources/android-34/android/widget/VideoView.java_SELECTED": "VideoView",
+    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.media3/media3-ui/1.2.1/55788ec8e8c7f2d69558554b9457ad133da1be50/media3-ui-1.2.1-sources.jar!/androidx/media3/ui/PlayerView.java_SELECTED": "PlayerView",
+    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.viewpager/viewpager/1.0.0/db045f92188b9d247d5f556866f8861ab68528f0/viewpager-1.0.0-sources.jar!/androidx/viewpager/widget/ViewPager.java_SELECTED": "ViewPager",
+    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.viewpager2/viewpager2/1.0.0/3c3569044e6969f1ee5c3aa03b08e6717a2d782f/viewpager2-1.0.0-sources.jar!/androidx/viewpager2/widget/ViewPager2.java_SELECTED": "ViewPager2",
+    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.androidkun/XTabLayout/1.1.4/c32891fea2e69b1fd5de9738f1ffb89571f8069/XTabLayout-1.1.4-sources.jar!/com/androidkun/xtablayout/XTabLayout.java_SELECTED": "XTabLayout",
     "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-ui/2.19.1/1e4a8691b096f1ff34cf8adb9f0f4f3627f5cbad/exoplayer-ui-2.19.1-sources.jar!/com/google/android/exoplayer2/ui/PlayerView.java_SELECTED": "PlayerView",
+    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.google.android.material/material/1.2.1/37d55d5141066b3d118d24232fa7025b65eb3a74/material-1.2.1-sources.jar!/com/google/android/material/tabs/TabLayout.java_SELECTED": "TabLayout",
     "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/VideoPlayer.kt_SELECTED": "VideoPlayer",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/controller/BaseVideoController.java_SELECTED": "BaseVideoController",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/controller/GestureVideoController.java_SELECTED": "GestureVideoController",
     "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/ControllerView.kt_SELECTED": "ControllerView",
     "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/LikeView.kt_SELECTED": "LikeView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/NonSwipeableViewPager.java_SELECTED": "NonSwipeableViewPager",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/ScrollableViewPager.java_SELECTED": "ScrollableViewPager",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/AdControlView.java_SELECTED": "AdControlView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/DebugInfoView.java_SELECTED": "DebugInfoView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/DefinitionControlView.java_SELECTED": "DefinitionControlView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/MyDanmakuView.java_SELECTED": "MyDanmakuView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/PipControlView.java_SELECTED": "PipControlView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/TikTokView.java_SELECTED": "TikTokView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/FloatController.java_SELECTED": "FloatController",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/PortraitWhenFullScreenController.java_SELECTED": "PortraitWhenFullScreenController",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/TikTokController.java_SELECTED": "TikTokController",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/render/gl2/GLSurfaceRenderView2.java_SELECTED": "GLSurfaceRenderView2",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/DanmukuVideoView.java_SELECTED": "DanmukuVideoView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/ExoVideoView.java_SELECTED": "ExoVideoView",
+    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/IjkVideoView.java_SELECTED": "IjkVideoView",
+    "android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/controller/BaseVideoController.java_SELECTED": "BaseVideoController",
+    "android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/player/BaseVideoView.java_SELECTED": "BaseVideoView",
+    "android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/player/VideoView.java_SELECTED": "VideoView",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "D:/work/video/DKVideoPlayer"
+    "last_opened_file_path": "D:/work/video/Tiktok/app/src/main/res/layout"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\work\video\Tiktok\app\src\main\res\layout" />
+      <recent name="D:\work\video\Tiktok\app\src\main\res\anim" />
+      <recent name="D:\work\video\Tiktok\app\src\main\res\drawable" />
+      <recent name="D:\work\video\Tiktok\app\src\main\java\com\bytedance\tiktok\utils" />
+      <recent name="D:\work\video\Tiktok\app\src\main\java\com\bytedance\tiktok\widget" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.bytedance.tiktok.base" />
+      <recent name="com.bytedance.tiktok.bean" />
+      <recent name="com.bytedance.tiktok.fragment" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bytedance.tiktok.adapter" />
+      <recent name="com.bytedance.tiktok.player" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="Tiktok.app.main" />
@@ -151,12 +242,59 @@
       <option name="project" value="LOCAL" />
       <updated>1706168724460</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="项目主页面搭建完成&#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+      <created>1706170760530</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706170760530</updated>
+    </task>
+    <task id="LOCAL-00003" summary="播放器更新最新版本">
+      <created>1706175088710</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706175088710</updated>
+    </task>
+    <task id="LOCAL-00004" summary="项目主页面搭建完成&#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+      <created>1706233552765</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706233552765</updated>
+    </task>
+    <task id="LOCAL-00005" summary="项目增加界面 完善部分">
+      <created>1706251292481</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706251292481</updated>
+    </task>
+    <task id="LOCAL-00006" summary="项目优化">
+      <created>1706255034739</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706255034739</updated>
+    </task>
+    <task id="LOCAL-00007" summary="项目主页面搭增加可扩展的dkVide0">
+      <created>1706495392400</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706495392400</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1aae22c8-2e79-461b-8eb3-0565d654cd7c">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -165,7 +303,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/dev_dkvideo" />
                       </list>
                     </value>
                   </entry>
@@ -176,48 +314,169 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1aae22c8-2e79-461b-8eb3-0565d654cd7c" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/dev" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修复过的基本模式使用 待优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复过的基本模式使用 待优化" />
+    <MESSAGE value="播放器更新最新版本" />
+    <MESSAGE value="项目主页面搭建完成&#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle" />
+    <MESSAGE value="项目增加界面 完善部分" />
+    <MESSAGE value="项目优化" />
+    <MESSAGE value="项目主页面搭增加可扩展的dkVide0" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目主页面搭增加可扩展的dkVide0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/RecommendFragment.kt</url>
-          <line>132</line>
-          <option name="timeStamp" value="1" />
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>72</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>78</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>83</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>87</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>96</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>135</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>175</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>190</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>73</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>77</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/RecommendFragment.kt</url>
-          <line>134</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>106</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/RecommendFragment.kt</url>
-          <line>137</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>108</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/RecommendFragment.kt</url>
-          <line>122</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>110</line>
+          <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/RecommendFragment.kt</url>
-          <line>119</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>111</line>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/RecommendFragment.kt</url>
-          <line>102</line>
-          <option name="timeStamp" value="6" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>112</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>113</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>115</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>116</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>121</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>109</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>107</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>80</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>157</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/fragment/FriendFragment.kt</url>
+          <line>158</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-function">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/player/VideoPlayer.kt</url>
-          <line>152</line>
-          <properties class="com.bytedance.tiktok.player.VideoPlayer" method="isPlaying">
+          <line>153</line>
+          <properties class="VideoPlayer">
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="7" />
