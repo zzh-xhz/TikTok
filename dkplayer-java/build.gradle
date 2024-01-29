@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+apply from: '../constants.gradle'
+
+android {
+    compileSdk rootProject.ext.android.compileSdk
+    defaultConfig {
+        minSdk rootProject.ext.android.minSdk
+        targetSdk rootProject.ext.android.targetSdk
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compileOnly project.ext.annotation
+}
+
+ext {
+    PUBLISH_ARTIFACT_ID = 'dkplayer-java'
+}
+
+apply from: '../publish.gradle'

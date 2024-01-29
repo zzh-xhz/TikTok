@@ -6,22 +6,23 @@
 
     </data>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.RecommendFragment"
-        android:background="@color/black">
-
+        android:orientation="vertical"
+        tools:context=".fragment.FriendFragment">
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/recyclerView"
+                android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"/>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </FrameLayout>
 
-    </RelativeLayout>
+
 </layout>

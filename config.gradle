@@ -83,7 +83,6 @@ ext {
             hls: "com.google.android.exoplayer:exoplayer-hls:${dependVersion.exoplayer}", //如果要播放 m3u8 ，添加exoplayer-hls
             ui: "com.google.android.exoplayer:exoplayer-ui:${dependVersion.exoplayer}",
             trmp: "com.google.android.exoplayer:extension-rtmp:${dependVersion.exoplayer}"
-
     ]
 
     glide = [
@@ -97,6 +96,9 @@ ext {
             session: "androidx.media3:media3-session:${dependVersion.media3}",
             exoplayer: "androidx.media3:media3-exoplayer:${dependVersion.media3}",
             exoplayerDash: "androidx.media3:media3-exoplayer-dash:${dependVersion.media3}",
+            exoplayerHls: "androidx.media3:media3-exoplayer-hls:${dependVersion.media3}",
+            exoplayerRtsp: "androidx.media3:media3-exoplayer-rtsp:${dependVersion.media3}",
+            exoplayerRtmp: "androidx.media3:media3-datasource-rtmp:${dependVersion.media3}",
             ui: "androidx.media3:media3-ui:${dependVersion.media3}"
     ]
     //以集合的方法进行依赖

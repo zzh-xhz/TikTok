@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout.LayoutParams
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlaybackException
 import androidx.recyclerview.widget.RecyclerView
@@ -14,21 +15,33 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.activity.PlayListActivity
+import com.bytedance.tiktok.adapter.Tiktok3Adapter
 import com.bytedance.tiktok.adapter.VideoAdapter
 import com.bytedance.tiktok.base.BaseBindingFragment
+import com.bytedance.tiktok.base.BaseBindingPlayerFragment
 import com.bytedance.tiktok.bean.CurUserBean
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
+import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.FragmentFriendBinding
+import com.bytedance.tiktok.utils.DataUtil
 import com.bytedance.tiktok.utils.OnVideoControllerListener
 import com.bytedance.tiktok.utils.RxBus
+import com.bytedance.tiktok.utils.Utils
+import com.bytedance.tiktok.utils.cache.PreloadManager
+import com.bytedance.tiktok.utils.cache.ProxyVideoCacheManager
 import com.bytedance.tiktok.view.CommentDialog
 import com.bytedance.tiktok.view.ControllerView
 import com.bytedance.tiktok.view.LikeView
 import com.bytedance.tiktok.view.ShareDialog
+import com.bytedance.tiktok.widget.VerticalViewPager
+import com.bytedance.tiktok.widget.controller.TikTokController
+import com.bytedance.tiktok.widget.render.TikTokRenderViewFactory
 import rx.Subscription
 import rx.functions.Action1
+import xyz.doikki.videoplayer.player.VideoView
+import xyz.doikki.videoplayer.util.L
 
 
 /**
@@ -36,173 +49,140 @@ import rx.functions.Action1
  * create on 2020-05-19
  * description 朋友播放页
  */
-class FriendFragment : BaseBindingFragment<FragmentFriendBinding>({FragmentFriendBinding.inflate(it)}) {
+class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding>({FragmentFriendBinding.inflate(it)}) {
     private var adapter: VideoAdapter?= null
     private var commentDialog : CommentDialog?= null
     private var shareDialog : ShareDialog?= null
 
-    /** 当前播放视频位置  */
-    private var curPlayPos = -1
-    private lateinit var videoView: VideoPlayer
-
+    /**
+     * 当前播放位置
+     */
+    private var mCurPos = 0
+    private val mVideoList: MutableList<VideoBean> = ArrayList()
+    private var mTiktok3Adapter: Tiktok3Adapter? = null
+    private var mPreloadManager: PreloadManager? = null
+    private var mController: TikTokController? = null
+    private var mViewPagerImpl: RecyclerView? = null
     private var ivCurCover: ImageView? = null
     private var subscribe: Subscription?= null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewPager()
+        initVideoView()
+        mPreloadManager = PreloadManager.getInstance(requireActivity())
+        addData(null)
 
-        initRecyclerView()
-        initVideoPlayer()
-        setViewPagerLayoutManager()
+        val index =0
+        binding.viewPager2!!.post {
+            if (index == 0) {
+                startPlay(0)
+            } else {
+                binding.viewPager2.setCurrentItem(index, false)
+            }
+        }
         setRefreshEvent()
-        observeEvent()
-    }
 
-    private fun initRecyclerView() {
-        adapter  = VideoAdapter(requireContext(), binding.recyclerView.getChildAt(0) as RecyclerView)
-        binding.recyclerView.adapter = adapter
-        adapter?.appendList(DataCreate.datas)
     }
-
-    private fun initVideoPlayer() {
-        var params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        videoView = VideoPlayer(requireActivity())
-        videoView.layoutParams = params
-        lifecycle.addObserver(videoView)
+    private fun initVideoView() {
+        mVideoView = VideoView(requireActivity())
+        mVideoView!!.setLooping(true)
+        //以下只能二选一，看你的需求
+        mVideoView!!.setRenderViewFactory(TikTokRenderViewFactory.create())
+        //        mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
+        mController = TikTokController(requireActivity())
+        mVideoView!!.setVideoController(mController)
     }
+    private fun initViewPager() {
+        binding.viewPager2.offscreenPageLimit = 4
+        mTiktok3Adapter = Tiktok3Adapter(mVideoList)
+        binding.viewPager2.adapter = mTiktok3Adapter
+        binding.viewPager2.overScrollMode = View.OVER_SCROLL_NEVER
+        binding.viewPager2.registerOnPageChangeCallback(pageChangeCallback)
 
-    private fun observeEvent() {
-        //监听播放或暂停事件
-        subscribe = RxBus.getDefault().toObservable(PauseVideoEvent::class.java)
-            .subscribe(Action1 { event: PauseVideoEvent ->
-                if (event.isPlayOrPause) {
-                    videoView!!.play()
-                } else {
-                    videoView!!.pause()
-                }
-            } as Action1<PauseVideoEvent>)
+        //ViewPage2内部是通过RecyclerView去实现的，它位于ViewPager2的第0个位置
+        mViewPagerImpl =  binding.viewPager2.getChildAt(0) as RecyclerView
+    }
+    private fun startPlay(position: Int) {
+        val count = mViewPagerImpl?.childCount
+        for (i in 0 until count!!) {
+            val itemView = mViewPagerImpl?.getChildAt(i)
+            val viewHolder = itemView?.tag as Tiktok3Adapter.ViewHolder
+            if (viewHolder.mPosition == position) {
+                mVideoView?.release()
+                Utils.removeViewFormParent(mVideoView)
+                val tiktokBean = mVideoList[position]
+                val playUrl = mPreloadManager!!.getPlayUrl(tiktokBean.videoRes)
+                L.i("startPlay: position: $position  url: $playUrl")
+                mVideoView!!.setUrl(playUrl)
+                //请点进去看isDissociate的解释
+                mController!!.addControlComponent(viewHolder.mTikTokView, true)
+                viewHolder.mPlayerContainer.addView(mVideoView, 0)
+                mVideoView!!.start()
+                mCurPos = position
+                break
+            }
+        }
+    }
+    fun addData(view: View?) {
+        val size = mVideoList.size
+        mVideoList.addAll(DataUtil.getTiktokDataFromAssets(requireActivity()))
+        //使用此方法添加数据，使用notifyDataSetChanged会导致正在播放的视频中断
+        mTiktok3Adapter!!.notifyItemRangeChanged(size, mVideoList.size)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        subscribe?.unsubscribe()
+        mPreloadManager!!.removeAllPreloadTask()
+        //清除缓存，实际使用可以不需要清除，这里为了方便测试
+        ProxyVideoCacheManager.clearAllCache(requireActivity())
     }
 
-    private fun setViewPagerLayoutManager() {
-        with(binding.recyclerView) {
-            orientation = ViewPager2.ORIENTATION_VERTICAL
-            offscreenPageLimit = 1
-            registerOnPageChangeCallback(pageChangeCallback)
-            (binding.recyclerView.getChildAt(0) as RecyclerView).scrollToPosition(PlayListActivity.initPos)
-        }
-    }
 
     private val pageChangeCallback = object: OnPageChangeCallback() {
+        private var mCurItem = 0
+
+        /**
+         * VerticalViewPager是否反向滑动
+         */
+        private var mIsReverseScroll = false
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            if (position == mCurItem) {
+                return
+            }
+            mIsReverseScroll = position < mCurItem
+        }
+
         override fun onPageSelected(position: Int) {
-            playCurVideo(position)
+            if (position == mCurPos) return
+            binding.viewPager2.post(Runnable { startPlay(position) })
+        }
+        override fun onPageScrollStateChanged(state: Int) {
+            super.onPageScrollStateChanged(state)
+            if (state == VerticalViewPager.SCROLL_STATE_DRAGGING) {
+                mCurItem = binding.viewPager2.getCurrentItem()
+            }
+            if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                mPreloadManager!!.resumePreload(mCurPos, mIsReverseScroll)
+            } else {
+                mPreloadManager!!.pausePreload(mCurPos, mIsReverseScroll)
+            }
         }
     }
 
     private fun setRefreshEvent() {
-        binding.refreshLayout.setColorSchemeResources(R.color.color_link)
-        binding.refreshLayout.setOnRefreshListener {
-            object : CountDownTimer(1000, 1000) {
-                override fun onTick(millisUntilFinished: Long) {}
-                override fun onFinish() {
-                    binding.refreshLayout!!.isRefreshing = false
-                }
-            }.start()
-        }
+//        binding.refreshLayout.setColorSchemeResources(R.color.color_link)
+//        binding.refreshLayout.setOnRefreshListener {
+//            object : CountDownTimer(1000, 1000) {
+//                override fun onTick(millisUntilFinished: Long) {}
+//                override fun onFinish() {
+//                    binding.refreshLayout!!.isRefreshing = false
+//                }
+//            }.start()
+//        }
     }
 
-    private fun playCurVideo(position: Int) {
-        if (position == curPlayPos) {
-            return
-        }
-        val itemView = adapter!!.getRootViewAt(position)
-        val rootView = itemView!!.findViewById<ViewGroup>(R.id.rl_container)
-        val likeView: LikeView = rootView.findViewById(R.id.likeview)
-        val controllerView: ControllerView = rootView.findViewById(R.id.controller)
-        val ivPlay = rootView.findViewById<ImageView>(R.id.iv_play)
-        val ivCover = rootView.findViewById<ImageView>(R.id.iv_cover)
-
-        //播放暂停事件
-        likeView.setOnPlayPauseListener(object: LikeView.OnPlayPauseListener {
-            override fun onPlayOrPause() {
-                if (videoView!!.isPlaying()) {
-                    videoView?.pause()
-                    ivPlay.visibility = View.VISIBLE
-                } else {
-                    videoView?.play()
-                    ivPlay.visibility = View.GONE
-                }
-            }
-
-        })
-        closeDialog()
-        //评论点赞事件
-        likeShareEvent(controllerView)
-
-        //切换播放视频的作者主页数据
-        RxBus.getDefault().post(CurUserBean(DataCreate.datas[position]?.userBean!!))
-        curPlayPos = position
-
-        //切换播放器位置
-        dettachParentView(rootView)
-        autoPlayVideo(curPlayPos, ivCover)
-        playVideoViewInitialization(ivPlay)
-    }
-
-    /**
-     * 移除videoview父view
-     */
-    private fun dettachParentView(rootView: ViewGroup) {
-        //1.添加videoView到当前需要播放的item中,添加进item之前，保证videoView没有父view
-        videoView.parent?.let {
-            (it as ViewGroup).removeView(videoView)
-        }
-
-        rootView.addView(videoView, 0)
-    }
-
-    /**
-     * 自动播放视频
-     */
-    private fun autoPlayVideo(position: Int, ivCover: ImageView) {
-        videoView.playVideo(adapter!!.getDatas()[position].mediaSource!!)
-        videoView.getplayer()?.addListener(object: Player.Listener {
-            override fun onPlaybackStateChanged(state: Int) {
-                // 播放状态发生变化时的回调
-                // 播放状态包括：Player.STATE_IDLE、Player.STATE_BUFFERING、Player.STATE_READY、Player.STATE_ENDED
-                if (state == Player.STATE_READY) {
-
-                }
-            }
-
-            fun onPlayerError(error: ExoPlaybackException?) {
-                // 播放发生错误时的回调
-            }
-
-            override fun onIsPlayingChanged(isPlaying: Boolean) {
-                // 播放状态变为播放或暂停时的回调
-            }
-
-            override fun onRenderedFirstFrame() {
-                //第一帧已渲染，隐藏封面
-                ivCover.visibility = View.GONE
-                ivCurCover = ivCover
-            }
-        })
-    }
-    /**
-     * 恢复最初的视图
-     */
-    private fun playVideoViewInitialization(ivPlay: ImageView) {
-        if (ivPlay?.visibility ==  View.VISIBLE){
-            ivPlay?.visibility = View.GONE
-        }
-
-    }
     /**
      * 关闭弹窗
      */

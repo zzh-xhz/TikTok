@@ -108,10 +108,6 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
         })
     }
 
-
-
-
-
     private fun selectIndexFragment(position :Int ){
         if (position == 0 ){
             binding.viewPager.visibility = View.VISIBLE
