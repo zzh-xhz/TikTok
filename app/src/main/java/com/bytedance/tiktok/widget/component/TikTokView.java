@@ -24,6 +24,7 @@ import xyz.doikki.videoplayer.player.VideoView;
 import xyz.doikki.videoplayer.util.L;
 
 public class TikTokView extends FrameLayout implements IControlComponent {
+
     private final ImageView thumb;
     private final ImageView mPlayBtn;
 
@@ -51,10 +52,16 @@ public class TikTokView extends FrameLayout implements IControlComponent {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mControlWrapper.togglePlay();
+                togglePlay();
             }
         });
         mScaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
+    }
+    public void togglePlay(){
+        if (mControlWrapper ==null){
+            return;
+        }
+        mControlWrapper.togglePlay();
     }
 
     /**

@@ -16,6 +16,11 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            //使用abiFilters筛选你需要的so
+            abiFilters 'arm64-v8a'
+        }
+        multiDexEnabled true
     }
     buildTypes {
         debug {
@@ -29,7 +34,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     kotlinOptions {
         jvmTarget = '11'
     }

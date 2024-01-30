@@ -38,13 +38,6 @@ class Tiktok3Adapter(
             .apply(RequestOptions.frameOf(0)) // 从第一帧开始
             .into(holder.mThumb)
         holder.mPosition = position
-        holder.likeview.setOnLikeListener(object : LikeView.OnLikeListener {
-            override fun onLikeListener() {
-                if (!item.isLiked) {  //未点赞，会有点赞效果，否则无
-                    holder.controllerView.like()
-                }
-            }
-        })
     }
 
     override fun onViewDetachedFromWindow(holder: ViewHolder) {
@@ -64,12 +57,11 @@ class Tiktok3Adapter(
         var mTikTokView: TikTokView
         var mPlayerContainer: FrameLayout
         var controllerView: ControllerView
-        var likeview: LikeView
+
         init {
             mTikTokView = itemView.findViewById(R.id.tiktok_View)
             mThumb = mTikTokView.findViewById(R.id.iv_thumb)
             controllerView = mTikTokView.findViewById(R.id.controller)
-            likeview = mTikTokView.findViewById(R.id.likeview)
             mPlayerContainer = itemView.findViewById(R.id.container)
             itemView.tag = this
         }

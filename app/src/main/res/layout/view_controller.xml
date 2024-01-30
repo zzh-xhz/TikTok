@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
         android:layout_marginLeft="12dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginRight="120dp">
 
         <TextView
@@ -146,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="5dp">
 
             <ImageView
                 android:id="@+id/ivRecord"
@@ -158,11 +158,10 @@
                 android:id="@+id/ivHeadAnim"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
+                android:layout_centerInParent="true"
                 app:ease_radius="15dp"
-                app:es_shape_type="round"
-                android:layout_centerInParent="true"/>
+                app:es_shape_type="round" />
         </RelativeLayout>
 
     </LinearLayout>
-
 </RelativeLayout>

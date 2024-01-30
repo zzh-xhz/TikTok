@@ -9,14 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
-
-
-
-    <com.bytedance.tiktok.view.LikeView
-        android:id="@+id/likeview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <com.bytedance.tiktok.view.ControllerView
         android:id="@+id/controller"
         android:layout_width="match_parent"

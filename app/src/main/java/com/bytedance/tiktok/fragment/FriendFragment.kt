@@ -1,28 +1,17 @@
 package com.bytedance.tiktok.fragment
 
-import VideoPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RelativeLayout.LayoutParams
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.media3.common.Player
-import androidx.media3.exoplayer.ExoPlaybackException
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bytedance.tiktok.R
-import com.bytedance.tiktok.activity.PlayListActivity
 import com.bytedance.tiktok.adapter.Tiktok3Adapter
-import com.bytedance.tiktok.adapter.VideoAdapter
-import com.bytedance.tiktok.base.BaseBindingFragment
 import com.bytedance.tiktok.base.BaseBindingPlayerFragment
 import com.bytedance.tiktok.bean.CurUserBean
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
-import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.FragmentFriendBinding
 import com.bytedance.tiktok.utils.DataUtil
@@ -30,16 +19,15 @@ import com.bytedance.tiktok.utils.OnVideoControllerListener
 import com.bytedance.tiktok.utils.RxBus
 import com.bytedance.tiktok.utils.Utils
 import com.bytedance.tiktok.utils.cache.PreloadManager
-import com.bytedance.tiktok.utils.cache.ProxyVideoCacheManager
 import com.bytedance.tiktok.view.CommentDialog
 import com.bytedance.tiktok.view.ControllerView
 import com.bytedance.tiktok.view.LikeView
 import com.bytedance.tiktok.view.ShareDialog
 import com.bytedance.tiktok.widget.VerticalViewPager
+import com.bytedance.tiktok.widget.controller.PortraitWhenFullScreenController
 import com.bytedance.tiktok.widget.controller.TikTokController
 import com.bytedance.tiktok.widget.render.TikTokRenderViewFactory
-import rx.Subscription
-import rx.functions.Action1
+import com.bytedance.tiktok.widget.videoview.ExoVideoView
 import xyz.doikki.videoplayer.player.VideoView
 import xyz.doikki.videoplayer.util.L
 
@@ -49,9 +37,9 @@ import xyz.doikki.videoplayer.util.L
  * create on 2020-05-19
  * description 朋友播放页
  */
-class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding>({FragmentFriendBinding.inflate(it)}) {
-    private var commentDialog : CommentDialog?= null
-    private var shareDialog : ShareDialog?= null
+class FriendFragment : BaseBindingPlayerFragment<VideoView, FragmentFriendBinding>({ FragmentFriendBinding.inflate(it) }) {
+    private var commentDialog: CommentDialog? = null
+    private var shareDialog: ShareDialog? = null
 
     /**
      * 当前播放位置
@@ -62,9 +50,6 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
     private var mPreloadManager: PreloadManager? = null
     private var mController: TikTokController? = null
     private var mViewPagerImpl: RecyclerView? = null
-    private var ivCurCover: ImageView? = null
-    private var subscribe: Subscription?= null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewPager()
@@ -72,7 +57,7 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
         mPreloadManager = PreloadManager.getInstance(requireActivity())
         addData(null)
 
-        val index =0
+        val index = 0
         binding.viewPager2!!.post {
             if (index == 0) {
                 startPlay(0)
@@ -83,6 +68,7 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
         setRefreshEvent()
 
     }
+
     private fun initVideoView() {
         mVideoView = VideoView(requireActivity())
         mVideoView!!.setLooping(true)
@@ -92,6 +78,7 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
         mController = TikTokController(requireActivity())
         mVideoView!!.setVideoController(mController)
     }
+
     private fun initViewPager() {
         binding.viewPager2.offscreenPageLimit = 4
         mTiktok3Adapter = Tiktok3Adapter(mVideoList)
@@ -100,8 +87,9 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
         binding.viewPager2.registerOnPageChangeCallback(pageChangeCallback)
 
         //ViewPage2内部是通过RecyclerView去实现的，它位于ViewPager2的第0个位置
-        mViewPagerImpl =  binding.viewPager2.getChildAt(0) as RecyclerView
+        mViewPagerImpl = binding.viewPager2.getChildAt(0) as RecyclerView
     }
+
     private fun startPlay(position: Int) {
         closeDialog()
         val count = mViewPagerImpl?.childCount
@@ -129,6 +117,7 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
             }
         }
     }
+
     fun addData(view: View?) {
         val size = mVideoList.size
         mVideoList.addAll(DataUtil.getTiktokDataFromAssets(requireActivity()))
@@ -139,19 +128,23 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
     override fun onDestroy() {
         super.onDestroy()
         mPreloadManager!!.removeAllPreloadTask()
-        //清除缓存，实际使用可以不需要清除，这里为了方便测试
-        ProxyVideoCacheManager.clearAllCache(requireActivity())
+//        //清除缓存，实际使用可以不需要清除，这里为了方便测试
+//        ProxyVideoCacheManager.clearAllCache(requireActivity())
     }
 
 
-    private val pageChangeCallback = object: OnPageChangeCallback() {
+    private val pageChangeCallback = object : OnPageChangeCallback() {
         private var mCurItem = 0
 
         /**
          * VerticalViewPager是否反向滑动
          */
         private var mIsReverseScroll = false
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
             super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             if (position == mCurItem) {
                 return
@@ -163,6 +156,7 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
             if (position == mCurPos) return
             binding.viewPager2.post(Runnable { startPlay(position) })
         }
+
         override fun onPageScrollStateChanged(state: Int) {
             super.onPageScrollStateChanged(state)
             if (state == VerticalViewPager.SCROLL_STATE_DRAGGING) {
@@ -193,13 +187,13 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
      */
     private fun closeDialog() {
 
-        if (commentDialog != null && commentDialog?.isBottomSheetVisible() == true){
+        if (commentDialog != null && commentDialog?.isBottomSheetVisible() == true) {
             commentDialog?.dismiss()
         }
         if (shareDialog == null) {
             return
         }
-        if (shareDialog?.isBottomSheetVisible() == true){
+        if (shareDialog?.isBottomSheetVisible() == true) {
             shareDialog?.dismiss()
         }
     }
@@ -215,12 +209,12 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView,FragmentFriendBinding
 
             override fun onLikeClick() {}
             override fun onCommentClick() {
-                commentDialog  = CommentDialog()
+                commentDialog = CommentDialog()
                 commentDialog?.show(childFragmentManager, "")
             }
 
             override fun onShareClick() {
-                shareDialog  = ShareDialog()
+                shareDialog = ShareDialog()
                 shareDialog?.show(childFragmentManager, "")
             }
         })

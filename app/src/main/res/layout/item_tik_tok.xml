@@ -8,11 +8,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <com.bytedance.tiktok.widget.component.TikTokView
         android:id="@+id/tiktok_View"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"/>
 </FrameLayout>
 </layout>
