@@ -19,6 +19,7 @@ import com.bytedance.tiktok.adapter.VideoAdapter.VideoViewHolder
 import com.bytedance.tiktok.base.BaseAdapter
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.ItemVideoBinding
+import com.bytedance.tiktok.utils.cache.PreloadManager
 import com.bytedance.tiktok.view.LikeView.OnLikeListener
 
 
@@ -51,8 +52,9 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView): BaseAd
             })
             holder.binding.ivPlay.alpha = 0.4f
         }
+
         //利用预加item，提前加载缓存资源
-        mList[position].mediaSource = buildMediaSource(mList[position].videoRes)
+        mList[position].mediaSource = buildMediaSource(PreloadManager.getInstance(context).getPlayUrl(mList[position].videoRes))
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.bytedance.tiktok.fragment
 
 import VideoPlayer
+import android.content.Context
 import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -22,8 +23,10 @@ import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.FragmentRecommendBinding
+import com.bytedance.tiktok.utils.DataUtil
 import com.bytedance.tiktok.utils.OnVideoControllerListener
 import com.bytedance.tiktok.utils.RxBus
+import com.bytedance.tiktok.utils.cache.PreloadManager
 import com.bytedance.tiktok.view.CommentDialog
 import com.bytedance.tiktok.view.ControllerView
 import com.bytedance.tiktok.view.LikeView
@@ -41,13 +44,21 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
     private var adapter: VideoAdapter?= null
     private var commentDialog : CommentDialog?= null
     private var shareDialog : ShareDialog?= null
-
+    private var mPreloadManager: PreloadManager? = null
     /** 当前播放视频位置  */
     private var curPlayPos = -1
     private lateinit var videoView: VideoPlayer
 
     private var ivCurCover: ImageView? = null
     private var subscribe: Subscription?= null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mPreloadManager = PreloadManager.getInstance(requireActivity())
+        DataCreate.datas.forEachIndexed { index, videoBean ->
+            //开始预加载
+            PreloadManager.getInstance(context).addPreloadTask(videoBean.videoRes, index)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

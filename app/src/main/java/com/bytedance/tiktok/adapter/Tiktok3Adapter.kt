@@ -38,6 +38,13 @@ class Tiktok3Adapter(
             .apply(RequestOptions.frameOf(0)) // 从第一帧开始
             .into(holder.mThumb)
         holder.mPosition = position
+        holder.mTikTokView?.setOnLikeListener(object : TikTokView.OnLikeListener {
+            override fun onLikeListener() {
+                if (!item.isLiked) {  //未点赞，会有点赞效果，否则无
+                    holder?.controllerView!!.like()
+                }
+            }
+        })
     }
 
     override fun onViewDetachedFromWindow(holder: ViewHolder) {
