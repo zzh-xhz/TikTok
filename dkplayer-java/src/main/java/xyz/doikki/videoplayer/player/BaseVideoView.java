@@ -178,8 +178,7 @@ public class BaseVideoView<P extends AbstractPlayer> extends FrameLayout
      */
     @Override
     public void start() {
-        if (isInIdleState()
-                || isInStartAbortState()) {
+        if (isInIdleState() || isInStartAbortState()) {
             startPlay();
         } else if (isInPlaybackState()) {
             startInPlaybackState();
@@ -287,6 +286,16 @@ public class BaseVideoView<P extends AbstractPlayer> extends FrameLayout
             //重新设置option，media player reset之后，option会失效
             setOptions();
         }
+        if (prepareDataSource()) {
+            mMediaPlayer.prepareAsync();
+            setPlayState(STATE_PREPARING);
+            setPlayerState(isFullScreen() ? PLAYER_FULL_SCREEN : isTinyScreen() ? PLAYER_TINY_SCREEN : PLAYER_NORMAL);
+        }
+    }
+    /**
+     * 开始准备播放（直接播放）
+     */
+    protected void prepare() {
         if (prepareDataSource()) {
             mMediaPlayer.prepareAsync();
             setPlayState(STATE_PREPARING);

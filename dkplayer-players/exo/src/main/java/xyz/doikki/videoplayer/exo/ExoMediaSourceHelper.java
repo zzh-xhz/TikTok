@@ -55,11 +55,11 @@ import java.util.Map;
     }
 
     public MediaSource getMediaSource(String uri) {
-        return getMediaSource(uri, null, false);
+        return getMediaSource(uri, null, true);
     }
 
     public MediaSource getMediaSource(String uri, Map<String, String> headers) {
-        return getMediaSource(uri, headers, false);
+        return getMediaSource(uri, headers, true);
     }
 
     public MediaSource getMediaSource(String uri, boolean isCache) {
@@ -119,7 +119,7 @@ import java.util.Map;
     private Cache newCache() {
         return new SimpleCache(
                 new File(mAppContext.getExternalCacheDir(), "exo-video-cache"),//缓存目录
-                new LeastRecentlyUsedCacheEvictor(512 * 1024 * 1024),//缓存大小，默认512M，使用LRU算法实现
+                new LeastRecentlyUsedCacheEvictor(2048 * 1024 * 1024),//缓存大小，默认2048M，使用LRU算法实现
                 new StandaloneDatabaseProvider(mAppContext));
     }
 

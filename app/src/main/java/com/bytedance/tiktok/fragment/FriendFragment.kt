@@ -1,8 +1,8 @@
-package com.bytedance.tiktok.fragment
-
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -21,14 +21,11 @@ import com.bytedance.tiktok.utils.Utils
 import com.bytedance.tiktok.utils.cache.PreloadManager
 import com.bytedance.tiktok.view.CommentDialog
 import com.bytedance.tiktok.view.ControllerView
-import com.bytedance.tiktok.view.LikeView
 import com.bytedance.tiktok.view.ShareDialog
 import com.bytedance.tiktok.widget.VerticalViewPager
-import com.bytedance.tiktok.widget.controller.PortraitWhenFullScreenController
 import com.bytedance.tiktok.widget.controller.TikTokController
 import com.bytedance.tiktok.widget.render.TikTokRenderViewFactory
-import com.bytedance.tiktok.widget.videoview.ExoVideoView
-import xyz.doikki.videoplayer.player.VideoView
+import com.bytedance.tiktok.widget.videoview.TiktokVideoView
 import xyz.doikki.videoplayer.util.L
 
 
@@ -37,7 +34,7 @@ import xyz.doikki.videoplayer.util.L
  * create on 2020-05-19
  * description 朋友播放页
  */
-class FriendFragment : BaseBindingPlayerFragment<VideoView, FragmentFriendBinding>({ FragmentFriendBinding.inflate(it) }) {
+class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriendBinding>({ FragmentFriendBinding.inflate(it) }) {
     private var commentDialog: CommentDialog? = null
     private var shareDialog: ShareDialog? = null
 
@@ -50,13 +47,23 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView, FragmentFriendBindin
     private var mPreloadManager: PreloadManager? = null
     private var mController: TikTokController? = null
     private var mViewPagerImpl: RecyclerView? = null
+    var loadControl = DefaultLoadControl.Builder()
+        .setBufferDurationsMs(32 * 1024, 1024 * 1024, 1024, 1024)
+        .build()
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mPreloadManager = PreloadManager.getInstance(requireActivity())
+        initVideoView()
+        DataUtil.getTiktokDataFromAssets(requireActivity()).forEachIndexed { index, videoBean ->
+            //开始预加载
+            PreloadManager.getInstance(context).addPreloadTask(videoBean.videoRes, index)
+        }
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewPager()
-        initVideoView()
-        mPreloadManager = PreloadManager.getInstance(requireActivity())
         addData(null)
-
         val index = 0
         binding.viewPager2!!.post {
             if (index == 0) {
@@ -66,11 +73,14 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView, FragmentFriendBindin
             }
         }
         setRefreshEvent()
-
     }
 
     private fun initVideoView() {
-        mVideoView = VideoView(requireActivity())
+        mVideoView = TiktokVideoView(requireActivity())
+        mVideoView!!.setAddData(mVideoList);
+        mVideoView!!.setLoadControl(loadControl)
+        mVideoView!!.setCacheEnabled(true)
+        mVideoView!!.initPlayer()
         mVideoView!!.setLooping(true)
         //以下只能二选一，看你的需求
         mVideoView!!.setRenderViewFactory(TikTokRenderViewFactory.create())
@@ -78,14 +88,12 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView, FragmentFriendBindin
         mController = TikTokController(requireActivity())
         mVideoView!!.setVideoController(mController)
     }
-
     private fun initViewPager() {
         binding.viewPager2.offscreenPageLimit = 4
         mTiktok3Adapter = Tiktok3Adapter(mVideoList)
         binding.viewPager2.adapter = mTiktok3Adapter
         binding.viewPager2.overScrollMode = View.OVER_SCROLL_NEVER
         binding.viewPager2.registerOnPageChangeCallback(pageChangeCallback)
-
         //ViewPage2内部是通过RecyclerView去实现的，它位于ViewPager2的第0个位置
         mViewPagerImpl = binding.viewPager2.getChildAt(0) as RecyclerView
     }
@@ -112,7 +120,6 @@ class FriendFragment : BaseBindingPlayerFragment<VideoView, FragmentFriendBindin
                 viewHolder.mPlayerContainer.addView(mVideoView, 0)
                 mVideoView!!.start()
                 mCurPos = position
-
                 break
             }
         }

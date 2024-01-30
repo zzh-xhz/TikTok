@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.media3.common.util.UnstableApi;
 import androidx.media3.exoplayer.LoadControl;
 import androidx.media3.exoplayer.RenderersFactory;
 import androidx.media3.exoplayer.source.MediaSource;
@@ -19,7 +20,7 @@ import xyz.doikki.videoplayer.player.BaseVideoView;
 import xyz.doikki.videoplayer.player.PlayerFactory;
 
 
-public class ExoVideoView extends BaseVideoView<CustomExoMediaPlayer> {
+@UnstableApi public class ExoVideoView extends BaseVideoView<CustomExoMediaPlayer> {
 
     private MediaSource mMediaSource;
 
@@ -29,7 +30,7 @@ public class ExoVideoView extends BaseVideoView<CustomExoMediaPlayer> {
     private RenderersFactory mRenderersFactory;
     private TrackSelector mTrackSelector;
 
-    private final ExoMediaSourceHelper mHelper;
+    public final ExoMediaSourceHelper mHelper;
 
     public ExoVideoView(Context context) {
         super(context);
