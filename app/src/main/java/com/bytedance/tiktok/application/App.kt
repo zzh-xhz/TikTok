@@ -4,6 +4,7 @@ import android.os.StrictMode
 import androidx.multidex.MultiDexApplication
 import com.bytedance.tiktok.utils.ProgressManagerImpl
 import com.bytedance.tiktok.widget.render.SurfaceRenderViewFactory
+import com.bytedance.tiktok.widget.render.gl2.GLSurfaceRenderView2
 import com.danikula.videocache.Logger
 import xyz.doikki.videoplayer.BuildConfig
 import xyz.doikki.videoplayer.exo.ExoMediaPlayerFactory

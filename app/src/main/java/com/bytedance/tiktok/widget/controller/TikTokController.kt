@@ -28,6 +28,9 @@ import java.util.Random
  */
 class TikTokController : StandardVideoController {
     private var tiktokControlView: TiktokControlView? = null
+    private var completeView: CompleteView? = null
+    private var errorView: ErrorView? = null
+    private var prepareView: PrepareView? = null
     private val angles = intArrayOf(-30, 0, 30)
     /** 图片大小  */
     private val likeViewSize = 330
@@ -61,10 +64,10 @@ class TikTokController : StandardVideoController {
     }
     override fun initView() {
         super.initView()
-        val completeView = CompleteView(context)
-        val errorView = ErrorView(context)
-        val prepareView = PrepareView(context)
-        prepareView.setClickStart()
+         completeView = CompleteView(context)
+         errorView = ErrorView(context)
+         prepareView = PrepareView(context)
+         prepareView?.setClickStart()
         addControlComponent(completeView, errorView, prepareView)
         addControlComponent(GestureView(context))
     }
@@ -78,11 +81,15 @@ class TikTokController : StandardVideoController {
      * 单击
      */
     override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+        if (errorView?.visibility == VISIBLE){
+            errorView?.onSingleTapConfirmed(e)
+        }
         if (mControlWrapper.isFullScreen){
             super.onSingleTapConfirmed(e)
         }else{
             togglePlay()
         }
+
         return true
     }
 

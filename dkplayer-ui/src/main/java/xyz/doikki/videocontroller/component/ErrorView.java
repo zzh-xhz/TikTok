@@ -2,12 +2,14 @@ package xyz.doikki.videocontroller.component;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,12 +27,15 @@ public class ErrorView extends LinearLayout implements IControlComponent {
 
     private float mDownX;
     private float mDownY;
-
+    private TextView statusBtn;
     private ControlWrapper mControlWrapper;
 
     public ErrorView(Context context) {
         this(context, null);
     }
+
+
+
 
     public ErrorView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -43,7 +48,8 @@ public class ErrorView extends LinearLayout implements IControlComponent {
     {
         setVisibility(GONE);
         LayoutInflater.from(getContext()).inflate(R.layout.dkplayer_layout_error_view, this, true);
-        findViewById(R.id.status_btn).setOnClickListener(new OnClickListener() {
+        statusBtn    = (TextView) findViewById(R.id.status_btn);
+        statusBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 setVisibility(GONE);
@@ -114,4 +120,32 @@ public class ErrorView extends LinearLayout implements IControlComponent {
         }
         return super.dispatchTouchEvent(ev);
     }
+    /**
+     * 单击
+     */
+    public boolean onSingleTapConfirmed(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        int[] location = new int[2];
+        statusBtn.getLocationOnScreen(location);
+        int viewX = location[0] -10;
+        int viewY = location[1] -100;
+
+        int viewWidth = statusBtn.getWidth()+10;
+        int viewHeight = statusBtn.getHeight()+10;
+
+        // 判断点击是否在 View 的范围内
+        if (x >= viewX && x <= viewX + viewWidth && y >= viewY && y <= viewY + viewHeight) {
+            // 在 View 的范围内
+            // 在这里处理点击事件
+            setVisibility(GONE);
+            mControlWrapper.replay(false);
+            return true;  // 返回 true 表示已经处理了触摸事件
+        } else {
+            // 不在 View 的范围内
+            return false;  // 返回 false 表示未处理触摸事件，事件会继续传递
+        }
+    }
+
 }

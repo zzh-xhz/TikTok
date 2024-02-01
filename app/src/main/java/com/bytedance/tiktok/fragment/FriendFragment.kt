@@ -1,4 +1,5 @@
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MotionEvent
@@ -27,13 +28,19 @@ import com.bytedance.tiktok.view.CommentDialog
 import com.bytedance.tiktok.view.ShareDialog
 import com.bytedance.tiktok.widget.VerticalViewPager
 import com.bytedance.tiktok.widget.component.TikTokView
-import com.bytedance.tiktok.widget.controller.PortraitWhenFullScreenController
 import com.bytedance.tiktok.widget.controller.TikTokController
 import com.bytedance.tiktok.widget.render.TikTokRenderViewFactory
+import com.bytedance.tiktok.widget.render.gl2.GLSurfaceRenderView2
+import com.bytedance.tiktok.widget.render.gl2.filter.GlFilterGroup
+import com.bytedance.tiktok.widget.render.gl2.filter.GlSepiaFilter
+import com.bytedance.tiktok.widget.render.gl2.filter.GlSharpenFilter
+import com.bytedance.tiktok.widget.render.gl2.filter.GlWatermarkFilter
 import com.bytedance.tiktok.widget.videoview.TiktokVideoView
 import xyz.doikki.videoplayer.player.BaseVideoView.OnStateChangeListener
 import xyz.doikki.videoplayer.player.BaseVideoView.SimpleOnStateChangeListener
 import xyz.doikki.videoplayer.player.VideoView
+import xyz.doikki.videoplayer.render.IRenderView
+import xyz.doikki.videoplayer.render.RenderViewFactory
 import xyz.doikki.videoplayer.util.L
 
 
@@ -48,6 +55,9 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
     private var commentDialog: CommentDialog? = null
     private var shareDialog: ShareDialog? = null
 
+    private val renderView by lazy {
+        GLSurfaceRenderView2(context)
+    }
     /**
      * 当前播放位置
      */
@@ -76,7 +86,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
         initViewPager()
         addData(null)
         val index = 0
-        binding.viewPager2!!.post {
+        binding.viewPager2.post {
             if (index == 0) {
                 startPlay(0)
             } else {
@@ -100,6 +110,20 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
         mController = TikTokController(requireActivity())
         mVideoView!!.setVideoController(mController)
         mVideoView!!.addOnStateChangeListener(mOnStateChangeListener)
+//        mVideoView!!.setRenderViewFactory(object : RenderViewFactory() {
+//            override fun createRenderView(context: Context?): IRenderView {
+//                return renderView
+//            }
+//        })
+//        // 设置滤镜
+//        renderView.setGlFilter(
+//            GlFilterGroup(
+//            // 水印
+//            GlWatermarkFilter(BitmapFactory.decodeResource(resources, R.mipmap.add_focus)),
+//            GlSepiaFilter(),
+//            GlSharpenFilter()
+//        )
+//        )
     }
 
     private fun initViewPager() {
@@ -269,7 +293,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
                     }
                 }
             }
-          mVideoView?.onTouchEvent(motionEvent)
+            mVideoView?.onTouchEvent(motionEvent)
             tikTokView.onTouchEvent(motionEvent)
             mController?.onTouchEvent(motionEvent)
             true
@@ -291,6 +315,9 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
             return
         }
     }
+    /**
+     * 视图扩大比例监听
+     */
     private fun videoViewLister(tikTokView:TikTokView,llRight :LinearLayout,llBottom:LinearLayout,tvFullScreenView:TextView) {
         mVideoView?.setScaleFactorChange(object : TiktokVideoView.OnScaleFactorChangeListener{
             override fun onScale(detector: Float) {
