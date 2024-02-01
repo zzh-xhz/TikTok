@@ -101,21 +101,6 @@ class TikTokView : FrameLayout, IControlComponent {
         ivHeadAnim = findViewById(R.id.ivHeadAnim);
         init()
         mScaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
-//        gestureDetector = GestureDetector(object : GestureDetector.SimpleOnGestureListener() {
-//            override fun onDoubleTap(e: MotionEvent): Boolean {
-//                addLikeView(e)
-//                onLikeListener!!.onLikeListener()
-//                return true
-//            }
-//
-//            override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-//                togglePlay()
-//                return true
-//            }
-//        })
-//        setOnClickListener {
-//            togglePlay()
-//        }
     }
 
     fun setListener(listener: OnVideoControllerListener?) {
@@ -125,7 +110,7 @@ class TikTokView : FrameLayout, IControlComponent {
     /**
      * Returns the debugging information string to be shown by the target [TextView].
      */
-    protected fun getDebugString() {
+    protected fun setAdjustingViews() {
         if (isLandscapeVideo() && tvFullScreenView?.visibility != visibility ){
             tvFullScreenView?.visibility = visibility
             return
@@ -134,10 +119,8 @@ class TikTokView : FrameLayout, IControlComponent {
             tvFullScreenView?.visibility = GONE
             return
         }
-
-//        return Utils.playState2str(playState) + "video width: " + mControlWrapper!!.videoSize[0] + " , height: " + mControlWrapper!!.videoSize[1]
     }
-    public fun isLandscapeVideo() :Boolean{
+     fun isLandscapeVideo() :Boolean{
        return mControlWrapper!!.videoSize[0] > mControlWrapper!!.videoSize[1]
     }
     fun setVideoData(videoData: VideoBean) {
@@ -150,7 +133,6 @@ class TikTokView : FrameLayout, IControlComponent {
         tvCommentcount!!.text = NumUtils.numberFilter(videoData.commentCount)
         tvSharecount!!.text = NumUtils.numberFilter(videoData.shareCount)
         animationView!!.setAnimation("like.json")
-
         //点赞状态
         if (videoData.isLiked) {
             ivLike!!.setTextColor(resources.getColor(R.color.color_FF0041))
@@ -163,6 +145,10 @@ class TikTokView : FrameLayout, IControlComponent {
             ivFocus!!.visibility = GONE
         } else {
             ivFocus!!.visibility = VISIBLE
+        }
+        // 默认都是隐藏 根据进度条监听  得出结果是否是 横屏竖屏视频正常应该是 后台接口给出
+        if (tvFullScreenView?.visibility == VISIBLE){
+            tvFullScreenView?.visibility = GONE
         }
     }
 
@@ -342,10 +328,8 @@ class TikTokView : FrameLayout, IControlComponent {
     }
     override fun setProgress(duration: Int, position: Int) {
         if (llBootom?.visibility == View.VISIBLE){
-            getDebugString()
+            setAdjustingViews()
         }
-
-
     }
     override fun onLockStateChanged(isLocked: Boolean) {}
     interface OnLikeListener {

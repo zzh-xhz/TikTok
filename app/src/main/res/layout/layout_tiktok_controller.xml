@@ -174,14 +174,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="450dp"
         android:text="全屏观看"
         android:paddingHorizontal="5dp"
-        android:paddingVertical="2dp"
         android:gravity="center_vertical"
         android:textColor="@color/white"
-        android:drawableLeft="@drawable/dkplayer_ic_action_fullscreen_exit"
-        android:background="@color/color_tag"
+        android:drawableLeft="@drawable/dkplayer_ic_action_fullscreen"
+        android:background="@drawable/shape_full_bg"
         android:visibility="gone"/>
     <ImageView
         android:id="@+id/play_btn"

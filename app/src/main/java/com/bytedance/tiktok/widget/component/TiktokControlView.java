@@ -3,17 +3,23 @@ package com.bytedance.tiktok.widget.component;
 import static xyz.doikki.videoplayer.util.PlayerUtils.stringForTime;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -22,7 +28,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bytedance.tiktok.R;
+import com.bytedance.tiktok.bean.VideoBean;
 
+import xyz.doikki.videocontroller.component.TitleView;
 import xyz.doikki.videoplayer.controller.ControlWrapper;
 import xyz.doikki.videoplayer.controller.IControlComponent;
 import xyz.doikki.videoplayer.player.VideoView;
@@ -35,19 +43,24 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
 
     protected ControlWrapper mControlWrapper;
 
-    private final TextView time;
-
+    private final TextView mTotalTime;
+    private final TextView mCurrTime;
+    private final ImageView mFullScreen;
     private final LinearLayout mBottomContainer;
     private final SeekBar mVideoProgress;
-//    private final TextView mFullScreen;
+    private final ImageView mPlayButton;
+    private final TextView time;
+    private final LinearLayout mBottomVerticalScreenContainer;
+    private final SeekBar mVideoVerticalScreenProgress;
+
     private boolean mIsDragging;
+    private final LinearLayout mTitleContainer;
+    private  TextView mTitle;
+    private  TextView mSysTime;//系统当前时间
 
-
-    private boolean mIsShowBottomProgress = true;
-
-
-
-
+    private  BatteryReceiver mBatteryReceiver;
+    private ImageView back;
+    private boolean mIsRegister;//是否注册BatteryReceiver
     public TiktokControlView(@NonNull Context context) {
         super(context);
     }
@@ -60,32 +73,60 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
         super(context, attrs, defStyleAttr);
     }
 
-
-    {
-        setVisibility(GONE);
-        LayoutInflater.from(getContext()).inflate(getLayoutId(), this, true);
-//        mFullScreen = findViewById(R.id.tv_full_screen_view);
-//        mFullScreen.setOnClickListener(this);
-        mBottomContainer = findViewById(R.id.bottom_container);
-        mVideoProgress = findViewById(R.id.seekBar);
-        mVideoProgress.setOnSeekBarChangeListener(this);
-
-        time = findViewById(R.id.time);
-        //5.1以下系统SeekBar高度需要设置成WRAP_CONTENT
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            mVideoProgress.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        }
-    }
-
     protected int getLayoutId() {
         return R.layout.tiktok_layout_vod_control_view;
     }
+    {
+        setVisibility(GONE);
+        LayoutInflater.from(getContext()).inflate(getLayoutId(), this, true);
+        //竖屏
+        mBottomVerticalScreenContainer = findViewById(R.id.bottom_vertical_screen_container);
+        mVideoVerticalScreenProgress = findViewById(R.id.seekBar_vertical_screen);
+        time = findViewById(R.id.time_vertical_screen);
+        // 横屏
+        mTitleContainer = findViewById(R.id.title_container);
+        back = findViewById(R.id.back);
+        mTitle = findViewById(R.id.title);
+        mSysTime = findViewById(R.id.sys_time);
+        mFullScreen = findViewById(R.id.fullscreen);
+        mFullScreen.setOnClickListener(this);
+        mBottomContainer = findViewById(R.id.bottom_container);
+        mVideoProgress = findViewById(R.id.seekBar);
+        mVideoProgress.setOnSeekBarChangeListener(this);
+        mTotalTime = findViewById(R.id.total_time);
+        mCurrTime = findViewById(R.id.curr_time);
+        mPlayButton = findViewById(R.id.iv_play);
+        mPlayButton.setOnClickListener(this);
+        //电量
+        ImageView batteryLevel = findViewById(R.id.iv_battery);
+        mBatteryReceiver = new BatteryReceiver(batteryLevel);
+        back.setOnClickListener(this);
+        mVideoVerticalScreenProgress.setOnSeekBarChangeListener(this);
 
-    /**
-     * 是否显示底部进度条，默认显示
-     */
-    public void showBottomProgress(boolean isShow) {
-        mIsShowBottomProgress = isShow;
+        //5.1以下系统SeekBar高度需要设置成WRAP_CONTENT
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            mVideoVerticalScreenProgress.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        }
+    }
+    public void setData(VideoBean videoBean) {
+        mTitle.setText(videoBean.getContent());
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mIsRegister) {
+            getContext().unregisterReceiver(mBatteryReceiver);
+            mIsRegister = false;
+        }
+    }
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (!mIsRegister) {
+            getContext().registerReceiver(mBatteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+            mIsRegister = true;
+        }
     }
 
     @Override
@@ -100,6 +141,37 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
 
     @Override
     public void onVisibilityChanged(boolean isVisible, Animation anim) {
+        //只在全屏时才有效
+        if (!mControlWrapper.isFullScreen()) {
+            return;
+        }
+        if (isVisible) {
+            if (mTitleContainer.getVisibility() == GONE) {
+                mSysTime.setText(PlayerUtils.getCurrentSystemTime());
+                mTitleContainer.setVisibility(VISIBLE);
+                if (anim != null) {
+                    startAnimation(anim);
+                }
+            }
+        } else {
+            if (mTitleContainer.getVisibility() == VISIBLE) {
+                mTitleContainer.setVisibility(GONE);
+                if (anim != null) {
+                    startAnimation(anim);
+                }
+            }
+        }
+        if (isVisible) {
+            mBottomContainer.setVisibility(VISIBLE);
+            if (anim != null) {
+                mBottomContainer.startAnimation(anim);
+            }
+        } else {
+            mBottomContainer.setVisibility(GONE);
+            if (anim != null) {
+                mBottomContainer.startAnimation(anim);
+            }
+        }
     }
 
     @Override
@@ -108,10 +180,10 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
             case VideoView.STATE_IDLE:
             case VideoView.STATE_PLAYBACK_COMPLETED:
                 setVisibility(GONE);
-//                mBottomProgress.setProgress(0);
-//                mBottomProgress.setSecondaryProgress(0);
                 mVideoProgress.setProgress(0);
                 mVideoProgress.setSecondaryProgress(0);
+                mVideoVerticalScreenProgress.setProgress(0);
+                mVideoVerticalScreenProgress.setSecondaryProgress(0);
                 break;
             case VideoView.STATE_START_ABORT:
             case VideoView.STATE_PREPARING:
@@ -120,32 +192,22 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
                 setVisibility(GONE);
                 break;
             case VideoView.STATE_PLAYING:
-//                mPlayButton.setSelected(true);
-//                if (mIsShowBottomProgress) {
-//                    if (mControlWrapper.isShowing()) {
-//                        mBottomProgress.setVisibility(GONE);
-//                        mBottomContainer.setVisibility(VISIBLE);
-//                    } else {
-//                        mBottomContainer.setVisibility(GONE);
-//                        mBottomProgress.setVisibility(VISIBLE);
-//                    }
-//                } else {
-//                    mBottomContainer.setVisibility(GONE);
-//                }
+                mPlayButton.setSelected(true);
+                mBottomContainer.setVisibility(GONE);
                 setVisibility(VISIBLE);
                 //开始刷新进度
                 mControlWrapper.startProgress();
                 break;
             case VideoView.STATE_PAUSED:
-//                mPlayButton.setSelected(false);
+                mPlayButton.setSelected(false);
                 break;
             case VideoView.STATE_BUFFERING:
-//                mPlayButton.setSelected(mControlWrapper.isPlaying());
+                mPlayButton.setSelected(mControlWrapper.isPlaying());
                 // 停止刷新进度
                 mControlWrapper.stopProgress();
                 break;
             case VideoView.STATE_BUFFERED:
-//                mPlayButton.setSelected(mControlWrapper.isPlaying());
+                mPlayButton.setSelected(mControlWrapper.isPlaying());
                 //开始刷新进度
                 mControlWrapper.startProgress();
                 break;
@@ -156,10 +218,21 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
     public void onPlayerStateChanged(int playerState) {
         switch (playerState) {
             case VideoView.PLAYER_NORMAL:
-//                mFullScreen.setSelected(false);
+                mFullScreen.setSelected(false);
+                mTitleContainer.setVisibility(GONE);
+                mTitle.setSelected(false);
+                mBottomContainer.setVisibility(GONE);
+                mBottomVerticalScreenContainer.setVisibility(VISIBLE);
                 break;
             case VideoView.PLAYER_FULL_SCREEN:
-//                mFullScreen.setSelected(true);
+                mFullScreen.setSelected(true);
+                if (mControlWrapper.isShowing() && !mControlWrapper.isLocked()) {
+                    mTitleContainer.setVisibility(VISIBLE);
+                    mSysTime.setText(PlayerUtils.getCurrentSystemTime());
+                    mBottomContainer.setVisibility(VISIBLE);
+                }
+                mTitle.setSelected(true);
+                mBottomVerticalScreenContainer.setVisibility(GONE);
                 break;
         }
 
@@ -168,14 +241,17 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
             int orientation = activity.getRequestedOrientation();
             int cutoutHeight = mControlWrapper.getCutoutHeight();
             if (orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                mBottomVerticalScreenContainer.setPadding(0, 0, 0, 0);
+                mTitleContainer.setPadding(0, 0, 0, 0);
                 mBottomContainer.setPadding(0, 0, 0, 0);
-//                mBottomProgress.setPadding(0, 0, 0, 0);
             } else if (orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                mBottomVerticalScreenContainer.setPadding(cutoutHeight, 0, 0, 0);
+                mTitleContainer.setPadding(cutoutHeight, 0, 0, 0);
                 mBottomContainer.setPadding(cutoutHeight, 0, 0, 0);
-//                mBottomProgress.setPadding(cutoutHeight, 0, 0, 0);
             } else if (orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
+                mBottomVerticalScreenContainer.setPadding(0, 0, cutoutHeight, 0);
+                mTitleContainer.setPadding(0, 0, cutoutHeight, 0);
                 mBottomContainer.setPadding(0, 0, cutoutHeight, 0);
-//                mBottomProgress.setPadding(0, 0, cutoutHeight, 0);
             }
         }
     }
@@ -185,26 +261,31 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
         if (mIsDragging) {
             return;
         }
-//        if (mControlWrapper.getVideoSize()[0] > mControlWrapper.getVideoSize()[1] && mFullScreen.getVisibility() != VISIBLE) {
-//            mFullScreen.setVisibility(VISIBLE);
-//        }
-        if (mVideoProgress != null) {
+        if (mVideoVerticalScreenProgress != null) {
             if (duration > 0) {
+                mVideoVerticalScreenProgress.setEnabled(true);
                 mVideoProgress.setEnabled(true);
-                int pos = (int) (position * 1.0 / duration * mVideoProgress.getMax());
+                int pos = (int) (position * 1.0 / duration * mVideoVerticalScreenProgress.getMax());
+                mVideoVerticalScreenProgress.setProgress(pos);
                 mVideoProgress.setProgress(pos);
-//                mBottomProgress.setProgress(pos);
             } else {
+                mVideoVerticalScreenProgress.setEnabled(false);
                 mVideoProgress.setEnabled(false);
             }
             int percent = mControlWrapper.getBufferedPercentage();
             if (percent >= 95) { //解决缓冲进度不能100%问题
+                mVideoVerticalScreenProgress.setSecondaryProgress(mVideoVerticalScreenProgress.getMax());
                 mVideoProgress.setSecondaryProgress(mVideoProgress.getMax());
-//                mBottomProgress.setSecondaryProgress(mBottomProgress.getMax());
             } else {
+                mVideoVerticalScreenProgress.setSecondaryProgress(percent * 10);
                 mVideoProgress.setSecondaryProgress(percent * 10);
-//                mBottomProgress.setSecondaryProgress(percent * 10);
             }
+        }
+        if (mTotalTime != null) {
+            mTotalTime.setText(stringForTime(duration));
+        }
+        if (mCurrTime != null) {
+            mCurrTime.setText(stringForTime(position));
         }
         if (time != null) {
             time.setText(stringForTime(position) + "/" + stringForTime(duration));
@@ -214,29 +295,30 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
     @Override
     public void onLockStateChanged(boolean isLocked) {
         onVisibilityChanged(!isLocked, null);
+        if (isLocked) {
+            mTitleContainer.setVisibility(GONE);
+        } else {
+            mTitleContainer.setVisibility(VISIBLE);
+            mSysTime.setText(PlayerUtils.getCurrentSystemTime());
+        }
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-//        if (id == R.id.tv_full_screen_view) {
-//            toggleFullScreen();
-//        }
-//        else if (id == R.id.iv_play) {
-//            mControlWrapper.togglePlay();
-//        }
-
-        if (id == R.id.iv_back) {
-
+        if (id == R.id.fullscreen) {
+            toggleFullScreen();
         }
-        if (id == R.id.iv_play) {
+        else if (id == R.id.iv_play) {
             mControlWrapper.togglePlay();
+        } else  if (id == R.id.back) {
+            Activity activity = PlayerUtils.scanForActivity(getContext());
+            if (activity != null && mControlWrapper.isFullScreen()) {
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                mControlWrapper.stopFullScreen();
+            }
         }
     }
-    public void setIvPause(){
-
-    }
-
     /**
      * 横竖屏切换
      */
@@ -244,7 +326,7 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
         Activity activity = PlayerUtils.scanForActivity(getContext());
         mControlWrapper.toggleFullScreen(activity);
         // 下面方法会根据适配宽高决定是否旋转屏幕
-        mControlWrapper.toggleFullScreenByVideoSize(activity);
+//        mControlWrapper.toggleFullScreenByVideoSize(activity);
     }
 
     @Override
@@ -258,7 +340,7 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
     @Override
     public void onStopTrackingTouch(@NonNull SeekBar seekBar) {
         long duration = mControlWrapper.getDuration();
-        long newPosition = (duration * seekBar.getProgress()) / mVideoProgress.getMax();
+        long newPosition = (duration * seekBar.getProgress()) / mVideoVerticalScreenProgress.getMax();
         mControlWrapper.seekTo((int) newPosition);
         mIsDragging = false;
         mControlWrapper.startProgress();
@@ -273,9 +355,31 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
         }
         time.setVisibility(VISIBLE);
         long duration = mControlWrapper.getDuration();
-        long newPosition = (duration * progress) / mVideoProgress.getMax();
+        long newPosition = (duration * progress) / mVideoVerticalScreenProgress.getMax();
         if (time != null) {
             time.setText(stringForTime((int) newPosition) + "/" + stringForTime((int) duration));
+        }
+        if (mCurrTime != null) {
+            mCurrTime.setText(stringForTime((int) newPosition));
+        }
+    }
+    private static class BatteryReceiver extends BroadcastReceiver {
+        private final ImageView pow;
+
+        public BatteryReceiver(ImageView pow) {
+            this.pow = pow;
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle extras = intent.getExtras();
+            if (extras == null) {
+                return;
+            }
+            int current = extras.getInt("level");// 获得当前电量
+            int total = extras.getInt("scale");// 获得总电量
+            int percent = current * 100 / total;
+            pow.getDrawable().setLevel(percent);
         }
     }
 }

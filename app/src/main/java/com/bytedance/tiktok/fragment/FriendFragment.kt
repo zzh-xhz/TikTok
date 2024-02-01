@@ -27,6 +27,7 @@ import com.bytedance.tiktok.view.CommentDialog
 import com.bytedance.tiktok.view.ShareDialog
 import com.bytedance.tiktok.widget.VerticalViewPager
 import com.bytedance.tiktok.widget.component.TikTokView
+import com.bytedance.tiktok.widget.controller.PortraitWhenFullScreenController
 import com.bytedance.tiktok.widget.controller.TikTokController
 import com.bytedance.tiktok.widget.render.TikTokRenderViewFactory
 import com.bytedance.tiktok.widget.videoview.TiktokVideoView
@@ -130,6 +131,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
                 viewHolder.llBootom,
                 viewHolder.tvFullScreenView
             )
+            mController?.setData(DataCreate.datas[position])
             if (viewHolder.mPosition == position) {
                 mVideoView?.release()
                 Utils.removeViewFormParent(mVideoView)

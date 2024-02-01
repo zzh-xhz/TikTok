@@ -9,22 +9,24 @@ import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.TextView
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.utils.AnimUtils
 import com.bytedance.tiktok.widget.component.DebugInfoView
 import com.bytedance.tiktok.widget.component.TiktokControlView
+import xyz.doikki.videocontroller.StandardVideoController
 import xyz.doikki.videocontroller.component.CompleteView
 import xyz.doikki.videocontroller.component.ErrorView
-import xyz.doikki.videoplayer.controller.GestureVideoController
+import xyz.doikki.videocontroller.component.GestureView
+import xyz.doikki.videocontroller.component.PrepareView
+import xyz.doikki.videoplayer.controller.MediaPlayerControl
 import java.util.Random
 
 /**
  * 抖音
  * Created by Doikki on 2018/1/6.
  */
-class TikTokController : GestureVideoController {
+class TikTokController : StandardVideoController {
     private var tiktokControlView: TiktokControlView? = null
     private val angles = intArrayOf(-30, 0, 30)
     /** 图片大小  */
@@ -42,25 +44,29 @@ class TikTokController : GestureVideoController {
         setEnableInNormal(false)
         setGestureEnabled(false)
         setDoubleTapTogglePlayEnabled(false)
-        //不监听设备方向
-        mOrientationHelper.setOnOrientationChangeListener(null)
+        setEnableOrientation(false)
         tiktokControlView = TiktokControlView(context)
         addControlComponent(tiktokControlView)
         //显示调试信息
         addControlComponent(DebugInfoView(context))
     }
 
-    override fun getLayoutId(): Int {
-        return 0
+    override fun setMediaPlayer(mediaPlayer: MediaPlayerControl?) {
+        super.setMediaPlayer(mediaPlayer)
+        //不监听设备方向
+        mOrientationHelper.setOnOrientationChangeListener(null)
     }
-
+     fun setData(videoBean: VideoBean) {
+         tiktokControlView?.setData(videoBean)
+    }
     override fun initView() {
         super.initView()
         val completeView = CompleteView(context)
         val errorView = ErrorView(context)
-        addControlComponent(completeView)
-        addControlComponent(errorView)
-
+        val prepareView = PrepareView(context)
+        prepareView.setClickStart()
+        addControlComponent(completeView, errorView, prepareView)
+        addControlComponent(GestureView(context))
     }
 
     override fun showNetWarning(): Boolean {
@@ -72,7 +78,9 @@ class TikTokController : GestureVideoController {
      * 单击
      */
     override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-        if (!isLocked && isInPlaybackState) {
+        if (mControlWrapper.isFullScreen){
+            super.onSingleTapConfirmed(e)
+        }else{
             togglePlay()
         }
         return true
@@ -83,13 +91,12 @@ class TikTokController : GestureVideoController {
      */
     override fun onDoubleTap(e: MotionEvent): Boolean {
         addLikeView(e)
+        super.onDoubleTap(e)
         return true
     }
 
     override fun onBackPressed(): Boolean {
-        return if (mControlWrapper.isFullScreen) {
-            stopFullScreen()
-        } else super.onBackPressed()
+        return super.onBackPressed()
     }
     private fun addLikeView(e: MotionEvent) {
         val imageView = ImageView(context)

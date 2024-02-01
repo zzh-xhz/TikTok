@@ -3,18 +3,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
+
     <LinearLayout
-        android:id="@+id/bottom_container"
+        android:id="@+id/title_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dkplayer_controller_height"
+        android:background="@drawable/dkplayer_shape_standard_controller_top_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/dkplayer_controller_height"
+            android:layout_height="@dimen/dkplayer_controller_height"
+            android:layout_gravity="center"
+            android:padding="@dimen/dkplayer_controller_icon_padding"
+            android:src="@drawable/dkplayer_ic_action_arrow_back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dkplayer_controller_text_size"
+            tools:text="这是一个标题" />
+
+        <ImageView
+            android:id="@+id/iv_battery"
+            android:layout_width="26dp"
+            android:layout_height="20dp"
+            android:src="@drawable/dkplayer_battery_level" />
+
+        <TextView
+            android:id="@+id/sys_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:textColor="@android:color/white"
+            tools:text="12:00" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/lock"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center|start"
+        android:layout_margin="24dp"
+        android:background="@drawable/dkplayer_shape_back_bg"
+        android:padding="@dimen/dkplayer_default_spacing"
+        android:src="@drawable/dkplayer_selector_lock_button"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="@dimen/dkplayer_play_btn_size"
+        android:layout_height="@dimen/dkplayer_play_btn_size"
+        android:layout_gravity="center"
+        android:indeterminateDrawable="@drawable/dkplayer_progress_loading"
+        android:indeterminateDuration="2000"
+        android:visibility="gone"
+        tools:visibility="visible" />
+    <LinearLayout
+        android:id="@+id/bottom_vertical_screen_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:gravity="center_vertical"
         android:background="@drawable/dkplayer_shape_stardard_controller_bottom_bg"
         android:orientation="vertical">
-
-
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/time_vertical_screen"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             android:textColor="@android:color/white"
@@ -24,9 +91,9 @@
             android:layout_marginBottom="5dp"
             tools:text="00:00" />
         <SeekBar
-            android:id="@+id/seekBar"
+            android:id="@+id/seekBar_vertical_screen"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
+            android:layout_height="10dp"
             android:background="@null"
             android:max="1000"
             android:layout_gravity="bottom"
@@ -37,5 +104,64 @@
             android:progressDrawable="@drawable/dkplayer_layer_progress_bar"
             android:thumb="@drawable/dkplayer_seekbar_thumb_tiktok"
             android:thumbOffset="0dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dkplayer_controller_height"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:background="@drawable/dkplayer_shape_stardard_controller_bottom_bg"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_play"
+            android:layout_width="@dimen/dkplayer_controller_height"
+            android:layout_height="@dimen/dkplayer_controller_height"
+            android:padding="@dimen/dkplayer_controller_icon_padding"
+            android:src="@drawable/dkplayer_selector_play_button" />
+
+        <TextView
+            android:id="@+id/curr_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dkplayer_controller_time_text_size"
+            tools:text="00:00" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:max="1000"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="0dp"
+            android:progressDrawable="@drawable/dkplayer_layer_progress_bar"
+            android:thumb="@drawable/dkplayer_seekbar_thumb"
+            android:thumbOffset="0dp" />
+
+        <TextView
+            android:id="@+id/total_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dkplayer_controller_time_text_size"
+            tools:text="00:00" />
+
+        <ImageView
+            android:id="@+id/fullscreen"
+            android:layout_width="@dimen/dkplayer_controller_height"
+            android:layout_height="@dimen/dkplayer_controller_height"
+            android:padding="@dimen/dkplayer_controller_icon_padding"
+            android:src="@drawable/dkplayer_selector_full_screen_button" />
     </LinearLayout>
 </FrameLayout>

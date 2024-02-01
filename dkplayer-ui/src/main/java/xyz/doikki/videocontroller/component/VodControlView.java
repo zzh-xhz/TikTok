@@ -208,7 +208,6 @@ public class VodControlView extends FrameLayout implements IControlComponent, Vi
         if (mIsDragging) {
             return;
         }
-
         if (mVideoProgress != null) {
             if (duration > 0) {
                 mVideoProgress.setEnabled(true);
