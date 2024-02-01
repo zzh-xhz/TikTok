@@ -1,5 +1,6 @@
 package com.bytedance.tiktok.activity
 
+import FriendFragment
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
@@ -71,6 +72,9 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
     }
 
     override fun onBackPressed() {
+        if (mainFragment != null ) {
+            mainFragment.onBackPressed()
+        }
         //双击返回退出App
         if (System.currentTimeMillis() - lastTime > EXIT_TIME) {
             if (binding.viewPager.currentItem == 1) {

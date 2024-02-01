@@ -114,7 +114,7 @@ public abstract class GestureVideoController extends BaseVideoController impleme
         mCurPlayState = playState;
     }
 
-    private boolean isInPlaybackState() {
+    protected boolean isInPlaybackState() {
         return mControlWrapper != null
                 && mCurPlayState != VideoView.STATE_ERROR
                 && mCurPlayState != VideoView.STATE_IDLE

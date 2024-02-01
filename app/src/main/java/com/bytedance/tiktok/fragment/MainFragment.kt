@@ -43,13 +43,13 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
     ): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
-    private fun addChildFragment(childFragment: Fragment, containerId: Int) {
+    private fun addChildFragment(childFragment: Fragment, containerId: Int, tag: String) {
         // 获取 childFragmentManager
         val fragmentManager = childFragmentManager
         // 开启事务
         val fragmentTransaction = fragmentManager.beginTransaction()
         // 将子 Fragment 替换到指定容器中
-        fragmentTransaction.replace(containerId, childFragment)
+        fragmentTransaction.replace(containerId, childFragment,tag)
         // 提交事务
         fragmentTransaction.commitAllowingStateLoss ()
     }
@@ -124,7 +124,7 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
             binding.tabTitle.visibility = View.GONE
             binding.fragmentContainer.visibility = View.VISIBLE
         }
-        addChildFragment(getFragment(position), R.id.fragmentContainer)
+        addChildFragment(getFragment(position), R.id.fragmentContainer,"Fragment"+position)
     }
     private fun getFragment(position :Int):Fragment{
         if (position == 1 ){
@@ -143,4 +143,11 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
         /** 默认显示第一页推荐页  */
         var curPage = 1
     }
+    fun onBackPressed() {
+        val currentFragment = childFragmentManager.findFragmentByTag("Fragment1")
+        if (currentFragment != null && currentFragment is FriendFragment) {
+            currentFragment?.onBackPressed()
+        }
+    }
+
 }

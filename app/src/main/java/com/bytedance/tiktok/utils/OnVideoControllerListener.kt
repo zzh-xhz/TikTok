@@ -14,4 +14,7 @@ interface OnVideoControllerListener {
     fun onCommentClick()
 
     fun onShareClick()
+
+    fun onFullScreenClick()
+
 }

@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
-
     <LinearLayout
         android:id="@+id/bottom_container"
         android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="17dp"
             android:textColor="@android:color/white"
             android:textSize="@dimen/dkplayer_controller_time_text_size"
             android:layout_gravity="center_horizontal"
@@ -37,10 +36,6 @@
             android:paddingStart="0dp"
             android:progressDrawable="@drawable/dkplayer_layer_progress_bar"
             android:thumb="@drawable/dkplayer_seekbar_thumb_tiktok"
-            android:layout_marginBottom="1dp"
             android:thumbOffset="0dp" />
-
-
-
     </LinearLayout>
 </FrameLayout>

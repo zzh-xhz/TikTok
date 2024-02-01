@@ -7,16 +7,14 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -41,10 +39,14 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
 
     private final LinearLayout mBottomContainer;
     private final SeekBar mVideoProgress;
-
+//    private final TextView mFullScreen;
     private boolean mIsDragging;
 
+
     private boolean mIsShowBottomProgress = true;
+
+
+
 
     public TiktokControlView(@NonNull Context context) {
         super(context);
@@ -57,14 +59,17 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
     public TiktokControlView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-    
-    
+
+
     {
         setVisibility(GONE);
         LayoutInflater.from(getContext()).inflate(getLayoutId(), this, true);
+//        mFullScreen = findViewById(R.id.tv_full_screen_view);
+//        mFullScreen.setOnClickListener(this);
         mBottomContainer = findViewById(R.id.bottom_container);
         mVideoProgress = findViewById(R.id.seekBar);
         mVideoProgress.setOnSeekBarChangeListener(this);
+
         time = findViewById(R.id.time);
         //5.1以下系统SeekBar高度需要设置成WRAP_CONTENT
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -180,7 +185,9 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
         if (mIsDragging) {
             return;
         }
-
+//        if (mControlWrapper.getVideoSize()[0] > mControlWrapper.getVideoSize()[1] && mFullScreen.getVisibility() != VISIBLE) {
+//            mFullScreen.setVisibility(VISIBLE);
+//        }
         if (mVideoProgress != null) {
             if (duration > 0) {
                 mVideoProgress.setEnabled(true);
@@ -199,8 +206,8 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
 //                mBottomProgress.setSecondaryProgress(percent * 10);
             }
         }
-        if (time != null){
-            time.setText(stringForTime(position) + "/"+stringForTime(duration));
+        if (time != null) {
+            time.setText(stringForTime(position) + "/" + stringForTime(duration));
         }
     }
 
@@ -212,11 +219,22 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.fullscreen) {
-            toggleFullScreen();
-        } else if (id == R.id.iv_play) {
+//        if (id == R.id.tv_full_screen_view) {
+//            toggleFullScreen();
+//        }
+//        else if (id == R.id.iv_play) {
+//            mControlWrapper.togglePlay();
+//        }
+
+        if (id == R.id.iv_back) {
+
+        }
+        if (id == R.id.iv_play) {
             mControlWrapper.togglePlay();
         }
+    }
+    public void setIvPause(){
+
     }
 
     /**
@@ -226,7 +244,7 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
         Activity activity = PlayerUtils.scanForActivity(getContext());
         mControlWrapper.toggleFullScreen(activity);
         // 下面方法会根据适配宽高决定是否旋转屏幕
-//        mControlWrapper.toggleFullScreenByVideoSize(activity);
+        mControlWrapper.toggleFullScreenByVideoSize(activity);
     }
 
     @Override
@@ -256,8 +274,8 @@ public class TiktokControlView extends FrameLayout implements IControlComponent,
         time.setVisibility(VISIBLE);
         long duration = mControlWrapper.getDuration();
         long newPosition = (duration * progress) / mVideoProgress.getMax();
-        if (time != null){
-            time.setText(stringForTime((int)newPosition) + "/"+stringForTime((int)duration));
+        if (time != null) {
+            time.setText(stringForTime((int) newPosition) + "/" + stringForTime((int) duration));
         }
     }
 }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -29,7 +30,7 @@ class Tiktok3Adapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val context = holder.itemView.context
         val item = mVideoBeans!![position]
-        holder.controllerView.setVideoData(item)
+        holder.mTikTokView.setVideoData(item)
         //开始预加载
         PreloadManager.getInstance(context).addPreloadTask(item.videoRes, position)
         Glide.with(context)
@@ -41,7 +42,7 @@ class Tiktok3Adapter(
         holder.mTikTokView?.setOnLikeListener(object : TikTokView.OnLikeListener {
             override fun onLikeListener() {
                 if (!item.isLiked) {  //未点赞，会有点赞效果，否则无
-                    holder?.controllerView!!.like()
+                    holder?.mTikTokView!!.like()
                 }
             }
         })
@@ -63,12 +64,16 @@ class Tiktok3Adapter(
         var mThumb : ImageView//封面图
         var mTikTokView: TikTokView
         var mPlayerContainer: FrameLayout
-        var controllerView: ControllerView
+        var llBootom : LinearLayout//封面图
+        var llRight : LinearLayout//封面图
+        var tvFullScreenView : TextView//全屏按钮
 
         init {
             mTikTokView = itemView.findViewById(R.id.tiktok_View)
             mThumb = mTikTokView.findViewById(R.id.iv_thumb)
-            controllerView = mTikTokView.findViewById(R.id.controller)
+            llBootom = mTikTokView.findViewById(R.id.ll_bootom)
+            llRight = mTikTokView.findViewById(R.id.ll_right)
+            tvFullScreenView = mTikTokView.findViewById(R.id.tv_full_screen_view)
             mPlayerContainer = itemView.findViewById(R.id.container)
             itemView.tag = this
         }

@@ -250,6 +250,10 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
                 shareDialog  = ShareDialog()
                 shareDialog?.show(childFragmentManager, "")
             }
+
+            override fun onFullScreenClick() {
+
+            }
         })
     }
 }
