@@ -152,8 +152,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
             videoViewLister(
                 viewHolder.mTikTokView,
                 viewHolder.llRight,
-                viewHolder.llBootom,
-                viewHolder.tvFullScreenView
+                viewHolder.llBootom
             )
             mController?.setData(DataCreate.datas[position])
             if (viewHolder.mPosition == position) {
@@ -318,32 +317,26 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
     /**
      * 视图扩大比例监听
      */
-    private fun videoViewLister(tikTokView:TikTokView,llRight :LinearLayout,llBottom:LinearLayout,tvFullScreenView:TextView) {
+    private fun videoViewLister(tikTokView:TikTokView,llRight :LinearLayout,llBottom:LinearLayout) {
         mVideoView?.setScaleFactorChange(object : TiktokVideoView.OnScaleFactorChangeListener{
             override fun onScale(detector: Float) {
                 if (llBottom.visibility != View.GONE && detector > 1.0f) {
+                    tikTokView.setAdjustingViews(detector)
                     llBottom.visibility = View.GONE
                     llRight.visibility = View.GONE
-                    if (tikTokView.isLandscapeVideo()){
-                        tvFullScreenView.visibility = View.GONE
-                    }
                     return
                 }
                 if (detector < 1.0f) {
                     if (llBottom.visibility == View.VISIBLE){
+                        tikTokView.setAdjustingViews(detector)
                         llBottom.visibility = View.GONE
                         llRight.visibility = View.GONE
-                        if (tikTokView.isLandscapeVideo()){
-                            tvFullScreenView.visibility = View.GONE
-                        }
                         return
                     }
                     if (llBottom.visibility == View.GONE){
+                        tikTokView.setAdjustingViews(detector)
                         llBottom.visibility = View.VISIBLE
                         llRight.visibility = View.VISIBLE
-                        if (tikTokView.isLandscapeVideo()){
-                            tvFullScreenView.visibility = View.VISIBLE
-                        }
                         doubleFingerStatus(true)
                         mVideoView?.defaultScaleFactorAnimate()
                         return

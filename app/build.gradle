@@ -71,12 +71,8 @@ dependencies {
     implementation project(path: ':dkplayer-players:exo')
     //缓存
     implementation project(':dkplayer-videocache')
-
-
-
-    implementation "androidx.multidex:multidex:2.0.1"
-    implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.25'
-    implementation 'com.github.ctiao:ndkbitmap-armv7a:0.9.21'
+    implementation rootProject.ext.ctiao.danmaku
+    implementation rootProject.ext.ctiao.ndkbitmap
     debugImplementation rootProject.ext.leakcanary.leakcanary
 //    //完整版引入
 //    implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.5.0-release-jitpack'

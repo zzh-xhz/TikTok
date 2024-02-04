@@ -101,6 +101,7 @@ class TikTokView : FrameLayout, IControlComponent {
         ivHeadAnim = findViewById(R.id.ivHeadAnim);
         init()
         mScaledTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
+        defaultView()
     }
 
     fun setListener(listener: OnVideoControllerListener?) {
@@ -110,16 +111,38 @@ class TikTokView : FrameLayout, IControlComponent {
     /**
      * Returns the debugging information string to be shown by the target [TextView].
      */
-    protected fun setAdjustingViews() {
+     fun setAdjustingViews() {
+        if (isLandscapeVideo() && tvFullScreenView?.visibility == visibility ){
+            return
+        }
         if (isLandscapeVideo() && tvFullScreenView?.visibility != visibility ){
             tvFullScreenView?.visibility = visibility
-            return
         }
         if (!isLandscapeVideo() && tvFullScreenView?.visibility != GONE ){
             tvFullScreenView?.visibility = GONE
             return
         }
     }
+    /**
+     * Returns the debugging information string to be shown by the target [TextView].
+     */
+    fun setAdjustingViews(detector : Float) {
+        // 扩大
+        if (llBootom?.visibility != View.GONE && detector > 1.0f && isLandscapeVideo()){
+            tvFullScreenView?.visibility = GONE
+        }
+        // 缩小
+        if (detector < 1.0f && isLandscapeVideo()) {
+            if (llBootom?.visibility == View.VISIBLE){
+                tvFullScreenView?.visibility = GONE
+            }
+            if (llBootom?.visibility == View.GONE){
+                tvFullScreenView?.visibility = VISIBLE
+            }
+        }
+
+    }
+
      fun isLandscapeVideo() :Boolean{
        return mControlWrapper!!.videoSize[0] > mControlWrapper!!.videoSize[1]
     }
@@ -146,6 +169,8 @@ class TikTokView : FrameLayout, IControlComponent {
         } else {
             ivFocus!!.visibility = VISIBLE
         }
+    }
+    private fun defaultView(){
         // 默认都是隐藏 根据进度条监听  得出结果是否是 横屏竖屏视频正常应该是 后台接口给出
         if (tvFullScreenView?.visibility == VISIBLE){
             tvFullScreenView?.visibility = GONE
@@ -289,6 +314,7 @@ class TikTokView : FrameLayout, IControlComponent {
 
     }
     override fun onPlayStateChanged(playState: Int) {
+        setAdjustingViews()
         when (playState) {
             VideoView.STATE_IDLE -> {
                 L.e("STATE_IDLE " + hashCode())
