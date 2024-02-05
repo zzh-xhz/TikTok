@@ -128,16 +128,31 @@ class TikTokView : FrameLayout, IControlComponent {
      */
     fun setAdjustingViews(detector : Float) {
         // 扩大
-        if (llBootom?.visibility != View.GONE && detector > 1.0f && isLandscapeVideo()){
-            tvFullScreenView?.visibility = GONE
-        }
-        // 缩小
-        if (detector < 1.0f && isLandscapeVideo()) {
-            if (llBootom?.visibility == View.VISIBLE){
+        if (llBootom?.visibility != View.GONE && detector > 1.0f) {
+            if (isLandscapeVideo()){
                 tvFullScreenView?.visibility = GONE
             }
+            llBootom?.visibility = View.GONE
+            llRight?.visibility = View.GONE
+            return
+        }
+        // 缩小
+        if (detector < 1.0f) {
+            if (llBootom?.visibility == View.VISIBLE){
+                if (isLandscapeVideo()){
+                    tvFullScreenView?.visibility = GONE
+                }
+                llBootom?.visibility = View.GONE
+                llRight?.visibility = View.GONE
+                return
+            }
             if (llBootom?.visibility == View.GONE){
-                tvFullScreenView?.visibility = VISIBLE
+                if (isLandscapeVideo()){
+                    tvFullScreenView?.visibility = VISIBLE
+                }
+                llBootom?.visibility = View.VISIBLE
+                llRight?.visibility = View.VISIBLE
+                return
             }
         }
 
