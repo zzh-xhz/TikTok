@@ -5,13 +5,16 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ImmersionBar
+import com.hjq.http.listener.OnHttpListener
+import com.hjq.toast.Toaster
+import okhttp3.Call
 
 /**
  * create by libo
  * create on 2020-05-19
  * description activity基类
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() , OnHttpListener<Any?> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,5 +56,16 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     protected fun setFullScreen() {
         ImmersionBar.with(this).init()
+    }
+    override fun onHttpStart(call: Call) {
+
+    }
+
+    override fun onHttpSuccess(result: Any?) {}
+    override fun onHttpFail(throwable: Throwable) {
+        Toaster.show(throwable.message)
+    }
+
+    override fun onHttpEnd(call: Call) {
     }
 }

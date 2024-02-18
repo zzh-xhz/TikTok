@@ -58,6 +58,7 @@ class MineFragment : BaseBindingFragment<FragmentMineHomeBinding>({FragmentMineH
         binding.ivBg!!.setOnClickListener(this)
         binding.homeHeader.llFocus!!.setOnClickListener(this)
         binding.homeHeader.llFans!!.setOnClickListener(this)
+        binding.ivMore.setOnClickListener(this)
         setUserInfo()
     }
 

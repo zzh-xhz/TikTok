@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.lib.network.EasyHttpActivity">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/tb_main_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:leftIcon="@null"
+        app:title="https://github.com/getActivity/EasyHttp" />
+
+    <ProgressBar
+        android:id="@+id/pb_main_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/btn_main_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get 请求" />
+
+        <Button
+            android:id="@+id/btn_main_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Post 请求" />
+
+        <Button
+            android:id="@+id/btn_main_exec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="同步请求" />
+
+        <Button
+            android:id="@+id/btn_main_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="上传文件" />
+
+        <Button
+            android:id="@+id/btn_main_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="下载文件" />
+
+        <Button
+            android:id="@+id/btn_test_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="测试网络请" />
+    </LinearLayout>
+
+</LinearLayout>

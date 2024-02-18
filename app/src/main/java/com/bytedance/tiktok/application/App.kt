@@ -2,13 +2,30 @@ package com.bytedance.tiktok.application
 
 import android.os.StrictMode
 import androidx.multidex.MultiDexApplication
+import com.airbnb.lottie.animation.content.Content
 import com.bytedance.tiktok.utils.ProgressManagerImpl
 import com.bytedance.tiktok.widget.render.SurfaceRenderViewFactory
-import com.bytedance.tiktok.widget.render.gl2.GLSurfaceRenderView2
 import com.danikula.videocache.Logger
+import com.google.gson.reflect.TypeToken
+import com.google.gson.stream.JsonToken
+import com.hjq.gson.factory.GsonFactory
+import com.hjq.gson.factory.ParseExceptionCallback
+import com.hjq.http.EasyConfig
+import com.hjq.http.config.IRequestInterceptor
+import com.hjq.http.config.IRequestServer
+import com.hjq.http.model.HttpHeaders
+import com.hjq.http.model.HttpParams
+import com.hjq.http.request.HttpRequest
+import com.hjq.toast.Toaster
+import com.lib.network.http.model.RequestHandler
+import com.lib.network.http.server.ReleaseServer
+import com.lib.network.http.server.TestServer
+import com.tencent.bugly.crashreport.CrashReport
+import com.tencent.mmkv.MMKV
+import okhttp3.OkHttpClient
+
 import xyz.doikki.videoplayer.BuildConfig
 import xyz.doikki.videoplayer.exo.ExoMediaPlayerFactory
-import xyz.doikki.videoplayer.ijk.IjkPlayerFactory
 import xyz.doikki.videoplayer.player.VideoView
 import xyz.doikki.videoplayer.player.VideoViewConfig
 import xyz.doikki.videoplayer.player.VideoViewManager
@@ -52,10 +69,82 @@ class App : MultiDexApplication() {
             StrictMode.setThreadPolicy( StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy( StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
         }
-
-
         // VideoCache 日志
         Logger.setDebug(BuildConfig.DEBUG)
+
+        Toaster.init(this)
+        MMKV.initialize(this)
+
+        // Bugly 异常捕捉
+        CrashReport.initCrashReport(this, "8ca94a2408", BuildConfig.DEBUG)
+
+        // 设置 Json 解析容错监听
+        GsonFactory.setParseExceptionCallback(object : ParseExceptionCallback {
+            override fun onParseObjectException(
+                typeToken: TypeToken<*>,
+                fieldName: String,
+                jsonToken: JsonToken
+            ) {
+                handlerGsonParseException("解析对象析异常：$typeToken#$fieldName，后台返回的类型为：$jsonToken")
+            }
+
+            override fun onParseListItemException(
+                typeToken: TypeToken<*>,
+                fieldName: String,
+                listItemJsonToken: JsonToken
+            ) {
+                handlerGsonParseException("解析 List 异常：$typeToken#$fieldName，后台返回的条目类型为：$listItemJsonToken")
+            }
+
+            override fun onParseMapItemException(
+                typeToken: TypeToken<*>,
+                fieldName: String,
+                mapItemKey: String,
+                mapItemJsonToken: JsonToken
+            ) {
+                handlerGsonParseException("解析 Map 异常：$typeToken#$fieldName，mapItemKey = $mapItemKey，后台返回的条目类型为：$mapItemJsonToken")
+            }
+
+            private fun handlerGsonParseException(message: String) {
+                require(!BuildConfig.DEBUG) { message }
+                CrashReport.postCatchedException(IllegalArgumentException(message))
+            }
+        })
+
+        // 网络请求框架初始化
+        val server: IRequestServer
+        server = if (BuildConfig.DEBUG) {
+            TestServer()
+        } else {
+            ReleaseServer()
+        }
+        val okHttpClient = OkHttpClient.Builder()
+            .build()
+        EasyConfig.with(okHttpClient) // 是否打印日志
+            .setLogEnabled(BuildConfig.DEBUG) // 设置服务器配置（必须设置）
+            .setServer(server) // 设置请求处理策略（必须设置）
+            .setHandler(RequestHandler(this)) // 设置请求参数拦截器
+            .setInterceptor(object : IRequestInterceptor {
+                override fun interceptArguments(
+                    httpRequest: HttpRequest<*>,
+                    params: HttpParams,
+                    headers: HttpHeaders
+                ) {
+                    headers.put("timestamp", System.currentTimeMillis().toString())
+                }
+            })
+            // 设置请求重试次数
+            .setRetryCount(1)
+            // 设置请求重试时间
+            .setRetryTime(2000)
+            // 添加全局请求参数
+            .addParam("token", "46c49847a9efc74aef2bb089b57acccd")
+            // 添加全局请求头
+            //.addHeader("date", "20191030")
+            .addHeader("Authorization", "P3pPyRUDwHGShlTWnV4hg2dUKelRi6V7cErdkKIb")
+            .addHeader("Content-Type", "application/json")
+            .addHeader("Accept", "application/vnd.vimeo.*+json;version=3.4")
+            .into()
     }
     companion object {
         @JvmStatic

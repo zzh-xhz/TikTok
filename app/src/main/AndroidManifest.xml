@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.bytedance.tiktok">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -15,14 +16,47 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        tools:targetApi="n"
+        tools:ignore="LockedOrientationActivity,UnusedAttribute"
         android:usesCleartextTraffic="true"
         >
 
+        <!-- 表示当前已经适配了分区存储 -->
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
+
+        <!-- 悬浮窗入口 -->
+        <meta-data
+            android:name="LogcatWindowEntrance"
+            android:value="true" />
+
+        <!-- 通知栏入口 -->
+        <meta-data
+            android:name="LogcatNotifyEntrance"
+            android:value="true" />
+
+        <!-- 默认搜索关键字 -->
+        <meta-data
+            android:name="LogcatDefaultSearchKey"
+            android:value="Tiktok" />
+
+        <!-- 适配 Android 7.0 文件意图 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:exported="true"
-            android:theme="@style/Launch_Theme">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,6 +83,16 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
+
     </application>
 
+    <!-- Android 11 软件包可见性适配 -->
+    <queries>
+
+        <!-- 调起其他页面意图：Intent.ACTION_VIEW -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+        </intent>
+
+    </queries>
 </manifest>

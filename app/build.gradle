@@ -57,14 +57,7 @@ android {
 }
 
 dependencies {
-    implementation rootProject.ext.androisxLibs
-    implementation rootProject.ext.immersionbar.immersionbar
-    implementation rootProject.ext.tablayout.tablayout
-    implementation rootProject.ext.rxjava.rxjava
-    implementation rootProject.ext.lottile.lottile
-    implementation rootProject.ext.glide.glide
-//    implementation rootProject.ext.exoplayerLibs
-    implementation rootProject.ext.mediaLibs
+    implementation project(':base')
     implementation project(':dkplayer-java')
     implementation project(':dkplayer-ui')
     implementation project(path: ':dkplayer-players:ijk')
@@ -74,7 +67,11 @@ dependencies {
     implementation rootProject.ext.ctiao.danmaku
     implementation rootProject.ext.ctiao.ndkbitmap
     debugImplementation rootProject.ext.leakcanary.leakcanary
+
+    implementation project(path: ':network-lib')
 //    //完整版引入
 //    implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.5.0-release-jitpack'
+
+
 }
 

@@ -1,10 +1,8 @@
 package com.bytedance.tiktok.activity
 
-import FriendFragment
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.bytedance.tiktok.R
+import androidx.viewpager.widget.ViewPager
 import com.bytedance.tiktok.base.BaseBindingActivity
 import com.bytedance.tiktok.base.CommPagerAdapter
 import com.bytedance.tiktok.bean.MainPageChangeEvent
@@ -15,7 +13,7 @@ import com.bytedance.tiktok.fragment.MainFragment
 import com.bytedance.tiktok.fragment.PersonalHomeFragment
 import com.bytedance.tiktok.utils.RxBus
 import rx.functions.Action1
-import java.util.*
+
 
 /**
  * create by libo
@@ -56,7 +54,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
                     binding.viewPager.setSlide(event.isSlide)
                 }
             } as Action1<MainTabChangeEvent>)
-        binding.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
+        binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {
                 curMainPage = position
