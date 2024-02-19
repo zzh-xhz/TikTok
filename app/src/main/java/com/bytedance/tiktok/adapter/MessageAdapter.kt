@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.base.BaseAdapter
 import com.bytedance.tiktok.bean.VideoBean.UserBean
@@ -24,7 +25,9 @@ class MessageAdapter : BaseAdapter<MessageAdapter.MessageViewHolder, UserBean>(M
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         holder?.binding?.let {
             var userBean = mList[position]
-            it.ivHead!!.setImageResource(userBean!!.head)
+            Glide.with(it.ivHead.context)
+                .load(userBean!!.head)
+                .into(it.ivHead)
             it.tvNickname!!.text = userBean.nickName
             it.tvMessage!!.text = "测试消息数据$position"
 

@@ -49,7 +49,7 @@ class VideoBean {
         var uid = 0
         var nickName: String? = null
             get() = if (field == null) "" else field
-        var head = 0
+        var head = "0"
 
         /** 座右铭  */
         var sign: String? = null

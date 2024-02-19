@@ -3,6 +3,7 @@ package com.bytedance.tiktok.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bytedance.tiktok.adapter.PrivateLetterAdapter.PrivateLetterViewHolder
 import com.bytedance.tiktok.base.BaseAdapter
 import com.bytedance.tiktok.bean.VideoBean.UserBean
@@ -21,8 +22,12 @@ class PrivateLetterAdapter : BaseAdapter<PrivateLetterViewHolder, UserBean>(Fans
 
     override fun onBindViewHolder(holder: PrivateLetterViewHolder, position: Int) {
         var userBean = mList[position]
-        holder?.binding?.ivHead!!.setImageResource(userBean!!.head)
-        holder?.binding.tvNickname!!.text = userBean?.nickName
+        holder?.binding?.ivHead?.context?.let {
+            Glide.with(it)
+                .load(userBean!!.head)
+                .into(holder?.binding?.ivHead)
+        }
+        holder?.binding?.tvNickname!!.text = userBean?.nickName
     }
 
     inner class PrivateLetterViewHolder(val binding: ItemPrivateLetterBinding) : RecyclerView.ViewHolder(binding.root) {

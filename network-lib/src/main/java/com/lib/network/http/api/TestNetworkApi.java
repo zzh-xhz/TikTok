@@ -2,6 +2,7 @@ package com.lib.network.http.api;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.internal.LinkedTreeMap;
 import com.hjq.http.config.IRequestApi;
 
 import java.util.List;
@@ -14,118 +15,101 @@ import java.util.List;
  */
 public final class TestNetworkApi implements IRequestApi {
     /** userid*/
-    private String userId;
+    private String key;
+    private String q;
+
+    //    https://pixabay.com/api/videos/?key=42445463-2b7d14a51075cb646c2011843&q=yellow+flowers
     @NonNull
     @Override
     public String getApi() {
-        return "users/{"+userId+"}/videos";
+        return "api/videos/?key="+ key +"&q="+q;
     }
 
-    public TestNetworkApi setUserId(String userId) {
-        this.userId = userId;
+    public TestNetworkApi setKey(String key) {
+        this.key = key;
+        return this;
+    }
+    public TestNetworkApi setQ(String q) {
+        this.q = q;
         return this;
     }
 
+
     public final static class Bean {
 
-        /**
-         * page
-         */
-        private Integer page;
-        /**
-         * per_page
-         */
-        private Integer per_page;
-        /**
-         * total_results
-         */
-        private Integer total_results;
-        /**
-         * url
-         */
-        private String url;
-        /**
-         * videos
-         */
-        private List<VideosDTO> videos;
+        private Integer total;
+        private Integer totalHits;
+        private List<HitsData> hits;
 
-        public Integer getPage() {
-            return page;
+        public Integer getTotal() {
+            return total;
         }
 
-        public void setPage(Integer page) {
-            this.page = page;
+        public void setTotal(Integer total) {
+            this.total = total;
         }
 
-        public Integer getPer_page() {
-            return per_page;
+        public Integer getTotalHits() {
+            return totalHits;
         }
 
-        public void setPer_page(Integer per_page) {
-            this.per_page = per_page;
+        public void setTotalHits(Integer totalHits) {
+            this.totalHits = totalHits;
         }
 
-        public Integer getTotal_results() {
-            return total_results;
+        public List<HitsData> getHits() {
+            return hits;
         }
 
-        public void setTotal_results(Integer total_results) {
-            this.total_results = total_results;
+        public void setHits(List<HitsData> hits) {
+            this.hits = hits;
         }
 
-        public String getUrl() {
-            return url;
+        @Override
+        public String toString() {
+            return "Bean{" +
+                    "total=" + total +
+                    ", totalHits=" + totalHits +
+                    ", hits=" + hits +
+                    '}';
         }
 
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public List<VideosDTO> getVideos() {
-            return videos;
-        }
-
-        public void setVideos(List<VideosDTO> videos) {
-            this.videos = videos;
-        }
-
-        public static class VideosDTO {
-            /**
-             * id
-             */
+        public static class HitsData {
             private Integer id;
-            /**
-             * width
-             */
-            private Integer width;
-            /**
-             * height
-             */
-            private Integer height;
-            /**
-             * url
-             */
-            private String url;
-            /**
-             * image
-             */
-            private String image;
-            /**
-             * duration
-             */
+            private String pageURL;
+            private String type;
+            private String tags;
             private Integer duration;
-            /**
-             * user
-             */
-            private UserDTO user;
-            /**
-             * video_files
-             */
-            private List<VideoFilesDTO> video_files;
-            /**
-             * video_pictures
-             */
-            private List<VideoPicturesDTO> video_pictures;
+            private String picture_id;
+            //  large  medium   small  tiny
+            private LinkedTreeMap<String,VideosItemData> videos;
+            private Integer views;
+            private Integer downloads;
+            private Integer likes;
+            private Integer comments;
+            private Integer user_id;
+            private String user;
+            private String userImageURL;
+
+            @Override
+            public String toString() {
+                return "HitsData{" +
+                        "id=" + id +
+                        ", pageURL='" + pageURL + '\'' +
+                        ", type='" + type + '\'' +
+                        ", tags='" + tags + '\'' +
+                        ", duration=" + duration +
+                        ", picture_id='" + picture_id + '\'' +
+                        ", videos=" + videos +
+                        ", views=" + views +
+                        ", downloads=" + downloads +
+                        ", likes=" + likes +
+                        ", comments=" + comments +
+                        ", user_id=" + user_id +
+                        ", user='" + user + '\'' +
+                        ", userImageURL='" + userImageURL + '\'' +
+                        '}';
+            }
 
             public Integer getId() {
                 return id;
@@ -135,36 +119,28 @@ public final class TestNetworkApi implements IRequestApi {
                 this.id = id;
             }
 
-            public Integer getWidth() {
-                return width;
+            public String getPageURL() {
+                return pageURL;
             }
 
-            public void setWidth(Integer width) {
-                this.width = width;
+            public void setPageURL(String pageURL) {
+                this.pageURL = pageURL;
             }
 
-            public Integer getHeight() {
-                return height;
+            public String getType() {
+                return type;
             }
 
-            public void setHeight(Integer height) {
-                this.height = height;
+            public void setType(String type) {
+                this.type = type;
             }
 
-            public String getUrl() {
-                return url;
+            public String getTags() {
+                return tags;
             }
 
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public String getImage() {
-                return image;
-            }
-
-            public void setImage(String image) {
-                this.image = image;
+            public void setTags(String tags) {
+                this.tags = tags;
             }
 
             public Integer getDuration() {
@@ -175,59 +151,83 @@ public final class TestNetworkApi implements IRequestApi {
                 this.duration = duration;
             }
 
-            public UserDTO getUser() {
+            public String getPicture_id() {
+                return picture_id;
+            }
+
+            public void setPicture_id(String picture_id) {
+                this.picture_id = picture_id;
+            }
+
+            public LinkedTreeMap<String,VideosItemData> getVideos() {
+                return videos;
+            }
+
+            public void setVideos(LinkedTreeMap<String,VideosItemData> videos) {
+                this.videos = videos;
+            }
+
+            public Integer getViews() {
+                return views;
+            }
+
+            public void setViews(Integer views) {
+                this.views = views;
+            }
+
+            public Integer getDownloads() {
+                return downloads;
+            }
+
+            public void setDownloads(Integer downloads) {
+                this.downloads = downloads;
+            }
+
+            public Integer getLikes() {
+                return likes;
+            }
+
+            public void setLikes(Integer likes) {
+                this.likes = likes;
+            }
+
+            public Integer getComments() {
+                return comments;
+            }
+
+            public void setComments(Integer comments) {
+                this.comments = comments;
+            }
+
+            public Integer getUser_id() {
+                return user_id;
+            }
+
+            public void setUser_id(Integer user_id) {
+                this.user_id = user_id;
+            }
+
+            public String getUser() {
                 return user;
             }
 
-            public void setUser(UserDTO user) {
+            public void setUser(String user) {
                 this.user = user;
             }
 
-            public List<VideoFilesDTO> getVideo_files() {
-                return video_files;
+            public String getUserImageURL() {
+                return userImageURL;
             }
 
-            public void setVideo_files(List<VideoFilesDTO> video_files) {
-                this.video_files = video_files;
+            public void setUserImageURL(String userImageURL) {
+                this.userImageURL = userImageURL;
             }
+            public static class VideosItemData {
 
-            public List<VideoPicturesDTO> getVideo_pictures() {
-                return video_pictures;
-            }
-
-            public void setVideo_pictures(List<VideoPicturesDTO> video_pictures) {
-                this.video_pictures = video_pictures;
-            }
-
-            public static class UserDTO {
-                /**
-                 * id
-                 */
-                private Integer id;
-                /**
-                 * name
-                 */
-                private String name;
-                /**
-                 * url
-                 */
                 private String url;
-
-                public Integer getId() {
-                    return id;
-                }
-
-                public void setId(Integer id) {
-                    this.id = id;
-                }
-
-                public String getName() {
-                    return name;
-                }
-
-                public void setName(String name) {
-                    this.name = name;
-                }
+                private Integer width;
+                private Integer height;
+                private Integer size;
 
                 public String getUrl() {
                     return url;
@@ -235,57 +235,6 @@ public final class TestNetworkApi implements IRequestApi {
 
                 public void setUrl(String url) {
                     this.url = url;
-                }
-            }
-
-            public static class VideoFilesDTO {
-                /**
-                 * id
-                 */
-                private Integer id;
-                /**
-                 * quality
-                 */
-                private String quality;
-                /**
-                 * file_type
-                 */
-                private String file_type;
-                /**
-                 * width
-                 */
-                private Integer width;
-                /**
-                 * height
-                 */
-                private Integer height;
-                /**
-                 * link
-                 */
-                private String link;
-
-                public Integer getId() {
-                    return id;
-                }
-
-                public void setId(Integer id) {
-                    this.id = id;
-                }
-
-                public String getQuality() {
-                    return quality;
-                }
-
-                public void setQuality(String quality) {
-                    this.quality = quality;
-                }
-
-                public String getFile_type() {
-                    return file_type;
-                }
-
-                public void setFile_type(String file_type) {
-                    this.file_type = file_type;
                 }
 
                 public Integer getWidth() {
@@ -304,51 +253,12 @@ public final class TestNetworkApi implements IRequestApi {
                     this.height = height;
                 }
 
-                public String getLink() {
-                    return link;
+                public Integer getSize() {
+                    return size;
                 }
 
-                public void setLink(String link) {
-                    this.link = link;
-                }
-            }
-
-            public static class VideoPicturesDTO {
-                /**
-                 * id
-                 */
-                private Integer id;
-                /**
-                 * picture
-                 */
-                private String picture;
-                /**
-                 * nr
-                 */
-                private Integer nr;
-
-                public Integer getId() {
-                    return id;
-                }
-
-                public void setId(Integer id) {
-                    this.id = id;
-                }
-
-                public String getPicture() {
-                    return picture;
-                }
-
-                public void setPicture(String picture) {
-                    this.picture = picture;
-                }
-
-                public Integer getNr() {
-                    return nr;
-                }
-
-                public void setNr(Integer nr) {
-                    this.nr = nr;
+                public void setSize(Integer size) {
+                    this.size = size;
                 }
             }
         }

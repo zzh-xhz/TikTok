@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.adapter.FansAdapter.FansViewHolder
 import com.bytedance.tiktok.base.BaseAdapter
@@ -25,7 +26,9 @@ class FansAdapter : BaseAdapter<FansViewHolder, UserBean>(FansDiff()) {
     override fun onBindViewHolder(holder: FansViewHolder, position: Int) {
         holder?.binding?.let {
             var userBean = mList[position]
-            it.ivHead!!.setImageResource(userBean!!.head)
+            Glide.with(it.ivHead.context)
+                .load(userBean!!.head)
+                .into( it.ivHead)
             it.tvNickname!!.text = userBean.nickName
             it.tvFocus!!.text = if (userBean.isFocused) "已关注" else "关注"
             it.tvFocus!!.setOnClickListener { v: View? ->

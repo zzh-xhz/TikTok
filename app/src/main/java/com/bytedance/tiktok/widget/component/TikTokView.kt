@@ -19,6 +19,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
+import com.bumptech.glide.Glide
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.utils.AnimUtils
@@ -162,10 +163,18 @@ class TikTokView : FrameLayout, IControlComponent {
     }
     fun setVideoData(videoData: VideoBean) {
         this.videoData = videoData
-        ivHead!!.setImageResource(videoData.userBean!!.head)
+        ivHead?.let {
+            Glide.with( ivHead!!.context)
+                .load(videoData.userBean!!.head)
+                .into(it)
+        }
         tvNickname!!.text = "@" + videoData.userBean!!.nickName
         autoLinkTextView?.let { AutoLinkHerfManager.setContent(videoData.content, it) }
-        ivHeadAnim!!.setImageResource(videoData.userBean!!.head)
+        ivHeadAnim?.context?.let {
+            Glide.with(it)
+                .load(videoData.userBean!!.head)
+                .into(ivHeadAnim!!)
+        }
         tvLikecount!!.text = NumUtils.numberFilter(videoData.likeCount)
         tvCommentcount!!.text = NumUtils.numberFilter(videoData.commentCount)
         tvSharecount!!.text = NumUtils.numberFilter(videoData.shareCount)

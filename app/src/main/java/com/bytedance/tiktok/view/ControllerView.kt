@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.RelativeLayout
+import com.bumptech.glide.Glide
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.ViewControllerBinding
@@ -40,10 +41,14 @@ class ControllerView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     fun setVideoData(videoData: VideoBean) {
         this.videoData = videoData
-        binding.ivHead!!.setImageResource(videoData.userBean!!.head)
+        Glide.with( binding.ivHead.context)
+            .load(videoData.userBean!!.head)
+            .into(binding.ivHead)
         binding.tvNickname!!.text = "@" + videoData.userBean!!.nickName
         AutoLinkHerfManager.setContent(videoData.content, binding.autoLinkTextView)
-        binding.ivHeadAnim!!.setImageResource(videoData.userBean!!.head)
+        Glide.with( binding.ivHeadAnim.context)
+            .load(videoData.userBean!!.head)
+            .into(binding.ivHeadAnim)
         binding.tvLikecount!!.text = NumUtils.numberFilter(videoData.likeCount)
         binding.tvCommentcount!!.text = NumUtils.numberFilter(videoData.commentCount)
         binding.tvSharecount!!.text = NumUtils.numberFilter(videoData.shareCount)

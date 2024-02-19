@@ -142,8 +142,6 @@ class App : MultiDexApplication() {
             // 添加全局请求头
             //.addHeader("date", "20191030")
             .addHeader("Authorization", "P3pPyRUDwHGShlTWnV4hg2dUKelRi6V7cErdkKIb")
-            .addHeader("Content-Type", "application/json")
-            .addHeader("Accept", "application/vnd.vimeo.*+json;version=3.4")
             .into()
     }
     companion object {

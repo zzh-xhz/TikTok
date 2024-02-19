@@ -98,7 +98,14 @@ ext {
             danmaku: "com.github.ctiao:DanmakuFlameMaster:0.9.25",
             ndkbitmap: "com.github.ctiao:ndkbitmap-armv7a:0.9.21",
     ]
-
+    wheel = [
+            // 吐司框架：https://github.com/getActivity/Toaster
+            toaster: "com.github.getActivity:Toaster:12.6",
+            // 权限请求框架：https://github.com/getActivity/XXPermissions
+            xxpermissions: "com.github.getActivity:XXPermissions:18.5",
+            // Gson 解析容错：https://github.com/getActivity/GsonFactory
+            gsonfactory :"com.github.getActivity:GsonFactory:9.5"
+    ]
     media = [
             session: "androidx.media3:media3-session:${dependVersion.media3}",
             exoplayer: "androidx.media3:media3-exoplayer:${dependVersion.media3}",
@@ -108,6 +115,7 @@ ext {
             exoplayerRtmp: "androidx.media3:media3-datasource-rtmp:${dependVersion.media3}",
             ui: "androidx.media3:media3-ui:${dependVersion.media3}"
     ]
+
     //以集合的方法进行依赖
     androisxLibs = androidxDeps.values()
     lifecycleLibs = lifecycle.values()
@@ -116,5 +124,6 @@ ext {
     navigationlibs = navigation.values()
 //    exoplayerLibs = exoplayer.values()
     mediaLibs = media.values()
+    wheelLibs = wheel.values()
 
 }

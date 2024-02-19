@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bytedance.tiktok.base.BaseAdapter
 import com.bytedance.tiktok.bean.VideoBean.UserBean
 import com.bytedance.tiktok.databinding.ItemMessageTopBinding
@@ -22,7 +23,9 @@ class MessageTopAdapter : BaseAdapter<MessageTopAdapter.MessageTopViewHolder, Us
     override fun onBindViewHolder(holder: MessageTopViewHolder, position: Int) {
         holder?.binding?.let {
             var userBean = mList[position]
-            it.ivHead!!.setImageResource(userBean!!.head)
+            Glide.with(it.ivHead.context)
+                .load(userBean!!.head)
+                .into(it.ivHead)
         }
     }
 

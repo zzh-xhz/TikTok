@@ -2,15 +2,17 @@ package com.bytedance.tiktok.activity
 
 import android.content.Intent
 import android.os.CountDownTimer
+import com.airbnb.lottie.LottieCompositionFactory.fromJson
 import com.bytedance.tiktok.base.BaseBindingActivity
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.databinding.ActivitySplashBinding
+import com.danikula.videocache.Logger
+import com.google.gson.Gson
+import com.hjq.gson.factory.GsonFactory
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallbackProxy
-import com.hjq.http.listener.OnHttpListener
-import com.hjq.toast.Toaster
-import com.lib.network.http.api.TestLoginNetworkApi
 import com.lib.network.http.api.TestNetworkApi
+
 
 /**
  * create by libo
@@ -21,7 +23,6 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>({ActivitySplas
 
     override fun init() {
         setFullScreen()
-        DataCreate()
         var countDownTimer    = object : CountDownTimer(300, 300) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
@@ -29,28 +30,29 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>({ActivitySplas
                 finish()
             }
         }
+        EasyHttp.get(this)
+            .api(TestNetworkApi().apply {
+                setKey("42445463-2b7d14a51075cb646c2011843")
+                setQ("plant")
+            })
+            .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
+                override fun onHttpSuccess(result: TestNetworkApi.Bean) {
+                    DataCreate.addData(result.hits)
+                }
+            })
+        EasyHttp.get(this)
+            .api(TestNetworkApi().apply {
+                setKey("42445463-2b7d14a51075cb646c2011843")
+                setQ("flowers")
+            })
+            .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
+                override fun onHttpSuccess(result: TestNetworkApi.Bean) {
+                    DataCreate.mutableNumbers.addAll(result.hits)
+                    DataCreate()
+                    countDownTimer.start()
+                }
+            })
 
-//        EasyHttp.post(this)
-//            .api(TestLoginNetworkApi()
-//                .setGrantType("a")
-//            )
-//            .request(object : HttpCallbackProxy<TestLoginNetworkApi.Bean>(this) {
-//                override fun onHttpSuccess(result: TestLoginNetworkApi.Bean) {
-//
-//                }
-//            })
-//        EasyHttp.get(this)
-//            .api(TestNetworkApi().setUserId("215607337"))
-//            .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
-//                override fun onHttpSuccess(result: TestNetworkApi.Bean) {
-//                    result.videos[0].video_files.forEach {
-//                        DataCreate.mutableNumbers.add(it.link)
-//                    }
-//
-//
-//                }
-//            })
-        countDownTimer.start()
 
     }
 }

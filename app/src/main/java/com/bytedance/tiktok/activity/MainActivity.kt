@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.bytedance.tiktok.base.BaseBindingActivity
 import com.bytedance.tiktok.base.CommPagerAdapter
+import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
@@ -12,6 +13,9 @@ import com.bytedance.tiktok.databinding.ActivityMainBinding
 import com.bytedance.tiktok.fragment.MainFragment
 import com.bytedance.tiktok.fragment.PersonalHomeFragment
 import com.bytedance.tiktok.utils.RxBus
+import com.hjq.http.EasyHttp
+import com.hjq.http.listener.HttpCallbackProxy
+import com.lib.network.http.api.TestNetworkApi
 import rx.functions.Action1
 
 
@@ -67,6 +71,28 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
 
             override fun onPageScrollStateChanged(state: Int) {}
         })
+        val testNetworkApi = TestNetworkApi().apply {
+            setKey("42445463-2b7d14a51075cb646c2011843")
+            setQ("people")
+        }
+        EasyHttp.get(this)
+            .api(testNetworkApi)
+            .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
+                override fun onHttpSuccess(result: TestNetworkApi.Bean) {
+                    DataCreate.addData(result.hits)
+                }
+            })
+        val testNetworkApi2 = TestNetworkApi().apply {
+            setKey("42445463-2b7d14a51075cb646c2011843")
+            setQ("animal")
+        }
+        EasyHttp.get(this)
+            .api(testNetworkApi2)
+            .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
+                override fun onHttpSuccess(result: TestNetworkApi.Bean) {
+                    DataCreate.addData(result.hits)
+                }
+            })
     }
 
     override fun onBackPressed() {

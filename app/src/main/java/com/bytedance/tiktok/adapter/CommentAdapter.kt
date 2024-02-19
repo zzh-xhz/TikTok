@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.bytedance.tiktok.adapter.CommentAdapter.CommentViewHolder
 import com.bytedance.tiktok.base.BaseAdapter
 import com.bytedance.tiktok.bean.CommentBean
@@ -24,7 +26,9 @@ class CommentAdapter : BaseAdapter<CommentViewHolder, CommentBean>(CommentDiff()
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         holder?.binding?.let {
             var commentBean = mList[position]
-            it.ivHead!!.setImageResource(commentBean?.userBean!!.head)
+            Glide.with(it.ivHead.context)
+                .load(commentBean?.userBean!!.head)
+                .into( it.ivHead)
             it.tvNickname!!.text = commentBean?.userBean!!.nickName
             it.tvContent!!.text = commentBean?.content
             it.tvLikecount!!.text = numberFilter(commentBean.likeCount)

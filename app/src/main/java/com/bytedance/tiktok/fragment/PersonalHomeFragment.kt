@@ -7,6 +7,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.activity.FocusActivity
 import com.bytedance.tiktok.activity.ShowImageActivity
@@ -59,7 +60,7 @@ class PersonalHomeFragment : BaseBindingFragment<FragmentPersonalHomeBinding>({F
      *
      * @param view
      */
-    fun transitionAnim(view: View, res: Int) {
+    fun transitionAnim(view: View, res: String) {
         val compat = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), view, getString(R.string.trans))
         val intent = Intent(activity, ShowImageActivity::class.java)
         intent.putExtra("res", res)
@@ -70,8 +71,12 @@ class PersonalHomeFragment : BaseBindingFragment<FragmentPersonalHomeBinding>({F
         subscription = RxBus.getDefault().toObservable(CurUserBean::class.java).subscribe(Action1 { curUserBean: CurUserBean ->
             coordinatorLayoutBackTop()
             this.curUserBean = curUserBean.userBean
-            binding.ivBg!!.setImageResource(curUserBean.userBean.head)
-            binding.homeHeader.ivHead!!.setImageResource(curUserBean.userBean.head)
+            Glide.with( binding.homeHeader.ivHead.context)
+                .load(curUserBean.userBean!!.head)
+                .into(binding.homeHeader.ivHead)
+            Glide.with( binding.ivBg.context)
+                .load(curUserBean.userBean!!.head)
+                .into(binding.ivBg)
             binding.homeHeader.tvNickname!!.text = curUserBean.userBean.nickName
             binding.homeHeader.tvSign!!.text = curUserBean.userBean.sign
             binding.tvTitle!!.text = curUserBean.userBean.nickName

@@ -19,13 +19,8 @@ dependencies {
     api rootProject.ext.glide.glide
 //    implementation rootProject.ext.exoplayerLibs
     api rootProject.ext.mediaLibs
+    api rootProject.ext.wheelLibs
 
-    // 吐司框架：https://github.com/getActivity/Toaster
-    api 'com.github.getActivity:Toaster:12.6'
-    // 权限请求框架：https://github.com/getActivity/XXPermissions
-    api 'com.github.getActivity:XXPermissions:18.5'
-    // Gson 解析容错：https://github.com/getActivity/GsonFactory
-    api 'com.github.getActivity:GsonFactory:9.5'
     // Json 解析框架：https://github.com/google/gson
     api 'com.google.code.gson:gson:2.10.1'
     // Kotlin 反射库：用于反射 Kotlin data class 类对象

@@ -13,6 +13,6 @@ public class TestServer extends ReleaseServer {
     @NonNull
     @Override
     public String getHost() {
-        return "https://images-api.nasa.gov/";
+        return "https://pixabay.com/";
     }
 }

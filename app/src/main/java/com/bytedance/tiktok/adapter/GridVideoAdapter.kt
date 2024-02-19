@@ -36,7 +36,11 @@ class GridVideoAdapter(val context: Context) : BaseAdapter<GridVideoViewHolder, 
                 .into(holder.binding.ivCover)
             holder?.binding?.tvContent?.text = it.content
             holder?.binding?.tvDistance!!.text = it.distance.toString() + " km"
-            holder?.binding?.ivHead!!.setImageResource(it.userBean!!.head)
+            holder?.binding?.ivHead?.let { it1 ->
+                Glide.with(holder?.binding?.ivHead.context)
+                    .load(it.userBean!!.head)
+                    .into(it1)
+            }
             holder?.binding?.root?.setOnClickListener { v: View? ->
                 PlayListActivity.initPos = position
                 context.startActivity(Intent(context, PlayListActivity::class.java))
