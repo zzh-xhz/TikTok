@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="9221条评论"
+        android:paddingVertical="10dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"/>
 
@@ -18,5 +19,11 @@
         android:id="@+id/recyclerView"
         android:layout_below="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"/>
+    <EditText
+        android:id="@+id/et_text"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="50dp"/>
 </RelativeLayout>

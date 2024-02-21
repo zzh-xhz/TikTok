@@ -45,6 +45,9 @@ class CommentDialog : BaseVideoBottomSheetDialog() {
         binding.recyclerView!!.adapter = commentAdapter
         loadData()
         commentAdapter.appendList(datas)
+        binding.etText.setOnClickListener {
+
+        }
     }
     private fun loadData() {
         for (i in DataCreate.userList.indices) {

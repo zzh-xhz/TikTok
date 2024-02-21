@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ScreenUtils
+import com.blankj.utilcode.util.SizeUtils
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.adapter.Tiktok3Adapter
 import com.bytedance.tiktok.bean.CurUserBean
@@ -35,6 +36,7 @@ import com.bytedance.tiktok.widget.videoview.TiktokVideoView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.lib.base.dialog.BaseVideoBottomSheetDialog
 import com.lib.base.ui.BaseBindingPlayerFragment
+import kotlinx.coroutines.NonDisposableHandle.parent
 import xyz.doikki.videoplayer.player.BaseVideoView.OnStateChangeListener
 import xyz.doikki.videoplayer.player.BaseVideoView.SimpleOnStateChangeListener
 import xyz.doikki.videoplayer.player.VideoView
@@ -280,7 +282,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
                                 views[0]?.post(Runnable {
                                     val scale: Float = height - views[0]?.height!!
                                     val py = if (isLandscapeVideo == true) {
-                                        2f - (scale / height)
+                                        Math.max(2f - (scale / height), 1f)
                                     } else {
                                         scale / height
                                     }
@@ -288,7 +290,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
                                     mVideoView?.scaleY = py
                                     mVideoView?.pivotX = x
                                     mVideoView?.pivotY = if (isLandscapeVideo == true) {
-                                        height
+                                        height -BarUtils.getStatusBarHeight() -BarUtils.getNavBarHeight()- SizeUtils.dp2px(50f)
                                     } else {
                                         0f
                                     }
@@ -423,18 +425,19 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
         val width = ScreenUtils.getScreenWidth().toFloat()
         val height = ScreenUtils.getScreenHeight().toFloat()
         var x = width / 2f
-        val py = if (isLandscapeVideo == true) {
-            2f - (parent.y / height)
+        var py = if (isLandscapeVideo == true) {
+            Math.max(2f - (parent.y / height), 1f)
         } else {
-            parent.y / height
+             parent.y / height
         }
+
         LogUtils.e(parent.y)
         LogUtils.e(parent.y + BarUtils.getStatusBarHeight())
         mVideoView?.scaleX = py
         mVideoView?.scaleY = py
         mVideoView?.pivotX = x
         mVideoView?.pivotY = if (isLandscapeVideo == true) {
-            height
+            height -BarUtils.getStatusBarHeight() -BarUtils.getNavBarHeight()- SizeUtils.dp2px(50f)
         } else {
             0f
         }
