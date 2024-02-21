@@ -18,9 +18,5 @@
         android:id="@+id/recyclerView"
         android:layout_below="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <org.kymjs.chat.widget.KJChatKeyboardDialog
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recyclerView"/>
+        android:layout_height="match_parent" />
 </RelativeLayout>
