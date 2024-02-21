@@ -5,9 +5,9 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bytedance.tiktok.adapter.WorkAdapter
-import com.bytedance.tiktok.base.BaseBindingFragment
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.databinding.FragmentWorkBinding
+import com.lib.base.ui.BaseBindingFragment
 
 /**
  * create by libo

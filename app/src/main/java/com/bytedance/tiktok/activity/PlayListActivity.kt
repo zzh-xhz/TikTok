@@ -1,9 +1,9 @@
 package com.bytedance.tiktok.activity
 
 import com.bytedance.tiktok.R
-import com.bytedance.tiktok.base.BaseBindingActivity
 import com.bytedance.tiktok.databinding.ActivityPlayListBinding
 import com.bytedance.tiktok.fragment.RecommendFragment
+import com.lib.base.ui.BaseBindingActivity
 
 /**
  * create by libo

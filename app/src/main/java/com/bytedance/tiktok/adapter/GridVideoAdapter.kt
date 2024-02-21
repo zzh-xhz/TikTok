@@ -11,8 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bytedance.tiktok.activity.PlayListActivity
 import com.bytedance.tiktok.adapter.GridVideoAdapter.GridVideoViewHolder
-import com.bytedance.tiktok.base.BaseAdapter
 import com.bytedance.tiktok.bean.VideoBean
+import com.lib.base.adapter.BaseAdapter
+
 import com.bytedance.tiktok.databinding.ItemGridvideoBinding
 
 /**

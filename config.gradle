@@ -90,7 +90,10 @@ ext {
     glide = [
             glide: 'com.github.bumptech.glide:glide:4.12.0'
     ]
-
+    https = [
+            easyhttp: 'com.github.getActivity:EasyHttp:12.8',
+            okhttp3: 'com.squareup.okhttp3:okhttp:3.12.13'
+    ]
     leakcanary = [
             leakcanary: "com.squareup.leakcanary:leakcanary-android:${dependVersion.leakcanary}"
     ]
@@ -125,5 +128,6 @@ ext {
 //    exoplayerLibs = exoplayer.values()
     mediaLibs = media.values()
     wheelLibs = wheel.values()
+    httpLibs = https.values()
 
 }

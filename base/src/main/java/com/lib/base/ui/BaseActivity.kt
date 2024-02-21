@@ -1,4 +1,4 @@
-package com.bytedance.tiktok.base
+package com.lib.base.ui
 
 import android.os.Bundle
 import android.view.WindowManager

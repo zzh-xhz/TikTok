@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bytedance.tiktok.adapter.CommentAdapter.CommentViewHolder
-import com.bytedance.tiktok.base.BaseAdapter
+//import com.bytedance.tiktok.base.BaseAdapter
 import com.bytedance.tiktok.bean.CommentBean
 import com.bytedance.tiktok.databinding.ItemCommentBinding
 import com.bytedance.tiktok.utils.NumUtils.numberFilter
+import com.lib.base.adapter.BaseAdapter
 
 /**
  * create by libo

@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bytedance.tiktok.activity.PlayListActivity
 import com.bytedance.tiktok.adapter.WorkAdapter.WorkViewHolder
-import com.bytedance.tiktok.base.BaseAdapter
+import com.lib.base.adapter.BaseAdapter
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.ItemWorkBinding
 import com.bytedance.tiktok.utils.NumUtils.numberFilter

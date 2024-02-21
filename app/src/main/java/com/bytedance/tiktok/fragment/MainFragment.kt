@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.androidkun.xtablayout.XTabLayout
 import com.bytedance.tiktok.R
-import com.bytedance.tiktok.base.BaseBindingFragment
-import com.bytedance.tiktok.base.CommPagerAdapter
 import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.FragmentMainBinding
 import com.bytedance.tiktok.utils.RxBus
+import com.lib.base.adapter.CommPagerAdapter
+import com.lib.base.ui.BaseBindingFragment
 import java.util.*
 
 

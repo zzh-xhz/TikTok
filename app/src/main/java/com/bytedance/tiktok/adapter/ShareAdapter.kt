@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bytedance.tiktok.adapter.ShareAdapter.ShareViewHolder
-import com.bytedance.tiktok.base.BaseAdapter
+import com.lib.base.adapter.BaseAdapter
 import com.bytedance.tiktok.bean.ShareBean
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.ItemShareBinding

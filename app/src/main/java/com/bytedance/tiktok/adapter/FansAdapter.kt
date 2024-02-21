@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.adapter.FansAdapter.FansViewHolder
-import com.bytedance.tiktok.base.BaseAdapter
+
 import com.bytedance.tiktok.bean.VideoBean.UserBean
 import com.bytedance.tiktok.databinding.ItemFansBinding
+import com.lib.base.adapter.BaseAdapter
 
 /**
  * create by libo

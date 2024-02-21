@@ -2,7 +2,6 @@ package com.bytedance.tiktok.fragment
 
 import VideoPlayer
 import android.content.Context
-import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -14,23 +13,27 @@ import androidx.media3.exoplayer.ExoPlaybackException
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.blankj.utilcode.util.BarUtils
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ScreenUtils
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.activity.PlayListActivity
 import com.bytedance.tiktok.adapter.VideoAdapter
-import com.bytedance.tiktok.base.BaseBindingFragment
 import com.bytedance.tiktok.bean.CurUserBean
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.FragmentRecommendBinding
-import com.bytedance.tiktok.utils.DataUtil
+import com.bytedance.tiktok.dialog.CommentDialog
+import com.bytedance.tiktok.dialog.ShareDialog
 import com.bytedance.tiktok.utils.OnVideoControllerListener
 import com.bytedance.tiktok.utils.RxBus
 import com.bytedance.tiktok.utils.cache.PreloadManager
-import com.bytedance.tiktok.view.CommentDialog
 import com.bytedance.tiktok.view.ControllerView
 import com.bytedance.tiktok.view.LikeView
-import com.bytedance.tiktok.view.ShareDialog
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.lib.base.dialog.BaseVideoBottomSheetDialog
+import com.lib.base.ui.BaseBindingFragment
 import rx.Subscription
 import rx.functions.Action1
 
@@ -242,8 +245,40 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
 
             override fun onLikeClick() {}
             override fun onCommentClick() {
+                val views = arrayOfNulls<View>(1)
                 commentDialog  = CommentDialog()
+                commentDialog?.setViewListener(object : CommentDialog.ViewListener{
+                    override fun bindView(v: View?) {
+                        views[0] = v
+                    }
+                })
                 commentDialog?.show(childFragmentManager, "")
+                commentDialog?.behaviorChanged = object :BaseVideoBottomSheetDialog.IBehaviorChanged{
+                    override fun changedState(bottomSheet: View?, state: Int) {
+                        val width: Float = ScreenUtils.getScreenWidth().toFloat()
+                        val height: Float = ScreenUtils.getScreenHeight().toFloat()
+                        if (state == BottomSheetBehavior.STATE_EXPANDED) {
+                            val x = width / 2f
+                            views[0]?.post(Runnable {
+                                val scale: Float = height - views[0]?.height!!
+                                videoView.scaleX = scale / height
+                                videoView.scaleY = scale / height
+                                videoView.pivotX = x
+                                videoView.pivotY = 0f
+                            })
+                        } else if (state == BottomSheetBehavior.STATE_COLLAPSED) {
+                            videoView.scaleX = 1.0f
+                            videoView.scaleY = 1.0f
+                            videoView.pivotX = 0f
+                            videoView.pivotY = 0f
+                        }
+                    }
+
+                    override fun changedOffset(bottomSheet: View?, slideOffset: Float) {
+                        startAnimator(bottomSheet!!)
+                    }
+                }
+
             }
 
             override fun onShareClick() {
@@ -255,5 +290,21 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
 
             }
         })
+    }
+
+    /**
+     * @param parent
+     */
+    private fun startAnimator(parent: View) {
+        val width = ScreenUtils.getScreenWidth().toFloat()
+        val height = ScreenUtils.getScreenHeight().toFloat()
+        val x = width / 2f
+        val py = parent.y / height
+        LogUtils.e(parent.y)
+        LogUtils.e(parent.y + BarUtils.getStatusBarHeight())
+        videoView.scaleX = py
+        videoView.scaleY = py
+        videoView.pivotX = x
+        videoView.pivotY = 0f
     }
 }

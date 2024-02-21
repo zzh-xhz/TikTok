@@ -1,10 +1,10 @@
 package com.bytedance.tiktok.activity
 
 import androidx.fragment.app.Fragment
-import com.bytedance.tiktok.base.BaseBindingActivity
-import com.bytedance.tiktok.base.CommPagerAdapter
 import com.bytedance.tiktok.databinding.ActivityFocusBinding
 import com.bytedance.tiktok.fragment.FansFragment
+import com.lib.base.adapter.CommPagerAdapter
+import com.lib.base.ui.BaseBindingActivity
 import java.util.*
 
 /**

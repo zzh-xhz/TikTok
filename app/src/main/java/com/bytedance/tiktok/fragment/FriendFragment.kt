@@ -1,46 +1,43 @@
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.blankj.utilcode.util.BarUtils
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ScreenUtils
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.adapter.Tiktok3Adapter
-import com.bytedance.tiktok.base.BaseBindingPlayerFragment
 import com.bytedance.tiktok.bean.CurUserBean
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.FragmentFriendBinding
+import com.bytedance.tiktok.dialog.CommentDialog
+import com.bytedance.tiktok.dialog.ShareDialog
 import com.bytedance.tiktok.utils.DataUtil
 import com.bytedance.tiktok.utils.OnVideoControllerListener
 import com.bytedance.tiktok.utils.RxBus
 import com.bytedance.tiktok.utils.Utils
 import com.bytedance.tiktok.utils.cache.PreloadManager
-import com.bytedance.tiktok.view.CommentDialog
-import com.bytedance.tiktok.view.ShareDialog
 import com.bytedance.tiktok.widget.VerticalViewPager
 import com.bytedance.tiktok.widget.component.TikTokView
 import com.bytedance.tiktok.widget.controller.TikTokController
 import com.bytedance.tiktok.widget.render.TikTokRenderViewFactory
 import com.bytedance.tiktok.widget.render.gl2.GLSurfaceRenderView2
-import com.bytedance.tiktok.widget.render.gl2.filter.GlFilterGroup
-import com.bytedance.tiktok.widget.render.gl2.filter.GlSepiaFilter
-import com.bytedance.tiktok.widget.render.gl2.filter.GlSharpenFilter
-import com.bytedance.tiktok.widget.render.gl2.filter.GlWatermarkFilter
 import com.bytedance.tiktok.widget.videoview.TiktokVideoView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.lib.base.dialog.BaseVideoBottomSheetDialog
+import com.lib.base.ui.BaseBindingPlayerFragment
 import xyz.doikki.videoplayer.player.BaseVideoView.OnStateChangeListener
 import xyz.doikki.videoplayer.player.BaseVideoView.SimpleOnStateChangeListener
 import xyz.doikki.videoplayer.player.VideoView
-import xyz.doikki.videoplayer.render.IRenderView
-import xyz.doikki.videoplayer.render.RenderViewFactory
 import xyz.doikki.videoplayer.util.L
 
 
@@ -54,10 +51,12 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
 }) {
     private var commentDialog: CommentDialog? = null
     private var shareDialog: ShareDialog? = null
+    private var isLandscapeVideo: Boolean? = false;
 
     private val renderView by lazy {
         GLSurfaceRenderView2(context)
     }
+
     /**
      * 当前播放位置
      */
@@ -262,8 +261,50 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
 
             override fun onLikeClick() {}
             override fun onCommentClick() {
+                refreshIsLandscapeVideo()
+                val views = arrayOfNulls<View>(1)
                 commentDialog = CommentDialog()
+                commentDialog?.setViewListener(object : CommentDialog.ViewListener {
+                    override fun bindView(v: View?) {
+                        views[0] = v
+                    }
+                })
                 commentDialog?.show(childFragmentManager, "")
+                commentDialog?.behaviorChanged =
+                    object : BaseVideoBottomSheetDialog.IBehaviorChanged {
+                        override fun changedState(bottomSheet: View?, state: Int) {
+                            val width: Float = ScreenUtils.getScreenWidth().toFloat()
+                            val height: Float = ScreenUtils.getScreenHeight().toFloat()
+                            if (state == BottomSheetBehavior.STATE_EXPANDED) {
+                                var x = width / 2f
+                                views[0]?.post(Runnable {
+                                    val scale: Float = height - views[0]?.height!!
+                                    val py = if (isLandscapeVideo == true) {
+                                        2f - (scale / height)
+                                    } else {
+                                        scale / height
+                                    }
+                                    mVideoView?.scaleX = py
+                                    mVideoView?.scaleY = py
+                                    mVideoView?.pivotX = x
+                                    mVideoView?.pivotY = if (isLandscapeVideo == true) {
+                                        height
+                                    } else {
+                                        0f
+                                    }
+                                })
+                            } else if (state == BottomSheetBehavior.STATE_COLLAPSED) {
+                                mVideoView?.scaleX = 1.0f
+                                mVideoView?.scaleY = 1.0f
+                                mVideoView?.pivotX = 0f
+                                mVideoView?.pivotY = 0f
+                            }
+                        }
+
+                        override fun changedOffset(bottomSheet: View?, slideOffset: Float) {
+                            startAnimator(bottomSheet!!)
+                        }
+                    }
             }
 
             override fun onShareClick() {
@@ -304,23 +345,24 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
     private fun doubleFingerStatus(status: Boolean) {
         if (status) {
             binding.refreshLayout.isEnabled = true
-            binding.viewPager2.isUserInputEnabled =true
+            binding.viewPager2.isUserInputEnabled = true
             return
         }
         if (!status) {
-            binding.refreshLayout.isEnabled= false
-            binding.viewPager2.isUserInputEnabled =false// 设置为 false 禁止上下滑动
+            binding.refreshLayout.isEnabled = false
+            binding.viewPager2.isUserInputEnabled = false// 设置为 false 禁止上下滑动
             return
         }
     }
+
     /**
      * 视图扩大比例监听
      */
-    private fun videoViewLister(tikTokView:TikTokView,llBottom:LinearLayout) {
-        mVideoView?.setScaleFactorChange(object : TiktokVideoView.OnScaleFactorChangeListener{
+    private fun videoViewLister(tikTokView: TikTokView, llBottom: LinearLayout) {
+        mVideoView?.setScaleFactorChange(object : TiktokVideoView.OnScaleFactorChangeListener {
             override fun onScale(detector: Float) {
                 if (detector < 1.0f) {
-                    if (llBottom.visibility == View.GONE){
+                    if (llBottom.visibility == View.GONE) {
                         doubleFingerStatus(true)
                         mVideoView?.defaultScaleFactorAnimate()
                     }
@@ -330,27 +372,27 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
         })
     }
 
-    private val mOnStateChangeListener: OnStateChangeListener = object : SimpleOnStateChangeListener() {
+    private val mOnStateChangeListener: OnStateChangeListener =
+        object : SimpleOnStateChangeListener() {
             override fun onPlayerStateChanged(playerState: Int) {
                 when (playerState) {
                     VideoView.PLAYER_NORMAL -> {
 
                     }
+
                     VideoView.PLAYER_FULL_SCREEN -> {
 
                     }
                 }
             }
+
             override fun onPlayStateChanged(playState: Int) {
                 when (playState) {
                     VideoView.STATE_IDLE -> {}
                     VideoView.STATE_PREPARING -> {}
                     VideoView.STATE_PREPARED -> {}
                     VideoView.STATE_PLAYING -> {
-                        //需在此时获取视频宽高
-                        val videoSize = mVideoView!!.videoSize
-                        L.d("视频宽：" + videoSize[0])
-                        L.d("视频高：" + videoSize[1])
+                        refreshIsLandscapeVideo()
                     }
 
                     VideoView.STATE_PAUSED -> {}
@@ -361,8 +403,40 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
                 }
             }
         }
+
     fun onBackPressed() {
         mController?.onBackPressed()
     }
 
+    fun refreshIsLandscapeVideo() {
+        //需在此时获取视频宽高
+        val videoSize = mVideoView!!.videoSize
+        L.d("视频宽：" + videoSize[0])
+        L.d("视频高：" + videoSize[1])
+        isLandscapeVideo = videoSize[0] > videoSize[1]
+    }
+
+    /**
+     * @param parent
+     */
+    private fun startAnimator(parent: View) {
+        val width = ScreenUtils.getScreenWidth().toFloat()
+        val height = ScreenUtils.getScreenHeight().toFloat()
+        var x = width / 2f
+        val py = if (isLandscapeVideo == true) {
+            2f - (parent.y / height)
+        } else {
+            parent.y / height
+        }
+        LogUtils.e(parent.y)
+        LogUtils.e(parent.y + BarUtils.getStatusBarHeight())
+        mVideoView?.scaleX = py
+        mVideoView?.scaleY = py
+        mVideoView?.pivotX = x
+        mVideoView?.pivotY = if (isLandscapeVideo == true) {
+            height
+        } else {
+            0f
+        }
+    }
 }

@@ -2,8 +2,8 @@ package com.bytedance.tiktok.activity
 
 import android.view.View
 import com.bumptech.glide.Glide
-import com.bytedance.tiktok.base.BaseBindingActivity
 import com.bytedance.tiktok.databinding.ActivityShowImageBinding
+import com.lib.base.ui.BaseBindingActivity
 
 class ShowImageActivity : BaseBindingActivity<ActivityShowImageBinding>({ActivityShowImageBinding.inflate(it)}) {
 

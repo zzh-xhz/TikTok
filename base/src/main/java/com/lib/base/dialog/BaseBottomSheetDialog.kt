@@ -1,4 +1,4 @@
-package com.bytedance.tiktok.view
+package com.lib.base.dialog
 
 import android.content.Context
 import android.os.Bundle
@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.Nullable
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.bytedance.tiktok.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.lib.base.R
 
 
 /**
@@ -63,4 +63,5 @@ open class BaseBottomSheetDialog : BottomSheetDialogFragment() {
     fun isBottomSheetVisible(): Boolean? {
         return isVisible
     }
+
 }

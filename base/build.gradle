@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 apply from: '../constants.gradle'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
 android {
     compileSdk rootProject.ext.android.compileSdk
     defaultConfig {
@@ -8,6 +11,17 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures{
+        dataBinding = true
+    }
+    buildFeatures{
+        viewBinding = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 dependencies {
@@ -20,7 +34,7 @@ dependencies {
 //    implementation rootProject.ext.exoplayerLibs
     api rootProject.ext.mediaLibs
     api rootProject.ext.wheelLibs
-
+    api rootProject.ext.httpLibs
     // Json 解析框架：https://github.com/google/gson
     api 'com.google.code.gson:gson:2.10.1'
     // Kotlin 反射库：用于反射 Kotlin data class 类对象
@@ -35,6 +49,9 @@ dependencies {
     api 'com.tencent.bugly:nativecrashreport:3.9.2'
 //    // 日志调试框架：https://github.com/getActivity/Logcat
 //    debugApi('com.github.getActivity:Logcat:11.82')
+    implementation project(':dkplayer-java')
+    api 'com.blankj:utilcodex:1.31.1'
+
 }
 ext {
     PUBLISH_ARTIFACT_ID = 'base'

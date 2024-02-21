@@ -11,8 +11,6 @@ import com.bumptech.glide.Glide
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.activity.FocusActivity
 import com.bytedance.tiktok.activity.ShowImageActivity
-import com.bytedance.tiktok.base.BaseBindingFragment
-import com.bytedance.tiktok.base.CommPagerAdapter
 import com.bytedance.tiktok.bean.CurUserBean
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
@@ -21,6 +19,8 @@ import com.bytedance.tiktok.databinding.FragmentMineHomeBinding
 import com.bytedance.tiktok.utils.NumUtils
 import com.bytedance.tiktok.utils.RxBus
 import com.google.android.material.appbar.AppBarLayout
+import com.lib.base.adapter.CommPagerAdapter
+import com.lib.base.ui.BaseBindingFragment
 import rx.Subscription
 import rx.functions.Action1
 import java.util.*

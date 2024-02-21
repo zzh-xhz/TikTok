@@ -6,9 +6,9 @@ import android.view.View
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.adapter.GridVideoAdapter
-import com.bytedance.tiktok.base.BaseBindingFragment
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.databinding.FragmentCurrentLocationBinding
+import com.lib.base.ui.BaseBindingFragment
 
 /**
  * create by libo

@@ -1,4 +1,4 @@
-package com.bytedance.tiktok.view
+package com.bytedance.tiktok.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import com.bytedance.tiktok.adapter.ShareAdapter
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.ShareBean
 import com.bytedance.tiktok.databinding.DialogShareBinding
+import com.lib.base.dialog.BaseBottomSheetDialog
 import java.util.*
 
 /**

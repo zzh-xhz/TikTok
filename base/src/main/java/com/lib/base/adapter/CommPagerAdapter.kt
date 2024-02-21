@@ -1,4 +1,4 @@
-package com.bytedance.tiktok.base
+package com.lib.base.adapter
 
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
