@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/comment_keyboard_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/space_54">
+
+    <ImageView
+        android:id="@+id/iv_voice"
+        android:layout_width="@dimen/space_32"
+        android:layout_height="@dimen/space_32"
+        android:layout_marginStart="@dimen/space_12"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_chat_voice" />
+
+    <EditText
+        android:id="@+id/et_msg"
+        style="@style/text_t1.15"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginRight="@dimen/space_12"
+        android:background="@drawable/et_input_bg"
+        android:imeOptions="actionSend"
+        android:inputType="textImeMultiLine"
+        android:maxLines="5"
+        android:minHeight="@dimen/space_36"
+        android:paddingLeft="@dimen/space_10"
+        android:paddingRight="@dimen/space_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/iv_voice"
+        app:layout_constraintRight_toLeftOf="@id/iv_face"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,LabelFor"
+        tools:text="hello" />
+
+    <TextView
+        android:id="@+id/tv_record_voice"
+        style="@style/text_t1.15"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_36"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginRight="@dimen/space_12"
+        android:background="@drawable/et_input_bg"
+        android:gravity="center"
+        android:imeOptions="actionSend"
+        android:paddingLeft="@dimen/space_10"
+        android:paddingRight="@dimen/space_10"
+        android:text="@string/click_record_voice"
+        android:textColorHint="@color/color_t4_dark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/iv_voice"
+        app:layout_constraintRight_toLeftOf="@id/iv_face"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,LabelFor,TextViewEdits" />
+
+    <ImageView
+        android:id="@+id/iv_face"
+        android:layout_width="@dimen/space_32"
+        android:layout_height="@dimen/space_32"
+        android:layout_marginEnd="@dimen/space_10"
+        android:contentDescription="@null"
+        android:padding="@dimen/space_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/right_send_container"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_chat_expression" />
+
+    <FrameLayout
+        android:id="@+id/right_send_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="@dimen/space_32"
+            android:layout_height="@dimen/space_32"
+            android:layout_marginEnd="@dimen/space_12"
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/ic_chat_more" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_send_msg"
+            android:layout_width="@dimen/space_48"
+            android:layout_height="@dimen/space_32"
+            android:layout_marginEnd="@dimen/space_12"
+            android:background="@drawable/bg_chat_send"
+            android:contentDescription="@null"
+            android:text="发送"
+            android:textColor="@color/color_t4_dark"
+            android:textSize="@dimen/font_12"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_chat_more"
+            tools:ignore="HardcodedText"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,7 +45,9 @@ class CommentDialog : BaseVideoBottomSheetDialog() {
         binding.recyclerView!!.adapter = commentAdapter
         loadData()
         commentAdapter.appendList(datas)
-        binding.etText.setOnClickListener {
+        binding.commentKeyboardContainer.setOnClickListener {
+           var  keyWordDialog = KeyWordDialog()
+            keyWordDialog?.show(childFragmentManager, "")
 
         }
     }

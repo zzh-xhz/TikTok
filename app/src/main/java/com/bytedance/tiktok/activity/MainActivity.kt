@@ -1,5 +1,7 @@
 package com.bytedance.tiktok.activity
 
+import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -32,6 +34,10 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
 
     /** 连续按返回键退出时间  */
     private val EXIT_TIME = 2000
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
 
     override fun init() {
         fragments.add(mainFragment)

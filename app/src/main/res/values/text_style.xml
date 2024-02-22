@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="text_t1">
+        <item name="android:textColor">@color/color_t1_dark</item>
+        <item name="android:textSize">@dimen/font_12</item>
+    </style>
+
+    <style name="text_t1.13">
+        <item name="android:textSize">@dimen/font_13</item>
+    </style>
+
+    <style name="text_t1.14">
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
+
+    <style name="text_t1.15">
+        <item name="android:textSize">@dimen/font_15</item>
+    </style>
+
+    <style name="text_t1.15.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_t1.16">
+        <item name="android:textSize">@dimen/font_16</item>
+    </style>
+
+    <style name="text_t1.16.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_t1.17">
+        <item name="android:textSize">@dimen/font_17</item>
+    </style>
+
+    <style name="text_t1.18">
+        <item name="android:textSize">@dimen/font_18</item>
+    </style>
+
+    <style name="text_t1.18.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_t1.25">
+        <item name="android:textSize">@dimen/font_25</item>
+    </style>
+
+    <style name="text_t1.25.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_t2">
+        <item name="android:textColor">@color/color_t2_dark</item>
+    </style>
+
+    <style name="text_t2.12">
+        <item name="android:textSize">@dimen/font_12</item>
+    </style>
+
+    <style name="text_t2.13">
+        <item name="android:textSize">@dimen/font_13</item>
+    </style>
+
+    <style name="text_t2.14">
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
+
+    <style name="text_t2.15">
+        <item name="android:textSize">@dimen/font_15</item>
+    </style>
+
+    <style name="text_t2.15.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_t3">
+        <item name="android:textColor">@color/color_t3_dark</item>
+    </style>
+
+    <style name="text_t3.12">
+        <item name="android:textSize">@dimen/font_12</item>
+    </style>
+
+    <style name="text_t3.14">
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
+
+    <style name="text_t3.15">
+        <item name="android:textSize">@dimen/font_15</item>
+    </style>
+
+    <style name="text_t3.16">
+        <item name="android:textSize">@dimen/font_16</item>
+    </style>
+
+    <style name="text_t6">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@color/color_t6</item>
+    </style>
+
+    <style name="text_t6.13">
+        <item name="android:textSize">@dimen/font_13</item>
+    </style>
+
+    <style name="text_t6.15">
+        <item name="android:textSize">@dimen/font_15</item>
+    </style>
+
+    <style name="text_t7">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@color/color_t7</item>
+    </style>
+
+    <style name="text_t7.18">
+        <item name="android:textSize">@dimen/font_18</item>
+    </style>
+
+    <style name="text_t7.18.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_t7.23">
+        <item name="android:textSize">@dimen/font_23</item>
+    </style>
+
+    <style name="text_t7.23.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_b2">
+        <item name="android:textColor">@color/color_b2</item>
+    </style>
+
+    <style name="text_b2.10">
+        <item name="android:textSize">@dimen/font_10</item>
+    </style>
+
+    <style name="text_b2.12">
+        <item name="android:textSize">@dimen/font_12</item>
+    </style>
+
+    <style name="text_b2.14">
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
+
+    <style name="text_b2.15">
+        <item name="android:textSize">@dimen/font_15</item>
+    </style>
+
+    <style name="text_b2.15.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+</resources>
