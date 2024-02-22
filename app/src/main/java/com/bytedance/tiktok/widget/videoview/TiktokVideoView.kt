@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import com.bytedance.tiktok.bean.VideoBean
+import com.bytedance.tiktok.widget.controller.TikTokController
 import xyz.doikki.videoplayer.util.PlayerUtils
 
 /**
@@ -44,9 +45,17 @@ class TiktokVideoView : ExoVideoView {
 
     override fun onTouchEvent(motionEvent: MotionEvent): Boolean {
         scaleGestureDetector.onTouchEvent(motionEvent)
+        if (motionEvent.pointerCount == 2){
+            if (mVideoController?.visibility != INVISIBLE){
+                mVideoController?.visibility  = INVISIBLE
+            }
+        }
         // 处理双指离开时的回弹效果
         if ((motionEvent.pointerCount == 1 || motionEvent.pointerCount == 2 )  && motionEvent.action == MotionEvent.ACTION_UP) {
             defaultScaleFactorAnimate()
+            if (mVideoController?.visibility != VISIBLE){
+                mVideoController?.visibility  = VISIBLE
+            }
         }
         super.onTouchEvent(motionEvent)
         if (motionEvent.actionMasked == MotionEvent.ACTION_POINTER_UP ||  motionEvent.actionMasked ==MotionEvent.ACTION_POINTER_DOWN){
