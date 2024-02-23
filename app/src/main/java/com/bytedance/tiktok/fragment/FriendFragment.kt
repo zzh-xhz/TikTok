@@ -265,12 +265,13 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
             override fun onCommentClick() {
                 refreshIsLandscapeVideo()
                 val views = arrayOfNulls<View>(1)
-                commentDialog = CommentDialog()
-                commentDialog?.setViewListener(object : CommentDialog.ViewListener {
+                commentDialog = CommentDialog().apply {
+                    this.setViewListener(object : CommentDialog.ViewListener {
                     override fun bindView(v: View?) {
                         views[0] = v
                     }
                 })
+                }
                 commentDialog?.show(childFragmentManager, "FriendFragment")
                 commentDialog?.behaviorChanged =
                     object : BaseVideoBottomSheetDialog.IBehaviorChanged {

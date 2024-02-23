@@ -126,16 +126,19 @@ class MineFragment : BaseBindingFragment<FragmentMineHomeBinding>({FragmentMineH
      */
     private fun setappbarlayoutPercent() {
         binding.appbarlayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appbarlayout, verticalOffset ->
+            if (binding == null){
+                return@OnOffsetChangedListener
+            }
             val percent = Math.abs(verticalOffset * 1.0f) / appbarlayout.totalScrollRange //滑动比例
             if (percent > 0.8) {
-                binding.tvTitle!!.visibility = View.VISIBLE
-                binding.tvFocus!!.visibility = View.VISIBLE
+                binding.tvTitle.visibility = View.VISIBLE
+                binding.tvFocus.visibility = View.VISIBLE
                 val alpha = 1 - (1 - percent) * 5 //渐变变换
-                binding.tvTitle!!.alpha = alpha
+                binding.tvTitle.alpha = alpha
                 binding.tvFocus!!.alpha = alpha
             } else {
-                binding.tvTitle!!.visibility = View.GONE
-                binding.tvFocus!!.visibility = View.GONE
+                binding.tvTitle.visibility = View.GONE
+                binding.tvFocus.visibility = View.GONE
             }
         })
     }
