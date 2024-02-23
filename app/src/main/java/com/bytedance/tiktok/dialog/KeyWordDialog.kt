@@ -14,6 +14,7 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.blankj.utilcode.util.KeyboardUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.databinding.KeyWordDialogBinding
 import com.bytedance.tiktok.emojikeyboard.keyboard.input.OnChatInputViewListener
@@ -70,6 +71,7 @@ class KeyWordDialog : DialogFragment () , OnChatInputViewListener {
     }
 
     override fun onSendMsg(msg: String) {
+        ToastUtils.showLong(msg)
     }
 
 

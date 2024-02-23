@@ -30,6 +30,7 @@
         android:imeOptions="actionSend"
         android:inputType="textImeMultiLine"
         android:maxLines="5"
+        android:textColor="@color/gray_900"
         android:minHeight="@dimen/space_36"
         android:paddingLeft="@dimen/space_10"
         android:paddingRight="@dimen/space_10"
@@ -38,7 +39,8 @@
         app:layout_constraintRight_toLeftOf="@id/iv_face"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="Autofill,LabelFor"
-        tools:text="hello" />
+        android:hint="善语结善缘，恶语伤人心"
+        tools:text="善语结善缘，恶语伤人心" />
 
     <TextView
         android:id="@+id/tv_record_voice"
