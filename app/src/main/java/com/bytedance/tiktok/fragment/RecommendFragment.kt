@@ -252,7 +252,7 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
                         views[0] = v
                     }
                 })
-                commentDialog?.show(childFragmentManager, "")
+                commentDialog?.show(childFragmentManager, "RecommendFragment")
                 commentDialog?.behaviorChanged = object :BaseVideoBottomSheetDialog.IBehaviorChanged{
                     override fun changedState(bottomSheet: View?, state: Int) {
                         val width: Float = ScreenUtils.getScreenWidth().toFloat()
@@ -278,12 +278,11 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
                         startAnimator(bottomSheet!!)
                     }
                 }
-
             }
 
             override fun onShareClick() {
                 shareDialog  = ShareDialog()
-                shareDialog?.show(childFragmentManager, "")
+                shareDialog?.show(childFragmentManager, "RecommendFragment")
             }
 
             override fun onFullScreenClick() {

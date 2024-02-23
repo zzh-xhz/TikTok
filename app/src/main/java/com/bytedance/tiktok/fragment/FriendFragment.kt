@@ -271,7 +271,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
                         views[0] = v
                     }
                 })
-                commentDialog?.show(childFragmentManager, "")
+                commentDialog?.show(childFragmentManager, "FriendFragment")
                 commentDialog?.behaviorChanged =
                     object : BaseVideoBottomSheetDialog.IBehaviorChanged {
                         override fun changedState(bottomSheet: View?, state: Int) {
@@ -311,7 +311,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
 
             override fun onShareClick() {
                 shareDialog = ShareDialog()
-                shareDialog?.show(childFragmentManager, "")
+                shareDialog?.show(childFragmentManager, "FriendFragment")
             }
 
             override fun onFullScreenClick() {
