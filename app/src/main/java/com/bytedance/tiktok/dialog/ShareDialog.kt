@@ -44,6 +44,10 @@ class ShareDialog : BaseBottomSheetDialog() {
         binding.rvShare!!.adapter = shareAdapter
         setShareDatas()
         shareAdapter.appendList(shareBeans)
+        binding.tvCancel.setOnClickListener { v: View? ->
+            dismiss()
+        }
+
     }
 
     private fun setShareDatas() {

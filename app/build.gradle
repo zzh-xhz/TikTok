@@ -66,9 +66,13 @@ dependencies {
     implementation project(':dkplayer-videocache')
     implementation rootProject.ext.ctiao.danmaku
     implementation rootProject.ext.ctiao.ndkbitmap
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     debugImplementation rootProject.ext.leakcanary.leakcanary
-
     implementation project(':network-lib')
+    debugImplementation "io.github.didi.dokit:dokitx:3.5.0"
+//    releaseImplementation "io.github.didi.dokit:dokitx-no-op:${lastversion}"
 //    //完整版引入
 //    implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.5.0-release-jitpack'
 

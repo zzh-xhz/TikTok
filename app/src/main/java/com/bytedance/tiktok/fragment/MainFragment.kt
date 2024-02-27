@@ -1,6 +1,7 @@
 package com.bytedance.tiktok.fragment
 
 import FriendFragment
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.androidkun.xtablayout.XTabLayout
 import com.bytedance.tiktok.R
+import com.bytedance.tiktok.activity.MainActivity
+import com.bytedance.tiktok.activity.SearchActivity
 import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.FragmentMainBinding
@@ -33,6 +36,9 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
         super.onViewCreated(view, savedInstanceState)
         setFragments()
         setMainMenu()
+        binding.ivSearch.setOnClickListener { v: View? ->
+            startActivity(Intent(activity, SearchActivity::class.java))
+        }
     }
 
     override fun onCreateView(
