@@ -63,6 +63,16 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        RxBus.getDefault().post(PauseVideoEvent(true))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        RxBus.getDefault().post(PauseVideoEvent(false))
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -90,6 +100,9 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
         //监听播放或暂停事件
         subscribe = RxBus.getDefault().toObservable(PauseVideoEvent::class.java)
             .subscribe(Action1 { event: PauseVideoEvent ->
+                if (videoView ==null){
+                    return@Action1
+                }
                 if (event.isPlayOrPause) {
                     videoView!!.play()
                 } else {

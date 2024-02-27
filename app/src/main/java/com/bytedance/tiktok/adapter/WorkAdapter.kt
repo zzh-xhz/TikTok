@@ -32,8 +32,7 @@ class WorkAdapter(val context: Context) : BaseAdapter<WorkViewHolder, VideoBean>
         var videoBean = mList[position]
         Glide.with(context)
             .asBitmap()
-            .load(videoBean.videoRes)
-            .apply(RequestOptions.frameOf(0))  // 从第一帧开始
+            .load(videoBean.coverRes)
             .into(holder.binding.ivCover)
         holder?.binding?.tvLikecount!!.text = numberFilter(videoBean.likeCount)
         holder?.binding.root.setOnClickListener { v: View? ->

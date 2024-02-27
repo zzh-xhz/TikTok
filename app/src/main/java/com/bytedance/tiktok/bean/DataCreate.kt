@@ -92,7 +92,8 @@ class DataCreate {
                 val videoBean = VideoBean()
                 videoBean.content = "# "+videoData.type+ "# "+videoData.tags
                 videoBean.videoRes = videoData.videos["tiny"]?.url.toString()
-                videoBean.distance = 7.9f
+                videoBean.coverRes=  videoData.videos["tiny"]?.thumbnail.toString()
+                    videoBean.distance = 7.9f
                 videoBean.isFocused = false
                 videoBean.isLiked = true
                 videoBean.likeCount = 226823

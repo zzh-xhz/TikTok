@@ -1,6 +1,7 @@
 package com.bytedance.tiktok.fragment
 
 import FriendFragment
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -39,6 +40,10 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
         binding.ivSearch.setOnClickListener { v: View? ->
             startActivity(Intent(activity, SearchActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onCreateView(

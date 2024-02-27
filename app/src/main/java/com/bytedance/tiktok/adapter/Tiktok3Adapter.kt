@@ -35,8 +35,7 @@ class Tiktok3Adapter(
         PreloadManager.getInstance(context).addPreloadTask(item.videoRes, position)
         Glide.with(context)
             .asBitmap()
-            .load(item.videoRes)
-            .apply(RequestOptions.frameOf(0)) // 从第一帧开始
+            .load(item.coverRes)
             .into(holder.mThumb)
         holder.mPosition = position
         holder.mTikTokView?.setOnLikeListener(object : TikTokView.OnLikeListener {

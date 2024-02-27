@@ -1,6 +1,7 @@
 package com.bytedance.tiktok.bean
 
 import androidx.media3.exoplayer.source.BaseMediaSource
+import androidx.media3.extractor.Ac3Util.SyncFrameInfo.StreamType
 
 
 /**
@@ -15,7 +16,7 @@ class VideoBean {
     var videoRes = ""
 
     /** 封面图片资源  */
-    var coverRes = 0
+    var coverRes = ""
 
     /** 视频文案内容  */
     var content: String? = null

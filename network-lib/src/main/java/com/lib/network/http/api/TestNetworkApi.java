@@ -228,6 +228,15 @@ public final class TestNetworkApi implements IRequestApi {
                 private Integer width;
                 private Integer height;
                 private Integer size;
+                private   String  thumbnail;
+
+                public String getThumbnail() {
+                    return thumbnail;
+                }
+
+                public void setThumbnail(String thumbnail) {
+                    this.thumbnail = thumbnail;
+                }
 
                 public String getUrl() {
                     return url;

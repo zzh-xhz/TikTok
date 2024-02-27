@@ -18,6 +18,7 @@ import com.bytedance.tiktok.bean.CurUserBean
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.MainTabChangeEvent
+import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.FragmentFriendBinding
 import com.bytedance.tiktok.dialog.CommentDialog
@@ -81,7 +82,15 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
             PreloadManager.getInstance(context).addPreloadTask(videoBean.videoRes, index)
         }
     }
+    override fun onResume() {
+        super.onResume()
+        mVideoView?.start()
+    }
 
+    override fun onPause() {
+        super.onPause()
+        mVideoView?.pause()
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewPager()

@@ -40,8 +40,7 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView): BaseAd
             holder.binding.controller.setVideoData(it)
             Glide.with(context)
                 .asBitmap()
-                .load(it.videoRes)
-                .apply(RequestOptions.frameOf(0))  // 从第一帧开始
+                .load(it.coverRes)
                 .into(holder.binding.ivCover)
             holder?.binding?.likeview?.setOnLikeListener(object : OnLikeListener {
                 override fun onLikeListener() {

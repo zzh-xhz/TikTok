@@ -32,8 +32,7 @@ class GridVideoAdapter(val context: Context) : BaseAdapter<GridVideoViewHolder, 
 
             Glide.with(context)
                 .asBitmap()
-                .load(it.videoRes)
-                .apply(RequestOptions.frameOf(0))  // 从第一帧开始
+                .load(it.coverRes)
                 .into(holder.binding.ivCover)
             holder?.binding?.tvContent?.text = it.content
             holder?.binding?.tvDistance!!.text = it.distance.toString() + " km"
