@@ -31,6 +31,7 @@ import com.bytedance.tiktok.utils.RxBus
 import com.bytedance.tiktok.utils.cache.PreloadManager
 import com.bytedance.tiktok.view.ControllerView
 import com.bytedance.tiktok.view.LikeView
+import com.danikula.videocache.Logger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.lib.base.dialog.BaseVideoBottomSheetDialog
 import com.lib.base.ui.BaseBindingFragment
@@ -62,17 +63,6 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
             PreloadManager.getInstance(context).addPreloadTask(videoBean.videoRes, index)
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-        RxBus.getDefault().post(PauseVideoEvent(true))
-    }
-
-    override fun onPause() {
-        super.onPause()
-        RxBus.getDefault().post(PauseVideoEvent(false))
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -177,7 +167,7 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
 
         //切换播放器位置
         dettachParentView(rootView)
-        autoPlayVideo(curPlayPos, ivCover)
+        autoPlayVideo(curPlayPos, ivCover,ivPlay)
         playVideoViewInitialization(ivPlay)
     }
 
@@ -196,7 +186,7 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
     /**
      * 自动播放视频
      */
-    private fun autoPlayVideo(position: Int, ivCover: ImageView) {
+    private fun autoPlayVideo(position: Int, ivCover: ImageView,ivPlay: ImageView) {
         videoView.playVideo(adapter!!.getDatas()[position].mediaSource!!)
         videoView.getplayer()?.addListener(object: Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
@@ -205,20 +195,26 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
                 if (state == Player.STATE_READY) {
 
                 }
+                Logger.info("测试 onPlaybackStateChanged $state")
             }
 
             fun onPlayerError(error: ExoPlaybackException?) {
                 // 播放发生错误时的回调
+                Logger.info("测试 onPlayerError ${error.toString()}")
             }
 
             override fun onIsPlayingChanged(isPlaying: Boolean) {
                 // 播放状态变为播放或暂停时的回调
+                Logger.info("测试 onIsPlayingChanged $isPlaying")
             }
 
             override fun onRenderedFirstFrame() {
                 //第一帧已渲染，隐藏封面
                 ivCover.visibility = View.GONE
                 ivCurCover = ivCover
+                playVideoViewInitialization(ivPlay)
+                // 播放状态变为播放或暂停时的回调
+                Logger.info("测试 onRenderedFirstFrame")
             }
         })
     }
@@ -226,7 +222,7 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
      * 恢复最初的视图
      */
     private fun playVideoViewInitialization(ivPlay: ImageView) {
-        if (ivPlay?.visibility ==  View.VISIBLE){
+        if (ivPlay?.visibility !=  View.GONE){
             ivPlay?.visibility = View.GONE
         }
 

@@ -79,7 +79,7 @@ class VideoPlayer @JvmOverloads constructor(context: Context, attrs: AttributeSe
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
 
-        stop()
+//        stop()
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
