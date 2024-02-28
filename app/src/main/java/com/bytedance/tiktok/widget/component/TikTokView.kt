@@ -128,9 +128,8 @@ class TikTokView : FrameLayout, IControlComponent {
      * 双指扩大缩小屏幕
      */
     fun setAdjustingViews(detector : Float) {
-        val isEnlarge = detector > 1.0f
         // 扩大
-        if (llBootom?.visibility != View.GONE && isEnlarge) {
+        if (llBootom?.visibility != View.GONE && detector > 1.0f) {
             if (isLandscapeVideo()){
                 tvFullScreenView?.visibility = GONE
             }
@@ -139,7 +138,7 @@ class TikTokView : FrameLayout, IControlComponent {
             return
         }
         // 缩小
-        if (!isEnlarge) {
+        if (detector < 1.0f) {
             if (llBootom?.visibility == View.VISIBLE){
                 if (isLandscapeVideo()){
                     tvFullScreenView?.visibility = GONE

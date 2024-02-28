@@ -60,7 +60,7 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>({ ActivitySear
         mSearchView.queryHint = "请输入关键字"
         //设置输入框文字颜色
         val editText = mSearchView.findViewById<EditText>(com.google.android.material.R.id.search_src_text)
-        editText.textSize = PlayerUtils.sp2px(this, 12f).toFloat();
+        editText.textSize = PlayerUtils.sp2px(this, 4f).toFloat();
         editText.setHintTextColor(ContextCompat.getColor(this, R.color.black))
         editText.setTextColor(ContextCompat.getColor(this, R.color.black))
 
