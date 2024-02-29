@@ -8,17 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
+import com.androidkun.xtablayout.XTabLayout
 import com.bytedance.tiktok.R
-import com.bytedance.tiktok.view.viewpagerlayoutmanager.OnViewPagerListener
 import com.github.chrisbanes.photoview.PhotoView
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 /**
  * 图片
  */
 class HorImageView : FrameLayout {
     private var viewPager: HackyViewPager? = null
+    private var tablayout: XTabLayout? = null
+
     private var viewPagerDirectionListener: onViewPagerDirectionListener? = null
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -31,6 +31,7 @@ class HorImageView : FrameLayout {
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_view_pager, this, true)
         viewPager = findViewById(R.id.view_pager)
+          tablayout = findViewById(R.id.xTablayout)
         viewPager?.adapter = SamplePagerAdapter()
         viewPager?.setOnScrollListener(object :HackyViewPager.onScrollListener{
             override fun onScroll(isHorizontal: Boolean) {
@@ -40,6 +41,8 @@ class HorImageView : FrameLayout {
             }
 
         })
+        // 将ViewPager与TabLayout关联起来
+        tablayout?.setupWithViewPager(viewPager);
     }
 
     override fun onDetachedFromWindow() {

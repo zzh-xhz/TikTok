@@ -51,13 +51,7 @@ class HackyViewPager : ViewPager {
         if (scrollListener != null){
             scrollListener?.onScroll(isHorizontalScroll)
         }
-//        return if (isHorizontalScroll) {
-//            // 如果是水平滑动，则交给ViewPager处理
-//            super.onTouchEvent(event)
-//        } else {
-//            // 如果是垂直滑动，则不处理，交给父View处理
-//            false
-//        }
+
         return  super.onTouchEvent(event)
     }
     interface onScrollListener {
