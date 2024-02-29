@@ -113,7 +113,7 @@ class TikTokView : FrameLayout, IControlComponent {
      * Returns the debugging information string to be shown by the target [TextView].
      */
      fun setAdjustingViews() {
-        if (isLandscapeVideo() && tvFullScreenView?.visibility == visibility ){
+        if (isLandscapeVideo() && tvFullScreenView?.visibility == visibility ||  tvFullScreenView?.visibility == INVISIBLE ){
             return
         }
         if (isLandscapeVideo() && tvFullScreenView?.visibility != visibility ){

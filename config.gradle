@@ -107,7 +107,9 @@ ext {
             // 权限请求框架：https://github.com/getActivity/XXPermissions
             xxpermissions: "com.github.getActivity:XXPermissions:18.5",
             // Gson 解析容错：https://github.com/getActivity/GsonFactory
-            gsonfactory :"com.github.getActivity:GsonFactory:9.5"
+            gsonfactory :"com.github.getActivity:GsonFactory:9.5",
+            photoView :"com.github.chrisbanes:PhotoView:2.3.0"
+
     ]
     media = [
             session: "androidx.media3:media3-session:${dependVersion.media3}",

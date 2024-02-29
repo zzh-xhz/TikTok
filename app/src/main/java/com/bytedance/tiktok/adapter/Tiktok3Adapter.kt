@@ -31,12 +31,12 @@ class Tiktok3Adapter(
         val context = holder.itemView.context
         val item = mVideoBeans!![position]
         holder.mTikTokView.setVideoData(item)
-        //开始预加载
-        PreloadManager.getInstance(context).addPreloadTask(item.videoRes, position)
         Glide.with(context)
             .asBitmap()
             .load(item.coverRes)
             .into(holder.mThumb)
+        //开始预加载
+        PreloadManager.getInstance(context).addPreloadTask(item.videoRes, position)
         holder.mPosition = position
         holder.mTikTokView?.setOnLikeListener(object : TikTokView.OnLikeListener {
             override fun onLikeListener() {

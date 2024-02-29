@@ -28,6 +28,7 @@ import com.bytedance.tiktok.utils.OnVideoControllerListener
 import com.bytedance.tiktok.utils.RxBus
 import com.bytedance.tiktok.utils.Utils
 import com.bytedance.tiktok.utils.cache.PreloadManager
+import com.bytedance.tiktok.view.HorImageView
 import com.bytedance.tiktok.widget.VerticalViewPager
 import com.bytedance.tiktok.widget.component.TikTokView
 import com.bytedance.tiktok.widget.controller.TikTokController
@@ -59,7 +60,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
     private val renderView by lazy {
         GLSurfaceRenderView2(context)
     }
-
+    private  var photoView :  HorImageView? = null
     /**
      * 当前播放位置
      */
@@ -77,6 +78,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
         super.onAttach(context)
         mPreloadManager = PreloadManager.getInstance(requireActivity())
         initVideoView()
+        initImageView()
         DataUtil.getTiktokDataFromAssets(requireActivity()).forEachIndexed { index, videoBean ->
             //开始预加载
             PreloadManager.getInstance(context).addPreloadTask(videoBean.videoRes, index)
@@ -105,6 +107,17 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
         }
         setRefreshEvent()
         RxBus.getDefault().post(MainTabChangeEvent(false))
+    }
+    private fun initImageView(){
+        photoView = HorImageView(requireActivity())
+        photoView?.setOnViewPagerDirectionListener(object : HorImageView.onViewPagerDirectionListener{
+            override fun onDirectionListener(isHorizontal: Boolean) {
+                if (mCurPos == 3){
+                    doubleFingerStatus(!isHorizontal);
+                }
+            }
+
+        })
     }
 
     private fun initVideoView() {
@@ -167,14 +180,26 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
             if (viewHolder.mPosition == position) {
                 mVideoView?.release()
                 Utils.removeViewFormParent(mVideoView)
-                val tiktokBean = mVideoList[position]
-                val playUrl = mPreloadManager!!.getPlayUrl(tiktokBean.videoRes)
-                L.i("startPlay: position: $position  url: $playUrl")
-                mVideoView!!.setUrl(playUrl)
-                //请点进去看isDissociate的解释
-                mController!!.addControlComponent(viewHolder.mTikTokView, true)
-                viewHolder.mPlayerContainer.addView(mVideoView, 0)
-                mVideoView!!.start()
+                if (position == 3){
+                    Utils.removeViewFormParent(photoView)
+                    mController!!.addControlComponent(viewHolder.mTikTokView, true)
+                    viewHolder.mPlayerContainer.addView(photoView, 0)
+                    if (viewHolder.tvFullScreenView.visibility != View.INVISIBLE){
+                        viewHolder.tvFullScreenView.visibility = View.INVISIBLE
+                    }
+                    if (viewHolder.mThumb.visibility != View.INVISIBLE){
+                        viewHolder.mThumb.visibility = View.INVISIBLE
+                    }
+                }else{
+                    val tiktokBean = mVideoList[position]
+                    val playUrl = mPreloadManager!!.getPlayUrl(tiktokBean.videoRes)
+                    L.i("startPlay: position: $position  url: $playUrl")
+                    mVideoView!!.setUrl(playUrl)
+                    //请点进去看isDissociate的解释
+                    mController!!.addControlComponent(viewHolder.mTikTokView, true)
+                    viewHolder.mPlayerContainer.addView(mVideoView, 0)
+                    mVideoView!!.start()
+                }
                 mCurPos = position
                 break
             }
@@ -347,6 +372,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
             mVideoView?.onTouchEvent(motionEvent)
             tikTokView.onTouchEvent(motionEvent)
             mController?.onTouchEvent(motionEvent)
+            photoView?.onTouchEvent(motionEvent)
             true
         }
     }
