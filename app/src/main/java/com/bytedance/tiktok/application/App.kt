@@ -1,6 +1,7 @@
 package com.bytedance.tiktok.application
 
 import android.os.StrictMode
+import androidx.multidex.BuildConfig
 import androidx.multidex.MultiDexApplication
 import com.airbnb.lottie.animation.content.Content
 import com.bytedance.tiktok.utils.ProgressManagerImpl
@@ -24,7 +25,6 @@ import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import okhttp3.OkHttpClient
 
-import xyz.doikki.videoplayer.BuildConfig
 import xyz.doikki.videoplayer.exo.ExoMediaPlayerFactory
 import xyz.doikki.videoplayer.player.VideoView
 import xyz.doikki.videoplayer.player.VideoViewConfig

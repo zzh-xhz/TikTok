@@ -31,7 +31,7 @@ class HorImageView : FrameLayout {
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_view_pager, this, true)
         viewPager = findViewById(R.id.view_pager)
-          tablayout = findViewById(R.id.xTablayout)
+        tablayout = findViewById(R.id.xTablayout)
         viewPager?.adapter = SamplePagerAdapter()
         viewPager?.setOnScrollListener(object :HackyViewPager.onScrollListener{
             override fun onScroll(isHorizontal: Boolean) {

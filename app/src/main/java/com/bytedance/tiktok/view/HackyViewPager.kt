@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.viewpager.widget.ViewPager
 import com.danikula.videocache.Logger
+import java.lang.reflect.Field
 
 class HackyViewPager : ViewPager {
     private var startX = 0f
@@ -51,8 +52,13 @@ class HackyViewPager : ViewPager {
         if (scrollListener != null){
             scrollListener?.onScroll(isHorizontalScroll)
         }
+        try {
+            return  super.onTouchEvent(event)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return true
+        }
 
-        return  super.onTouchEvent(event)
     }
     interface onScrollListener {
         fun onScroll(isHorizontal: Boolean)

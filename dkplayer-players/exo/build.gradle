@@ -6,14 +6,13 @@ android {
     defaultConfig {
         minSdk rootProject.ext.android.minSdk
         targetSdk rootProject.ext.android.targetSdk
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+    namespace 'xyz.doikki.videoplayer.exo'
 }
 
 dependencies {
@@ -31,4 +30,4 @@ ext {
     PUBLISH_ARTIFACT_ID = 'player-exo'
 }
 
-apply from: '../../publish.gradle'
+//apply from: '../../publish.gradle'

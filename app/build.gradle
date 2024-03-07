@@ -34,14 +34,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    lintOptions {
-        checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
-        abortOnError false
-    }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
     buildFeatures{
         dataBinding = true
@@ -51,8 +45,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    namespace 'com.bytedance.tiktok'
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
@@ -72,6 +71,7 @@ dependencies {
     debugImplementation rootProject.ext.leakcanary.leakcanary
     implementation project(':network-lib')
     debugImplementation "io.github.didi.dokit:dokitx:3.5.0"
+    implementation 'com.github.Oxford-step-counter:Java-Step-Counter:-SNAPSHOT'
 //    releaseImplementation "io.github.didi.dokit:dokitx-no-op:${lastversion}"
 //    //完整版引入
 //    implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.5.0-release-jitpack'

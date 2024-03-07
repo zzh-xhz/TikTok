@@ -13,6 +13,7 @@ import com.androidkun.xtablayout.XTabLayout
 import com.bytedance.tiktok.R
 import com.bytedance.tiktok.activity.MainActivity
 import com.bytedance.tiktok.activity.SearchActivity
+import com.bytedance.tiktok.activity.StepNumberActivity
 import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.FragmentMainBinding
@@ -38,7 +39,9 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>({FragmentMainBindi
         setFragments()
         setMainMenu()
         binding.ivSearch.setOnClickListener { v: View? ->
-            startActivity(Intent(activity, SearchActivity::class.java))
+//            startActivity(Intent(activity, SearchActivity::class.java))
+            startActivity(Intent(activity, StepNumberActivity::class.java))
+
         }
     }
 

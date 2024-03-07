@@ -7,6 +7,7 @@ android {
         minSdk rootProject.ext.android.minSdk
         targetSdk rootProject.ext.android.targetSdk
     }
+    namespace 'xyz.doikki.videoplayer.ijk'
 }
 
 dependencies {
@@ -18,4 +19,4 @@ ext {
     PUBLISH_ARTIFACT_ID = 'player-ijk'
 }
 
-apply from: '../../publish.gradle'
+//apply from: '../../publish.gradle'

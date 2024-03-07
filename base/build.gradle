@@ -8,8 +8,6 @@ android {
     defaultConfig {
         minSdk rootProject.ext.android.minSdk
         targetSdk rootProject.ext.android.targetSdk
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures{
@@ -20,9 +18,10 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+    namespace 'com.lib.base'
 }
 dependencies {
     api rootProject.ext.androisxLibs
@@ -57,4 +56,4 @@ ext {
     PUBLISH_ARTIFACT_ID = 'base'
 }
 
-apply from: '../publish.gradle'
+//apply from: '../publish.gradle'

@@ -6,10 +6,9 @@ android {
     defaultConfig {
         minSdk rootProject.ext.android.minSdk
         targetSdk rootProject.ext.android.targetSdk
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    namespace 'xyz.doikki.videoplayer'
 }
 
 dependencies {
@@ -21,4 +20,4 @@ ext {
     PUBLISH_ARTIFACT_ID = 'dkplayer-java'
 }
 
-apply from: '../publish.gradle'
+//apply from: '../publish.gradle'

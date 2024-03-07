@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.bytedance.tiktok">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Android 11 软件包可见性适配 -->
@@ -28,9 +28,11 @@
         tools:ignore="LockedOrientationActivity,UnusedAttribute"
         tools:targetApi="n">
         <activity
-            android:name=".activity.SearchActivity"
+            android:name=".activity.StepNumberActivity"
             android:exported="false" />
-        <!-- 表示当前已经适配了分区存储 -->
+        <activity
+            android:name=".activity.SearchActivity"
+            android:exported="false" /> <!-- 表示当前已经适配了分区存储 -->
         <meta-data
             android:name="ScopedStorage"
             android:value="true" /> <!-- 悬浮窗入口 -->

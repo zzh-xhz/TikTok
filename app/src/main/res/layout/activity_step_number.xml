@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.bytedance.tiktok.activity.StepNumberActivity"
+    android:padding="10dp">
+
+    <Button
+        android:id="@+id/btn_toggleStepCounter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始步骤计数"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/stepsTextView"
+            android:layout_width="108dp"
+            android:layout_height="18dp"
+            android:layout_weight="1"
+            android:text="步骤: 0"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/hwstepsTextView"
+            android:layout_width="108dp"
+            android:layout_height="18dp"
+            android:layout_weight="1"
+            android:text="HW步骤: NA"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/gtTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="基本事实: NA"
+
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/logSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="日志csv文件"
+        android:layout_marginTop="35dp"/>
+
+    <Switch
+        android:id="@+id/gtdeviceSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="连接GT设备"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

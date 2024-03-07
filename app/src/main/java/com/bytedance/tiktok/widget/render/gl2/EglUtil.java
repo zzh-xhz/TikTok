@@ -17,8 +17,7 @@ import android.opengl.GLException;
 import android.opengl.GLUtils;
 import android.util.Log;
 
-import com.bytedance.tiktok.BuildConfig;
-
+import androidx.multidex.BuildConfig;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;

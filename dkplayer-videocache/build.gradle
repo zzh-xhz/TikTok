@@ -6,14 +6,13 @@ android {
     defaultConfig {
         minSdk rootProject.ext.android.minSdk
         targetSdk rootProject.ext.android.targetSdk
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    namespace 'com.danikula.videocache'
 }
 
 ext {
     PUBLISH_ARTIFACT_ID = 'videocache'
 }
 
-apply from: '../publish.gradle'
+//apply from: '../publish.gradle'
