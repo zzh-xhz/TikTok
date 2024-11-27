@@ -19,3 +19,20 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# OkHttp3 框架混淆规则
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+-dontwarn okio.**
+# EasyHttp 框架混淆规则
+-keep class com.hjq.http.** {*;}
+# 必须要加上此规则，否则会导致泛型解析失败
+-keep class * implements com.hjq.http.listener.OnHttpListener {
+    *;
+}
+
+-keep class * extends com.hjq.http.model.ResponseClass {
+    *;
+}

@@ -1,19 +1,15 @@
 apply plugin: 'com.android.library'
-apply from: '../constants.gradle'
+apply from : '../common.gradle'
+
 
 android {
-    compileSdk rootProject.ext.android.compileSdk
-    defaultConfig {
-        minSdk rootProject.ext.android.minSdk
-        targetSdk rootProject.ext.android.targetSdk
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+
     namespace 'xyz.doikki.videocontroller'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compileOnly project.ext.annotation
+//    compileOnly project.ext.annotation
     api project(':dkplayer-java')
 }
 

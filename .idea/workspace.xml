@@ -10,42 +10,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3981b629-6337-45d3-8c7f-ab7eb818634f" name="Changes" comment="项目主页面搭建完成&#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/bytedance/tiktok/ExampleInstrumentedTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/md5-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/sha1-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/dependencies-accessors/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AppSignature.jks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AppSignature.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/proguard-sdk.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/application/AppConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android-template.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fastlane/Appfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fastlane/Fastfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/app/proguard-app.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/activity/SplashActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/activity/SplashActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/application/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/bytedance/tiktok/application/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/base/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/base/proguard-rules.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/src/main/java/com/lib/base/ui/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/base/src/main/java/com/lib/base/ui/BaseActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/config.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dkplayer-java/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/dkplayer-java/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dkplayer-players/exo/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/dkplayer-players/exo/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dkplayer-players/ijk/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/dkplayer-players/ijk/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dkplayer-ui/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/dkplayer-ui/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dkplayer-videocache/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/dkplayer-videocache/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/network-lib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/network-lib/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/network-lib/src/main/java/com/lib/network/http/api/TestNetworkApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/network-lib/src/main/java/com/lib/network/http/api/TestNetworkApi.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[66J5T18B09034231]" />
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=2KE0219C25009841)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -83,72 +85,104 @@
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;zzh-xhz&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/zzh-xhz/TikTok.git&quot;,
+    &quot;accountId&quot;: &quot;76c07632-50a5-44f4-ad2a-c19637b96f7c&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2bQew0ANEjpP9mY4PybpTdpwwqB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DEBUGGABLE_DEVICE": "huawei-hma_al00-66J5T18B09034231",
-    "DEBUGGABLE_PROCESS": "com.bytedance.tiktok",
-    "DEBUGGER_ID": "Auto",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHOW_ALL_PROCESSES": "false",
-    "android-custom-viewD:/Android SDK/sources/android-34/android/view/View.java_SELECTED": "View",
-    "android-custom-viewD:/Android SDK/sources/android-34/android/view/ViewGroup.java_SELECTED": "ViewGroup",
-    "android-custom-viewD:/Android SDK/sources/android-34/android/widget/VideoView.java_SELECTED": "VideoView",
-    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.media3/media3-ui/1.2.1/55788ec8e8c7f2d69558554b9457ad133da1be50/media3-ui-1.2.1-sources.jar!/androidx/media3/ui/PlayerView.java_SELECTED": "PlayerView",
-    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.viewpager/viewpager/1.0.0/db045f92188b9d247d5f556866f8861ab68528f0/viewpager-1.0.0-sources.jar!/androidx/viewpager/widget/ViewPager.java_SELECTED": "ViewPager",
-    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.viewpager2/viewpager2/1.0.0/3c3569044e6969f1ee5c3aa03b08e6717a2d782f/viewpager2-1.0.0-sources.jar!/androidx/viewpager2/widget/ViewPager2.java_SELECTED": "ViewPager2",
-    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.androidkun/XTabLayout/1.1.4/c32891fea2e69b1fd5de9738f1ffb89571f8069/XTabLayout-1.1.4-sources.jar!/com/androidkun/xtablayout/XTabLayout.java_SELECTED": "XTabLayout",
-    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-ui/2.19.1/1e4a8691b096f1ff34cf8adb9f0f4f3627f5cbad/exoplayer-ui-2.19.1-sources.jar!/com/google/android/exoplayer2/ui/PlayerView.java_SELECTED": "PlayerView",
-    "android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.google.android.material/material/1.2.1/37d55d5141066b3d118d24232fa7025b65eb3a74/material-1.2.1-sources.jar!/com/google/android/material/tabs/TabLayout.java_SELECTED": "TabLayout",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/VideoPlayer.kt_SELECTED": "VideoPlayer",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/controller/BaseVideoController.java_SELECTED": "BaseVideoController",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/controller/GestureVideoController.java_SELECTED": "GestureVideoController",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/ControllerView.kt_SELECTED": "ControllerView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/LikeView.kt_SELECTED": "LikeView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/NonSwipeableViewPager.java_SELECTED": "NonSwipeableViewPager",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/ScrollableViewPager.java_SELECTED": "ScrollableViewPager",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/AdControlView.java_SELECTED": "AdControlView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/DebugInfoView.java_SELECTED": "DebugInfoView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/DefinitionControlView.java_SELECTED": "DefinitionControlView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/MyDanmakuView.java_SELECTED": "MyDanmakuView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/PipControlView.java_SELECTED": "PipControlView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/TikTokView.java_SELECTED": "TikTokView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/FloatController.java_SELECTED": "FloatController",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/PortraitWhenFullScreenController.java_SELECTED": "PortraitWhenFullScreenController",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/TikTokController.java_SELECTED": "TikTokController",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/render/gl2/GLSurfaceRenderView2.java_SELECTED": "GLSurfaceRenderView2",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/DanmukuVideoView.java_SELECTED": "DanmukuVideoView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/ExoVideoView.java_SELECTED": "ExoVideoView",
-    "android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/IjkVideoView.java_SELECTED": "IjkVideoView",
-    "android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/controller/BaseVideoController.java_SELECTED": "BaseVideoController",
-    "android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/player/BaseVideoView.java_SELECTED": "BaseVideoView",
-    "android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/player/VideoView.java_SELECTED": "VideoView",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "D:/work/video/Tiktok/app/src/main/res/layout"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;DEBUGGABLE_DEVICE&quot;: &quot;huawei-hma_al00-66J5T18B09034231&quot;,
+    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.bytedance.tiktok&quot;,
+    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
+    &quot;android-custom-viewD:/Android SDK/sources/android-34/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
+    &quot;android-custom-viewD:/Android SDK/sources/android-34/android/view/ViewGroup.java_SELECTED&quot;: &quot;ViewGroup&quot;,
+    &quot;android-custom-viewD:/Android SDK/sources/android-34/android/widget/VideoView.java_SELECTED&quot;: &quot;VideoView&quot;,
+    &quot;android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.media3/media3-ui/1.2.1/55788ec8e8c7f2d69558554b9457ad133da1be50/media3-ui-1.2.1-sources.jar!/androidx/media3/ui/PlayerView.java_SELECTED&quot;: &quot;PlayerView&quot;,
+    &quot;android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.viewpager/viewpager/1.0.0/db045f92188b9d247d5f556866f8861ab68528f0/viewpager-1.0.0-sources.jar!/androidx/viewpager/widget/ViewPager.java_SELECTED&quot;: &quot;ViewPager&quot;,
+    &quot;android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/androidx.viewpager2/viewpager2/1.0.0/3c3569044e6969f1ee5c3aa03b08e6717a2d782f/viewpager2-1.0.0-sources.jar!/androidx/viewpager2/widget/ViewPager2.java_SELECTED&quot;: &quot;ViewPager2&quot;,
+    &quot;android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.androidkun/XTabLayout/1.1.4/c32891fea2e69b1fd5de9738f1ffb89571f8069/XTabLayout-1.1.4-sources.jar!/com/androidkun/xtablayout/XTabLayout.java_SELECTED&quot;: &quot;XTabLayout&quot;,
+    &quot;android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-ui/2.19.1/1e4a8691b096f1ff34cf8adb9f0f4f3627f5cbad/exoplayer-ui-2.19.1-sources.jar!/com/google/android/exoplayer2/ui/PlayerView.java_SELECTED&quot;: &quot;PlayerView&quot;,
+    &quot;android-custom-viewD:/Users/210089/.jdks/corretto-18.0.2/caches/modules-2/files-2.1/com.google.android.material/material/1.2.1/37d55d5141066b3d118d24232fa7025b65eb3a74/material-1.2.1-sources.jar!/com/google/android/material/tabs/TabLayout.java_SELECTED&quot;: &quot;TabLayout&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/VideoPlayer.kt_SELECTED&quot;: &quot;VideoPlayer&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/controller/BaseVideoController.java_SELECTED&quot;: &quot;BaseVideoController&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/player/controller/GestureVideoController.java_SELECTED&quot;: &quot;GestureVideoController&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/ControllerView.kt_SELECTED&quot;: &quot;ControllerView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/LikeView.kt_SELECTED&quot;: &quot;LikeView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/NonSwipeableViewPager.java_SELECTED&quot;: &quot;NonSwipeableViewPager&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/view/ScrollableViewPager.java_SELECTED&quot;: &quot;ScrollableViewPager&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/AdControlView.java_SELECTED&quot;: &quot;AdControlView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/DebugInfoView.java_SELECTED&quot;: &quot;DebugInfoView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/DefinitionControlView.java_SELECTED&quot;: &quot;DefinitionControlView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/MyDanmakuView.java_SELECTED&quot;: &quot;MyDanmakuView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/PipControlView.java_SELECTED&quot;: &quot;PipControlView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/component/TikTokView.java_SELECTED&quot;: &quot;TikTokView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/FloatController.java_SELECTED&quot;: &quot;FloatController&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/PortraitWhenFullScreenController.java_SELECTED&quot;: &quot;PortraitWhenFullScreenController&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/controller/TikTokController.java_SELECTED&quot;: &quot;TikTokController&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/render/gl2/GLSurfaceRenderView2.java_SELECTED&quot;: &quot;GLSurfaceRenderView2&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/DanmukuVideoView.java_SELECTED&quot;: &quot;DanmukuVideoView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/ExoVideoView.java_SELECTED&quot;: &quot;ExoVideoView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/app/src/main/java/com/bytedance/tiktok/widget/videoview/IjkVideoView.java_SELECTED&quot;: &quot;IjkVideoView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/controller/BaseVideoController.java_SELECTED&quot;: &quot;BaseVideoController&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/player/BaseVideoView.java_SELECTED&quot;: &quot;BaseVideoView&quot;,
+    &quot;android-custom-viewD:/work/video/Tiktok/dkplayer-java/src/main/java/xyz/doikki/videoplayer/player/VideoView.java_SELECTED&quot;: &quot;VideoView&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zhangzehao/StudioProjectsTest/TikTok/app&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;kotlin-gradle-user-dirs&quot;: [
+      &quot;/Users/zhangzehao/.gradle&quot;,
+      &quot;/Users/zhangzehao/Downloads/gradle-7.5&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="D:\work\video\Tiktok\app\src\main\res\layout" />
       <recent name="D:\work\video\Tiktok\app\src\main\res\anim" />
       <recent name="D:\work\video\Tiktok\app\src\main\res\drawable" />
-      <recent name="D:\work\video\Tiktok\app\src\main\java\com\bytedance\tiktok\utils" />
-      <recent name="D:\work\video\Tiktok\app\src\main\java\com\bytedance\tiktok\widget" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.bytedance.tiktok.application" />
       <recent name="com.bytedance.tiktok.base" />
       <recent name="com.bytedance.tiktok.bean" />
       <recent name="com.bytedance.tiktok.fragment" />
@@ -169,11 +203,11 @@
       <option name="ALL_USERS" value="false" />
       <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -223,6 +257,19 @@
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Tiktok" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Tiktok" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -288,32 +335,6 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="1aae22c8-2e79-461b-8eb3-0565d654cd7c">
-          <value>
-            <State />
-          </value>
-        </entry>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/dev_dkvideo" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="OPEN_GENERIC_TABS">
       <map>
         <entry key="1aae22c8-2e79-461b-8eb3-0565d654cd7c" value="TOOL_WINDOW" />
@@ -330,6 +351,32 @@
                 </option>
               </RecentGroup>
             </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1aae22c8-2e79-461b-8eb3-0565d654cd7c">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -480,6 +527,11 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dkplayer-players/ijk/build.gradle</url>
+          <line>4</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

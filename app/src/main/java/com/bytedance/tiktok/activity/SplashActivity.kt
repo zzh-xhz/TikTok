@@ -44,4 +44,6 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>({ActivitySplas
 
 
     }
+
+
 }

@@ -57,15 +57,20 @@ abstract class BaseActivity : AppCompatActivity() , OnHttpListener<Any?> {
     protected fun setFullScreen() {
         ImmersionBar.with(this).init()
     }
-    override fun onHttpStart(call: Call) {
+//    override fun onHttpStart(call: Call) {
+//
+//    }
+//
+//    override fun onHttpSuccess(result: Any?) {}
+//    override fun onHttpFail(throwable: Throwable) {
+//        Toaster.show(throwable.message)
+//    }
+//
+//    override fun onHttpEnd(call: Call) {
+//    }
+override fun onHttpSuccess(p0: Any) {
+}
 
-    }
-
-    override fun onHttpSuccess(result: Any?) {}
-    override fun onHttpFail(throwable: Throwable) {
-        Toaster.show(throwable.message)
-    }
-
-    override fun onHttpEnd(call: Call) {
+    override fun onHttpFail(p0: Throwable) {
     }
 }

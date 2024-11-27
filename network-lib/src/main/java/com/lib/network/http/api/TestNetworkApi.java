@@ -18,11 +18,11 @@ public final class TestNetworkApi implements IRequestApi {
     private String key;
     private String q;
 
-    //    https://pixabay.com/api/videos/?key=42445463-2b7d14a51075cb646c2011843&q=yellow+flowers
+    //https://pixabay.com/api/videos/?key=42445463-2b7d14a51075cb646c2011843&q=yellow+flowers
     @NonNull
     @Override
     public String getApi() {
-        return "api/videos/?key="+ key +"&q="+q;
+        return "api/videos";
     }
 
     public TestNetworkApi setKey(String key) {

@@ -4,7 +4,7 @@ ext {
     android = [
             compileSdk : 34,
             minSdk     : 24,
-            targetSdk  : 29,
+            targetSdk  : 34,
             versionCode: 10,
             versionName: "3.0"
     ]
@@ -17,7 +17,7 @@ ext {
             navigation: '2.3.2',
             lottile: '2.8.0',
             exoplayer: 'r2.19.1',
-            media3: '1.2.1'
+            media3: '1.4.0'
 
     ]
 
@@ -90,8 +90,13 @@ ext {
     glide = [
             glide: 'com.github.bumptech.glide:glide:4.12.0'
     ]
+//    // 网络请求框架：https://github.com/getActivity/EasyHttp
+//    implementation 'com.github.getActivity:EasyHttp:13.0'
+//    // OkHttp 框架：https://github.com/square/okhttp
+//    // noinspection GradleDependency
+//    implementation 'com.squareup.okhttp3:okhttp:3.12.13'
     https = [
-            easyhttp: 'com.github.getActivity:EasyHttp:12.8',
+            easyhttp: 'com.github.getActivity:EasyHttp:13.0',
             okhttp3: 'com.squareup.okhttp3:okhttp:3.12.13'
     ]
     leakcanary = [
@@ -105,20 +110,35 @@ ext {
             // 吐司框架：https://github.com/getActivity/Toaster
             toaster: "com.github.getActivity:Toaster:12.6",
             // 权限请求框架：https://github.com/getActivity/XXPermissions
-            xxpermissions: "com.github.getActivity:XXPermissions:18.5",
+            xxpermissions: "com.github.getActivity:XXPermissions:20.0",
             // Gson 解析容错：https://github.com/getActivity/GsonFactory
             gsonfactory : "com.github.getActivity:GsonFactory:9.6",
-            photoView : "com.github.chrisbanes:PhotoView:2.3.0"
-
+            photoView : "com.github.chrisbanes:PhotoView:2.3.0",
+            // Json 解析框架：https://github.com/google/gson
+            gson : 'com.google.code.gson:gson:2.10.1',
+            // Kotlin 反射库：用于反射 Kotlin data class 类对象
+            kotlinreflect :'org.jetbrains.kotlin:kotlin-reflect:1.9.20'
     ]
+//    implementation "androidx.media3:media3-exoplayer:1.4.0"
+//    implementation "androidx.media3:media3-exoplayer-hls:1.4.0"
+//    implementation "androidx.media3:media3-exoplayer-rtsp:1.4.0"
+//    implementation "androidx.media3:media3-ui:1.4.0"
+//    implementation "androidx.media3:media3-common:1.4.0"
+//    implementation "androidx.media3:media3-session:1.4.0"
+//    implementation "androidx.media3:media3-datasource:1.4.0"
+//    implementation "androidx.media3:media3-datasource-rtmp:1.4.0"
+
     media = [
-            session: "androidx.media3:media3-session:${dependVersion.media3}",
             exoplayer: "androidx.media3:media3-exoplayer:${dependVersion.media3}",
-            exoplayerDash: "androidx.media3:media3-exoplayer-dash:${dependVersion.media3}",
             exoplayerHls: "androidx.media3:media3-exoplayer-hls:${dependVersion.media3}",
             exoplayerRtsp: "androidx.media3:media3-exoplayer-rtsp:${dependVersion.media3}",
+            ui: "androidx.media3:media3-ui:${dependVersion.media3}",
+            common: "androidx.media3:media3-common:${dependVersion.media3}",
+            session: "androidx.media3:media3-session:${dependVersion.media3}",
+            datasource: "androidx.media3:media3-datasource:${dependVersion.media3}",
+            exoplayerDash: "androidx.media3:media3-exoplayer-dash:${dependVersion.media3}",
             exoplayerRtmp: "androidx.media3:media3-datasource-rtmp:${dependVersion.media3}",
-            ui: "androidx.media3:media3-ui:${dependVersion.media3}"
+
     ]
 
     //以集合的方法进行依赖
@@ -131,5 +151,67 @@ ext {
     mediaLibs = media.values()
     wheelLibs = wheel.values()
     httpLibs = https.values()
+
+
+
+    // 测试服
+    def SERVER_TYPE_TEST = "test"
+    // 预发布服
+    def SERVER_TYPE_PREVIEW = "pre"
+    // 正式服
+    def SERVER_TYPE_PRODUCT = "product"
+
+    def taskName = project.gradle.startParameter.taskNames[0]
+    if (taskName == null) {
+        taskName = ""
+    }
+    // 打印当前执行的任务名称
+    println "GradleLog TaskNameOutput " + taskName
+
+    def serverType = SERVER_TYPE_PRODUCT
+
+    if (taskName.endsWith("Debug")) {
+        serverType = SERVER_TYPE_TEST
+    } else if (taskName.endsWith("Preview")) {
+        serverType = SERVER_TYPE_PREVIEW
+    }
+
+    // 从 Gradle 命令中读取参数配置，例如：./gradlew assembleRelease -P ServerType="test"
+    if (project.hasProperty("ServerType")) {
+        serverType = project.properties["ServerType"]
+    }
+
+    // 打印当前服务器配置
+    println "GradleLog ServerTypeOutput " + serverType
+
+    // 友盟 AppKey
+    UMENG_APP_KEY = "66ba0bc8cac2a664de8b28e9"
+    // QQ AppId
+    QQ_APP_ID = "101828096"
+    // QQ Secret
+    QQ_APP_SECRET = "9dfd3300c3aa3c4596a07796c64914b2"
+    // 微信 AppId
+    WX_APP_ID = "wxd35706cc9f46114c"
+    // 微信 Secret
+    WX_APP_SECRET = "0c8c7cf831dd135a32b3e395ea459b5a"
+
+
+    switch(serverType) {
+        case SERVER_TYPE_TEST:
+        case SERVER_TYPE_PREVIEW:
+            LOG_ENABLE = true
+            BUGLY_ID = "98f5d5d84b"
+            if (serverType == SERVER_TYPE_PREVIEW) {
+                HOST_URL = "https://www.bjykla.com/"
+            } else {
+                HOST_URL = "https://www.bjykla.com/"
+            }
+            break
+        case SERVER_TYPE_PRODUCT:
+            LOG_ENABLE = false
+            BUGLY_ID = "98f5d5d84b"
+            HOST_URL = "https://www.bjykla.com/"
+            break
+    }
 
 }

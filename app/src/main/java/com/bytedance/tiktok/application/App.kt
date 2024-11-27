@@ -1,9 +1,7 @@
 package com.bytedance.tiktok.application
 
 import android.os.StrictMode
-import androidx.multidex.BuildConfig
 import androidx.multidex.MultiDexApplication
-import com.airbnb.lottie.animation.content.Content
 import com.bytedance.tiktok.utils.ProgressManagerImpl
 import com.bytedance.tiktok.widget.render.SurfaceRenderViewFactory
 import com.danikula.videocache.Logger
@@ -43,7 +41,7 @@ class App : MultiDexApplication() {
         //播放器配置，注意：此为全局配置，按需开启
         VideoViewManager.setConfig(
             VideoViewConfig.newBuilder()
-                .setLogEnabled(BuildConfig.DEBUG) //调试的时候请打开日志，方便排错
+                .setLogEnabled(AppConfig.isDebug() ) //调试的时候请打开日志，方便排错
                 /** 软解，支持格式较多，可通过自编译so扩展格式，结合 [xyz.doikki.dkplayer.widget.videoview.IjkVideoView] 使用更佳  */ //                .setPlayerFactory(IjkPlayerFactory.create())
                 //.setPlayerFactory(AndroidMediaPlayerFactory.create()) //不推荐使用，兼容性较差
                 /** 硬解，支持格式看手机，请使用CpuInfoActivity检查手机支持的格式，结合 [xyz.doikki.dkplayer.widget.videoview.ExoVideoView] 使用更佳  */
@@ -65,18 +63,18 @@ class App : MultiDexApplication() {
                 .build()
         )
 
-        if (BuildConfig.DEBUG) {
+        if (AppConfig.isDebug()) {
             StrictMode.setThreadPolicy( StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy( StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
         }
         // VideoCache 日志
-        Logger.setDebug(BuildConfig.DEBUG)
+        Logger.setDebug(AppConfig.isDebug())
 
         Toaster.init(this)
         MMKV.initialize(this)
 
         // Bugly 异常捕捉
-        CrashReport.initCrashReport(this, "8ca94a2408", BuildConfig.DEBUG)
+        CrashReport.initCrashReport(this, "8ca94a2408", AppConfig.isDebug())
 
         // 设置 Json 解析容错监听
         GsonFactory.setParseExceptionCallback(object : ParseExceptionCallback {
@@ -106,24 +104,28 @@ class App : MultiDexApplication() {
             }
 
             private fun handlerGsonParseException(message: String) {
-                require(!BuildConfig.DEBUG) { message }
+                require(!AppConfig.isDebug()) { message }
                 CrashReport.postCatchedException(IllegalArgumentException(message))
             }
         })
 
         // 网络请求框架初始化
         val server: IRequestServer
-        server = if (BuildConfig.DEBUG) {
+        server = if (AppConfig.isDebug()) {
             TestServer()
         } else {
             ReleaseServer()
         }
         val okHttpClient = OkHttpClient.Builder()
             .build()
-        EasyConfig.with(okHttpClient) // 是否打印日志
-            .setLogEnabled(BuildConfig.DEBUG) // 设置服务器配置（必须设置）
-            .setServer(server) // 设置请求处理策略（必须设置）
-            .setHandler(RequestHandler(this)) // 设置请求参数拦截器
+        EasyConfig.with(okHttpClient)
+            // 是否打印日志
+            .setLogEnabled(true)
+            // 设置服务器配置（必须设置）
+            .setServer(server)
+            // 设置请求处理策略（必须设置）
+            .setHandler(RequestHandler(this))
+            // 设置请求参数拦截器
             .setInterceptor(object : IRequestInterceptor {
                 override fun interceptArguments(
                     httpRequest: HttpRequest<*>,
@@ -131,17 +133,14 @@ class App : MultiDexApplication() {
                     headers: HttpHeaders
                 ) {
                     headers.put("timestamp", System.currentTimeMillis().toString())
+                    headers.put("token", System.currentTimeMillis().toString())
+                    headers.put("Authorization","P3pPyRUDwHGShlTWnV4hg2dUKelRi6V7cErdkKIb")
                 }
             })
             // 设置请求重试次数
             .setRetryCount(1)
             // 设置请求重试时间
             .setRetryTime(2000)
-            // 添加全局请求参数
-            .addParam("token", "46c49847a9efc74aef2bb089b57acccd")
-            // 添加全局请求头
-            //.addHeader("date", "20191030")
-            .addHeader("Authorization", "P3pPyRUDwHGShlTWnV4hg2dUKelRi6V7cErdkKIb")
             .into()
     }
     companion object {
