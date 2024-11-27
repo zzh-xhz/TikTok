@@ -5,6 +5,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.bytedance.tiktok.bean.DataCreate.Companion.type
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
@@ -74,8 +75,15 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
 
             override fun onPageScrollStateChanged(state: Int) {}
         })
-        NetworkRequestUtils.setSearchData("people",this)
-        NetworkRequestUtils.setSearchData("animal",this)
+        NetworkRequestUtils.setSearchDataOne(this)
+        var type = mutableSetOf<String>()
+        type.add("animal")
+        type.add("people")
+        type.add("funny")
+        type.add("humorous")
+        type.add("sound")
+        NetworkRequestUtils.setSearchData(type.random(),this)
+
     }
 
     override fun onBackPressed() {

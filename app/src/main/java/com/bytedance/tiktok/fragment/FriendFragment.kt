@@ -264,6 +264,9 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
             object : CountDownTimer(1000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {}
                 override fun onFinish() {
+                    if (isOnDestroyView == true){
+                        return
+                    }
                     binding.refreshLayout!!.isRefreshing = false
                 }
             }.start()

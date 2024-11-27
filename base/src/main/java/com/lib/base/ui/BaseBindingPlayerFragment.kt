@@ -14,11 +14,12 @@ abstract class BaseBindingPlayerFragment< T: BaseVideoView<*>?,VB : ViewBinding>
     @JvmField
     protected var mVideoView: T? = null
     protected val binding: VB get() = requireNotNull(_binding) { "The property of binding has been destroyed." }
-
+     var isOnDestroyView: Boolean? = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        isOnDestroyView = false
         _binding = block(layoutInflater)
         return binding.root
     }
@@ -27,6 +28,7 @@ abstract class BaseBindingPlayerFragment< T: BaseVideoView<*>?,VB : ViewBinding>
     }
     override fun onDestroyView() {
         super.onDestroyView()
+        isOnDestroyView = true
         _binding = null
     }
     override fun onResume() {

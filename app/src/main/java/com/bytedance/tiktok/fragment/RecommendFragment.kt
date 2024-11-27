@@ -26,6 +26,7 @@ import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.databinding.FragmentRecommendBinding
 import com.bytedance.tiktok.dialog.CommentDialog
 import com.bytedance.tiktok.dialog.ShareDialog
+import com.bytedance.tiktok.utils.NetworkRequestUtils
 import com.bytedance.tiktok.utils.OnVideoControllerListener
 import com.bytedance.tiktok.utils.RxBus
 import com.bytedance.tiktok.utils.cache.PreloadManager
@@ -127,7 +128,20 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
             object : CountDownTimer(1000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {}
                 override fun onFinish() {
-                    binding.refreshLayout!!.isRefreshing = false
+
+                    activity?.let {
+                        NetworkRequestUtils.setSearchDataOne(it)
+                        var type = mutableSetOf<String>()
+                        type.add("animal")
+                        type.add("people")
+                        type.add("funny")
+                        type.add("humorous")
+                        type.add("sound")
+                        NetworkRequestUtils.setSearchData(type.random(),it)
+                        adapter?.setList(DataCreate.datas)
+                    }
+
+                    binding.refreshLayout?.isRefreshing = false
                 }
             }.start()
         }

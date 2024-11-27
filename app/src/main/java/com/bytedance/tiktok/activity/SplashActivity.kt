@@ -3,6 +3,7 @@ package com.bytedance.tiktok.activity
 import android.content.Intent
 import android.os.CountDownTimer
 import androidx.core.content.ContextCompat.startActivity
+import com.bytedance.tiktok.application.AppConfig
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.databinding.ActivitySplashBinding
 import com.bytedance.tiktok.utils.NetworkRequestUtils
@@ -28,19 +29,31 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>({ActivitySplas
                 finish()
             }
         }
-        NetworkRequestUtils.setSearchData("plant",this)
-        EasyHttp.get(this)
-            .api(TestNetworkApi().apply {
-                setKey("42445463-2b7d14a51075cb646c2011843")
-                setQ("flowers")
-            })
-            .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
-                override fun onHttpSuccess(result: TestNetworkApi.Bean) {
-                    DataCreate.mutableNumbers.addAll(result.hits)
-                    DataCreate()
-                    countDownTimer.start()
-                }
-            })
+        if (AppConfig.isDebug()){
+            var type = mutableSetOf<String>()
+            type.add("ShortVideo")
+            type.add("plant")
+            type.add("big")
+            type.add("sound")
+            type.add("flowers")
+            NetworkRequestUtils.setSearchDataOne(this)
+            NetworkRequestUtils.setSearchData(type.random(),this)
+            EasyHttp.get(this)
+                .api(TestNetworkApi().apply {
+                    setKey("42445463-2b7d14a51075cb646c2011843")
+                    setQ("beauty")
+                })
+                .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
+                    override fun onHttpSuccess(result: TestNetworkApi.Bean) {
+                        DataCreate.mutableNumbers.addAll(result.hits)
+                        DataCreate()
+                        countDownTimer.start()
+                    }
+                })
+        }else{
+
+        }
+
 
 
     }
