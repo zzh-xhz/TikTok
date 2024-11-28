@@ -50,10 +50,10 @@ class DataCreate {
 
             val  videoData =     mutableNumbers.random()
             val videoBean = VideoBean()
-            type.add(videoData.videos["tiny"]?.url.toString())
+//            type.add(videoData.videos["tiny"]?.url.toString())
             videoBean.content = "# "+videoData.type+ "# "+videoData.tags
-//            videoBean.videoRes = videoData.videos["tiny"]?.url.toString()
-            videoBean.videoRes = type.random()
+            videoBean.videoRes = videoData.videos["tiny"]?.url.toString()
+//            videoBean.videoRes = type.random()
             videoBean.distance = 7.9f
             videoBean.isFocused = false
             videoBean.isLiked = true
@@ -91,7 +91,7 @@ class DataCreate {
         @JvmField
         var mutableNumbers = mutableSetOf<TestNetworkApi.Bean.HitsData>()
 
-        var type = mutableSetOf<String>()
+//        var type = mutableSetOf<String>()
 
 
         fun addData(mutableNumbers : MutableList<TestNetworkApi.Bean.HitsData>){
@@ -99,10 +99,10 @@ class DataCreate {
 
                 val  videoData =     mutableNumbers.random()
                 val videoBean = VideoBean()
-                type.add(videoData.videos["tiny"]?.url.toString())
+//                type.add(videoData.videos["tiny"]?.url.toString())
                 videoBean.content = "# "+videoData.type+ "# "+videoData.tags
-//                videoBean.videoRes = videoData.videos["tiny"]?.url.toString()
-                videoBean.videoRes = type.random()
+                videoBean.videoRes = videoData.videos["tiny"]?.url.toString()
+//                videoBean.videoRes = type.random()
                 videoBean.coverRes=  videoData.videos["tiny"]?.thumbnail.toString()
                     videoBean.distance = 7.9f
                 videoBean.isFocused = false
