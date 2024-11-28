@@ -19,6 +19,7 @@ object NetworkRequestUtils {
 
 
     fun setSearchData(search : String,activity: LifecycleOwner) {
+
         EasyHttp.get(activity)
             .api(TestNetworkApi().apply {
                 setKey("42445463-2b7d14a51075cb646c2011843")
@@ -33,21 +34,51 @@ object NetworkRequestUtils {
                 }
             })
     }
-    fun setSearchDataOne(activity: LifecycleOwner) {
-        repeat(10) {
-            EasyHttp.get(activity)
-                .api(ReleaseOneApi().apply {
-                    setType("json")
-                })
-                .request(object : OnHttpListener<ReleaseOneApi.Bean> {
-                    override fun onHttpSuccess(result: ReleaseOneApi.Bean) {
-                        DataCreate.type.add(result.mp4_video)
-                    }
+    fun setSearchData(activity: LifecycleOwner) {
+        var type = mutableSetOf<String>()
+        type.add("animal")
+        type.add("people")
+        type.add("funny")
+        type.add("humorous")
+        type.add("sound")
+        type.add("ShortVideo")
+        type.add("plant")
+        type.add("big")
+        type.add("sound")
+        type.add("flowers")
 
-                    override fun onHttpFail(p0: Throwable) {
-                    }
-                })
-        }
+
+
+
+        EasyHttp.get(activity)
+            .api(TestNetworkApi().apply {
+                setKey("42445463-2b7d14a51075cb646c2011843")
+                setQ(type.random())
+            })
+            .request(object : OnHttpListener<TestNetworkApi.Bean> {
+                override fun onHttpSuccess(result: TestNetworkApi.Bean) {
+                    DataCreate.addData(result.hits)
+                }
+
+                override fun onHttpFail(p0: Throwable) {
+                }
+            })
+    }
+    fun setSearchDataOne(activity: LifecycleOwner) {
+//        repeat(10) {
+//            EasyHttp.get(activity)
+//                .api(ReleaseOneApi().apply {
+//                    setType("json")
+//                })
+//                .request(object : OnHttpListener<ReleaseOneApi.Bean> {
+//                    override fun onHttpSuccess(result: ReleaseOneApi.Bean) {
+//                        DataCreate.type.add(result.mp4_video)
+//                    }
+//
+//                    override fun onHttpFail(p0: Throwable) {
+//                    }
+//                })
+//        }
 
     }
     fun setSearchDataFour(search : String,activity: BaseActivity) {

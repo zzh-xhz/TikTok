@@ -75,14 +75,9 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>({ActivityMainBindi
 
             override fun onPageScrollStateChanged(state: Int) {}
         })
-        NetworkRequestUtils.setSearchDataOne(this)
-        var type = mutableSetOf<String>()
-        type.add("animal")
-        type.add("people")
-        type.add("funny")
-        type.add("humorous")
-        type.add("sound")
-        NetworkRequestUtils.setSearchData(type.random(),this)
+//        NetworkRequestUtils.setSearchDataOne(this)
+
+        NetworkRequestUtils.setSearchData(this)
 
     }
 

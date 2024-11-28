@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import androidx.core.content.ContextCompat.startActivity
 import com.bytedance.tiktok.application.AppConfig
 import com.bytedance.tiktok.bean.DataCreate
+import com.bytedance.tiktok.bean.DataCreate.Companion.type
 import com.bytedance.tiktok.databinding.ActivitySplashBinding
 import com.bytedance.tiktok.utils.NetworkRequestUtils
 import com.hjq.http.EasyHttp
@@ -30,14 +31,9 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>({ActivitySplas
             }
         }
         if (AppConfig.isDebug()){
-            var type = mutableSetOf<String>()
-            type.add("ShortVideo")
-            type.add("plant")
-            type.add("big")
-            type.add("sound")
-            type.add("flowers")
-            NetworkRequestUtils.setSearchDataOne(this)
-            NetworkRequestUtils.setSearchData(type.random(),this)
+
+//            NetworkRequestUtils.setSearchDataOne(this)
+            NetworkRequestUtils.setSearchData(this)
             EasyHttp.get(this)
                 .api(TestNetworkApi().apply {
                     setKey("42445463-2b7d14a51075cb646c2011843")

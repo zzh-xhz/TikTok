@@ -130,14 +130,9 @@ class RecommendFragment : BaseBindingFragment<FragmentRecommendBinding>({Fragmen
                 override fun onFinish() {
 
                     activity?.let {
-                        NetworkRequestUtils.setSearchDataOne(it)
-                        var type = mutableSetOf<String>()
-                        type.add("animal")
-                        type.add("people")
-                        type.add("funny")
-                        type.add("humorous")
-                        type.add("sound")
-                        NetworkRequestUtils.setSearchData(type.random(),it)
+//                        NetworkRequestUtils.setSearchDataOne(it)
+
+                        NetworkRequestUtils.setSearchData(it)
                         adapter?.setList(DataCreate.datas)
                     }
 
