@@ -5,7 +5,6 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import com.bytedance.tiktok.bean.DataCreate.Companion.type
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.MainTabChangeEvent
 import com.bytedance.tiktok.bean.PauseVideoEvent
