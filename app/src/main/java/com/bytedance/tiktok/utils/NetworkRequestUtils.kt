@@ -46,10 +46,12 @@ object NetworkRequestUtils {
         type.add("big")
         type.add("sound")
         type.add("flowers")
-
-
-
-
+        type.add("Summer")
+        type.add("Spring")
+        type.add("Autumn")
+        type.add("Winter")
+        type.add("Snow")
+        type.add("Rain")
         EasyHttp.get(activity)
             .api(TestNetworkApi().apply {
                 setKey("42445463-2b7d14a51075cb646c2011843")
