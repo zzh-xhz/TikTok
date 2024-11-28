@@ -16,7 +16,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3981b629-6337-45d3-8c7f-ab7eb818634f" name="Changes" comment="项目主页面搭建完成  更新配置文件 进入debug 模式 &#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+    <list default="true" id="3981b629-6337-45d3-8c7f-ab7eb818634f" name="Changes" comment="更新配置文件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -142,7 +142,7 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/zhangzehao/StudioProjectsTest/TikTok/app",
+    "last_opened_file_path": "/Users/zhangzehao/StudioProjectsTest/TikTok",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.17",
     "project.structure.side.proportion": "0.0"
@@ -156,8 +156,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/app" />
       <recent name="D:\work\video\Tiktok\app\src\main\res\layout" />
       <recent name="D:\work\video\Tiktok\app\src\main\res\anim" />
       <recent name="D:\work\video\Tiktok\app\src\main\res\drawable" />
@@ -329,7 +329,55 @@
       <option name="project" value="LOCAL" />
       <updated>1732702761292</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="项目主页面搭建完成  更新配置文件 进入debug 模式 &#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+      <option name="closed" value="true" />
+      <created>1732757836799</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1732757836799</updated>
+    </task>
+    <task id="LOCAL-00011" summary="项目主页面搭建完成  更新配置文件 进入debug 模式 &#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+      <option name="closed" value="true" />
+      <created>1732757943306</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1732757943307</updated>
+    </task>
+    <task id="LOCAL-00012" summary="项目主页面搭建完成  更新配置文件 进入debug 模式 &#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+      <option name="closed" value="true" />
+      <created>1732758035573</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1732758035573</updated>
+    </task>
+    <task id="LOCAL-00013" summary="项目主页面搭建完成  更新配置文件 进入debug 模式 &#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+      <option name="closed" value="true" />
+      <created>1732758372934</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732758372934</updated>
+    </task>
+    <task id="LOCAL-00014" summary="项目主页面搭建完成  更新配置文件 进入debug 模式 &#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle">
+      <option name="closed" value="true" />
+      <created>1732758696311</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1732758696311</updated>
+    </task>
+    <task id="LOCAL-00015" summary="更新配置文件">
+      <option name="closed" value="true" />
+      <created>1732759621866</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1732759621866</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -388,7 +436,8 @@
     <MESSAGE value="项目优化" />
     <MESSAGE value="项目主页面搭增加可扩展的dkVide0" />
     <MESSAGE value="项目主页面搭建完成  更新配置文件 进入debug 模式 &#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="项目主页面搭建完成  更新配置文件 进入debug 模式 &#10;&#10;# Conflicts:&#10;#&#9;.idea/gradle.xml&#10;#&#9;.idea/misc.xml&#10;#&#9;app/build.gradle&#10;#&#9;app/src/main/AndroidManifest.xml&#10;#&#9;app/src/main/res/layout/activity_main.xml&#10;#&#9;app/src/main/res/values/colors.xml&#10;#&#9;app/src/main/res/values/strings.xml&#10;#&#9;app/src/main/res/values/styles.xml&#10;#&#9;build.gradle&#10;#&#9;gradle.properties&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;#&#9;gradlew&#10;#&#9;gradlew.bat&#10;#&#9;settings.gradle" />
+    <MESSAGE value="更新配置文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新配置文件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
