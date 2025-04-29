@@ -14,7 +14,7 @@
         android:id="@+id/search_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dk_dp_16"
+        android:layout_margin="@dimen/dp_16"
         android:text="@string/large_text"
         android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"

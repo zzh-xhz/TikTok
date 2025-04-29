@@ -56,3 +56,5 @@
 -keep class com.sun.** {*;}
 -keep class org.apache.** {*;}
 -keep class org.json.** {*;}
+
+-keep class com.bytedance.tiktok.bean.** {*;}

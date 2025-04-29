@@ -111,11 +111,12 @@ class App : MultiDexApplication() {
 
         // 网络请求框架初始化
         val server: IRequestServer
-        server = if (AppConfig.isDebug()) {
-            TestServer()
-        } else {
-            ReleaseServer()
-        }
+//        server = if (AppConfig.isDebug()) {
+//            TestServer()
+//        } else {
+//            ReleaseServer()
+//        }
+        server = TestServer()
         val okHttpClient = OkHttpClient.Builder()
             .build()
         EasyConfig.with(okHttpClient)

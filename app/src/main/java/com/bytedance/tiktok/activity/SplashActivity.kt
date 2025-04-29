@@ -5,7 +5,7 @@ import android.os.CountDownTimer
 import androidx.core.content.ContextCompat.startActivity
 import com.bytedance.tiktok.application.AppConfig
 import com.bytedance.tiktok.bean.DataCreate
-import com.bytedance.tiktok.bean.DataCreate.Companion.type
+//import com.bytedance.tiktok.bean.DataCreate.Companion.type
 import com.bytedance.tiktok.databinding.ActivitySplashBinding
 import com.bytedance.tiktok.utils.NetworkRequestUtils
 import com.hjq.http.EasyHttp
@@ -30,26 +30,38 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>({ActivitySplas
                 finish()
             }
         }
-        if (AppConfig.isDebug()){
-
-//            NetworkRequestUtils.setSearchDataOne(this)
-            NetworkRequestUtils.setSearchData(this)
-            EasyHttp.get(this)
-                .api(TestNetworkApi().apply {
-                    setKey("42445463-2b7d14a51075cb646c2011843")
-                    setQ("beauty")
-                })
-                .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
-                    override fun onHttpSuccess(result: TestNetworkApi.Bean) {
-                        DataCreate.mutableNumbers.addAll(result.hits)
-                        DataCreate()
-                        countDownTimer.start()
-                    }
-                })
-        }else{
-
-        }
-
+//        if (AppConfig.isDebug()){
+//
+////            NetworkRequestUtils.setSearchDataOne(this)
+//            NetworkRequestUtils.setSearchData(this)
+//            EasyHttp.get(this)
+//                .api(TestNetworkApi().apply {
+//                    setKey("42445463-2b7d14a51075cb646c2011843")
+//                    setQ("beauty")
+//                })
+//                .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
+//                    override fun onHttpSuccess(result: TestNetworkApi.Bean) {
+//                        DataCreate.mutableNumbers.addAll(result.hits)
+//                        DataCreate()
+//                        countDownTimer.start()
+//                    }
+//                })
+//        }else{
+//
+//        }
+        NetworkRequestUtils.setSearchData(this)
+        EasyHttp.get(this)
+            .api(TestNetworkApi().apply {
+                setKey("42445463-2b7d14a51075cb646c2011843")
+                setQ("beauty")
+            })
+            .request(object : HttpCallbackProxy<TestNetworkApi.Bean>(this) {
+                override fun onHttpSuccess(result: TestNetworkApi.Bean) {
+                    DataCreate.mutableNumbers.addAll(result.hits)
+                    DataCreate()
+                    countDownTimer.start()
+                }
+            })
 
 
     }
