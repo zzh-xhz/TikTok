@@ -38,7 +38,6 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         //播放器配置，注意：此为全局配置，按需开启
-        //播放器配置，注意：此为全局配置，按需开启
         VideoViewManager.setConfig(
             VideoViewConfig.newBuilder()
                 .setLogEnabled(AppConfig.isDebug() ) //调试的时候请打开日志，方便排错
@@ -57,7 +56,7 @@ class App : MultiDexApplication() {
                  .setAdaptCutout(true)
                 // 移动网络下提示用户会产生流量费用，默认不提示，
                 // 如果要提示则设置成false并在控制器中监听STATE_START_ABORT状态，实现相关界面，具体可以参考PrepareView的实现
-                 .setPlayOnMobileNetwork(false)
+                 .setPlayOnMobileNetwork(true)
                 // 进度管理器，继承ProgressManager，实现自己的管理逻辑
                 .setProgressManager(ProgressManagerImpl())
                 .build()

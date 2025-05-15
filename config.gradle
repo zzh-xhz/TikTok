@@ -2,13 +2,12 @@
 //android sdk 版本 和 库依赖统一配置
 ext {
     android = [
-            compileSdk : 34,
+            compileSdk : 35,
             minSdk     : 24,
-            targetSdk  : 34,
-            versionCode: 10,
-            versionName: "3.0"
+            targetSdk  : 35,
+            versionCode: 1,
+            versionName: "0.0.1"
     ]
-
     dependVersion = [
             lifecycle: '2.4.0',
             retrofit: '2.9.0',
