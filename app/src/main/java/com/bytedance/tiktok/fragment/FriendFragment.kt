@@ -129,7 +129,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
         mVideoView!!.setLooping(true)
         //以下只能二选一，看你的需求
         mVideoView!!.setRenderViewFactory(TikTokRenderViewFactory.create())
-        //        mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
+//                mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
         mController = TikTokController(requireActivity())
         mVideoView!!.setVideoController(mController)
         mVideoView!!.addOnStateChangeListener(mOnStateChangeListener)
