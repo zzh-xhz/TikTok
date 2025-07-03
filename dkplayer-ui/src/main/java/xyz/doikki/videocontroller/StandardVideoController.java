@@ -183,6 +183,9 @@ public class StandardVideoController extends GestureVideoController implements V
                 if (!isBuffering) {
                     mLoadingProgress.setVisibility(GONE);
                 }
+                if (mControlWrapper.isPlaying()){
+                    mLoadingProgress.setVisibility(GONE);
+                }
                 break;
             case VideoView.STATE_PREPARING:
             case VideoView.STATE_BUFFERING:

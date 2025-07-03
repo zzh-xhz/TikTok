@@ -43,11 +43,11 @@ class TikTokController : StandardVideoController {
     )
 
     init {
-        setCanChangePosition(false)
-        setEnableInNormal(false)
-        setGestureEnabled(false)
-        setDoubleTapTogglePlayEnabled(false)
-        setEnableOrientation(false)
+        setCanChangePosition(true)
+        setEnableInNormal(true)
+        setGestureEnabled(true)
+        setDoubleTapTogglePlayEnabled(true)
+        setEnableOrientation(true)
         tiktokControlView = TiktokControlView(context)
         addControlComponent(tiktokControlView)
         //显示调试信息
