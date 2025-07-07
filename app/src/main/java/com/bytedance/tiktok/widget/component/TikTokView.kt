@@ -237,7 +237,7 @@ class TikTokView : FrameLayout, IControlComponent {
                 return@setOnClickListener
             }
             toggleFullScreen()
-            listener!!.onFullScreenClick()
+            listener?.onFullScreenClick()
         }
         setRotateAnim()
     }

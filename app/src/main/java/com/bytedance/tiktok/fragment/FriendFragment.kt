@@ -1,4 +1,6 @@
 import android.content.Context
+import android.content.res.Configuration
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MotionEvent
@@ -18,7 +20,6 @@ import com.bytedance.tiktok.bean.CurUserBean
 import com.bytedance.tiktok.bean.DataCreate
 import com.bytedance.tiktok.bean.MainPageChangeEvent
 import com.bytedance.tiktok.bean.MainTabChangeEvent
-import com.bytedance.tiktok.bean.PauseVideoEvent
 import com.bytedance.tiktok.bean.VideoBean
 import com.bytedance.tiktok.databinding.FragmentFriendBinding
 import com.bytedance.tiktok.dialog.CommentDialog
@@ -34,14 +35,19 @@ import com.bytedance.tiktok.widget.component.TikTokView
 import com.bytedance.tiktok.widget.controller.TikTokController
 import com.bytedance.tiktok.widget.render.TikTokRenderViewFactory
 import com.bytedance.tiktok.widget.render.gl2.GLSurfaceRenderView2
+import com.bytedance.tiktok.widget.render.gl2.filter.GlFilterGroup
+import com.bytedance.tiktok.widget.render.gl2.filter.GlSepiaFilter
+import com.bytedance.tiktok.widget.render.gl2.filter.GlSharpenFilter
+import com.bytedance.tiktok.widget.render.gl2.filter.GlWatermarkFilter
 import com.bytedance.tiktok.widget.videoview.TiktokVideoView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.lib.base.dialog.BaseVideoBottomSheetDialog
 import com.lib.base.ui.BaseBindingPlayerFragment
-import kotlinx.coroutines.NonDisposableHandle.parent
 import xyz.doikki.videoplayer.player.BaseVideoView.OnStateChangeListener
 import xyz.doikki.videoplayer.player.BaseVideoView.SimpleOnStateChangeListener
 import xyz.doikki.videoplayer.player.VideoView
+import xyz.doikki.videoplayer.render.IRenderView
+import xyz.doikki.videoplayer.render.RenderViewFactory
 import xyz.doikki.videoplayer.util.L
 
 
@@ -147,6 +153,7 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
 //            GlSharpenFilter()
 //        )
 //        )
+                   mVideoView?.isMute = true
     }
 
     private fun initViewPager() {
@@ -354,8 +361,26 @@ class FriendFragment : BaseBindingPlayerFragment<TiktokVideoView, FragmentFriend
 
             override fun onFullScreenClick() {
 //                mVideoView.toggleFullScreen()
-            }
+
+                }
+
         })
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // 横屏逻辑（左右横屏统一视为横屏）
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // 竖屏逻辑
+        }
+       ( newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE).let {
+            mController?.setCanChangePosition(it)
+            mController?.setEnableInNormal(it)
+            mController?.setGestureEnabled(it)
+            mController?.setDoubleTapTogglePlayEnabled(it)
+            mController?.setEnableOrientation(it)
+        }
     }
 
     private fun tiktokVideoEvent(tikTokView: TikTokView) {

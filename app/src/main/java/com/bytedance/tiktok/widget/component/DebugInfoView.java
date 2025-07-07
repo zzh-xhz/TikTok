@@ -76,7 +76,8 @@ public class DebugInfoView extends AppCompatTextView implements IControlComponen
      */
     protected String getDebugString(int playState) {
         return getCurrentPlayer() + Utils.playState2str(playState) + "\n"
-                + "video width: " + mControlWrapper.getVideoSize()[0] + " , height: " + mControlWrapper.getVideoSize()[1];
+                + "video width: " + mControlWrapper.getVideoSize()[0] + " , height: " + mControlWrapper.getVideoSize()[1]+ "\n"
+                +  "video Mute: " + mControlWrapper.isMute();
     }
 
     protected String getCurrentPlayer() {
