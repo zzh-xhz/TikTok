@@ -2,11 +2,14 @@ package xyz.doikki.videoplayer.exo;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.net.Uri;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
 
 import androidx.media3.common.C;
+import androidx.media3.common.MediaItem;
+import androidx.media3.common.MimeTypes;
 import androidx.media3.common.PlaybackException;
 import androidx.media3.common.PlaybackParameters;
 import androidx.media3.common.Player;
@@ -27,6 +30,9 @@ import androidx.media3.exoplayer.trackselection.MappingTrackSelector;
 import androidx.media3.exoplayer.trackselection.TrackSelector;
 import androidx.media3.exoplayer.upstream.DefaultBandwidthMeter;
 import androidx.media3.exoplayer.util.EventLogger;
+import androidx.media3.ui.SubtitleView;
+
+import com.google.common.collect.ImmutableList;
 
 import java.util.Map;
 
@@ -39,6 +45,8 @@ import xyz.doikki.videoplayer.player.VideoViewManager;
     protected Context mAppContext;
     protected ExoPlayer mInternalPlayer;
     protected MediaSource mMediaSource;
+
+    protected MediaItem mMediaItem;
     protected ExoMediaSourceHelper mMediaSourceHelper;
 
     private PlaybackParameters mSpeedPlaybackParameters;
@@ -91,6 +99,7 @@ import xyz.doikki.videoplayer.player.VideoViewManager;
     @Override
     public void setDataSource(String path, Map<String, String> headers) {
         mMediaSource = mMediaSourceHelper.getMediaSource(path, headers);
+//        mMediaPlayerSubtitleView(path);
     }
 
     @Override
@@ -128,7 +137,12 @@ import xyz.doikki.videoplayer.player.VideoViewManager;
             mInternalPlayer.setPlaybackParameters(mSpeedPlaybackParameters);
         }
         mIsPreparing = true;
-        mInternalPlayer.setMediaSource(mMediaSource);
+        if (mMediaItem != null){
+            // 播放器加载媒体项
+            mInternalPlayer.setMediaItem(mMediaItem);
+        }else {
+            mInternalPlayer.setMediaSource(mMediaSource);
+        }
         mInternalPlayer.prepare();
     }
 
@@ -294,4 +308,14 @@ import xyz.doikki.videoplayer.player.VideoViewManager;
             }
         }
     }
+    public void mMediaPlayerSubtitleView(String path){
+        if (mInternalPlayer == null)
+            return;
+
+        mMediaItem  =mMediaSourceHelper.getMediaItem(path);
+
+
+
+    }
+
 }

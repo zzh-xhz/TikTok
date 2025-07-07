@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 import androidx.media3.common.C;
 import androidx.media3.common.MediaItem;
+import androidx.media3.common.MimeTypes;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
 import androidx.media3.database.StandaloneDatabaseProvider;
@@ -24,6 +25,8 @@ import androidx.media3.exoplayer.hls.HlsMediaSource;
 import androidx.media3.exoplayer.rtsp.RtspMediaSource;
 import androidx.media3.exoplayer.source.MediaSource;
 import androidx.media3.exoplayer.source.ProgressiveMediaSource;
+
+import com.google.common.collect.ImmutableList;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -82,7 +85,6 @@ import java.util.Map;
             factory = getDataSourceFactory();
         }
         if (mHttpDataSourceFactory != null) {
-            setHeaders(headers);
         }
         switch (contentType) {
             case C.CONTENT_TYPE_DASH:
@@ -167,5 +169,31 @@ import java.util.Map;
 
     public void setCache(Cache cache) {
         this.mCache = cache;
+    }
+
+    public MediaItem getMediaItem(String uri) {
+        return getMediaItem(uri, null, true);
+    }
+
+    public MediaItem getMediaItem(String uri, Map<String, String> headers) {
+        return getMediaItem(uri, headers, true);
+    }
+
+    public MediaItem getMediaItem(String uri, boolean isCache) {
+        return getMediaItem(uri, null, isCache);
+    }
+
+    public MediaItem getMediaItem(String uri, Map<String, String> headers, boolean isCache) {
+        Uri contentUri = Uri.parse(uri);
+        // 创建字幕配置
+        MediaItem.SubtitleConfiguration subtitleConfig = new MediaItem.SubtitleConfiguration.Builder(Uri.parse("path/to/subtitle.srt"))
+                .setMimeType(MimeTypes.APPLICATION_SUBRIP) // SRT 格式
+                .setLanguage("en")
+                .build();
+// 绑定到媒体项
+        return new MediaItem.Builder()
+                .setUri(uri)
+                .setSubtitleConfigurations(ImmutableList.of(subtitleConfig))
+                .build();
     }
 }

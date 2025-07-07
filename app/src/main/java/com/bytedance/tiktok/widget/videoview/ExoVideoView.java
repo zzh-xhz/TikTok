@@ -1,17 +1,23 @@
 package com.bytedance.tiktok.widget.videoview;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.media3.common.MediaItem;
+import androidx.media3.common.MimeTypes;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.exoplayer.LoadControl;
 import androidx.media3.exoplayer.RenderersFactory;
 import androidx.media3.exoplayer.source.MediaSource;
 import androidx.media3.exoplayer.trackselection.TrackSelector;
+import androidx.media3.ui.SubtitleView;
 
+import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.widget.player.CustomExoMediaPlayer;
+import com.google.common.collect.ImmutableList;
 
 import java.util.Map;
 
@@ -61,6 +67,8 @@ import xyz.doikki.videoplayer.player.PlayerFactory;
         mMediaPlayer.setLoadControl(mLoadControl);
         mMediaPlayer.setRenderersFactory(mRenderersFactory);
         mMediaPlayer.setTrackSelector(mTrackSelector);
+
+
     }
 
     @Override
